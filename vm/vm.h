@@ -23,10 +23,45 @@
 # define LFORK 1000
 # define AFF 2
 
-typedef struct s_champ
+typedef struct				s_champ
 {
-  char    *name;
-  char    *comm;
-  char    *code;
-  t_champ *next;
-}              t_champ;
+	size_t 						index;
+	char						*name;
+	char						*comm;
+	short						*code;
+	struct t_champ				*next;
+}							t_champ;
+
+typedef	struct				s_bogie
+{
+	int 					num;
+	int 					carry;
+	short					com;
+	size_t 					last_breath;//last raund with live
+	size_t 					its_a_highnoon;//time to do com
+	size_t 					index;
+	int 					aim;//count of byts to jump next
+	short					reg;
+	//color defolt white
+}							t_bogie;
+
+typedef  struct 			s_com
+{
+	short com;
+	//colors
+}							t_com;
+
+typedef  struct 			s_coliseum // arena
+{
+	t_com					*list;
+	size_t 					raund;//global count
+	size_t 					mortal_flip;//live count
+	int 					doomsday_clock;//cycle_to_die count
+}							t_coliseum;
+
+typedef struct	s_globals
+{
+	t_champ*		last_stand;
+
+
+}				t_globals;
