@@ -65,3 +65,5 @@ typedef struct	s_globals
 
 
 }				t_globals;
+
+#endif
