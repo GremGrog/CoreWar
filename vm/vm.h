@@ -2,9 +2,6 @@
 # define VM_H
 
 # include "ft_printf/include/head.h"
-# define MAX_PLAYERS 4
-# define MEM_SIZE (4 * 1024)
-# define CHAMP_MAX_SIZE (MEM_SIZE / 6)
 
 # define LIVE 10
 # define LD 5
