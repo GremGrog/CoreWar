@@ -2,6 +2,12 @@
 # define VM_H
 
 # include "ft_printf/include/head.h"
+# include "op.h"
+
+# define MAGIC_NUM_B 4
+# define NULL_B 4
+# define HALF_SIZE PROG_NAME_LENGTH + COMMENT_LENGTH + NULL_B * 2
+# define FILE_SIZE HALF_SIZE + MAGIC_NUM_B + CHAMP_MAX_SIZE
 
 # define LIVE 10
 # define LD 5
@@ -24,9 +30,10 @@ typedef struct				s_champ
 {
 	size_t 						index;
 	char						*name;
-	char						*comm;
-	short						*code;
-	struct t_champ				*next;
+	char						*comment;
+	unsigned char				*code;
+	size_t						code_size;
+	struct s_champ				*next;
 }							t_champ;
 
 typedef	struct				s_bogie
@@ -62,5 +69,9 @@ typedef struct	s_globals
 
 
 }				t_globals;
+
+void		parse_bytecode(t_champ *champ, char *file);
+int			ft_errno(int x);
+size_t		scip_null_border(size_t i);
 
 #endif
