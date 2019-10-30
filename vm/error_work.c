@@ -14,5 +14,7 @@ int ft_errno(int x)
 		ft_printf("error: invalid champion code size\n");
 	if (x == 5)
 		ft_printf("error: too many argument\n");
+	if (x == 6)
+		ft_printf("error: wrong number of champion\n");
   	return (0);
 }
