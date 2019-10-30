@@ -73,5 +73,6 @@ typedef struct	s_globals
 void		parse_bytecode(t_champ *champ, char *file);
 int			ft_errno(int x);
 size_t		scip_null_border(size_t i);
+int			ft_rstrcmp(const char *str1, const char *str2);
 
 #endif

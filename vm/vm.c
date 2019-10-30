@@ -1,42 +1,19 @@
 #include "vm.h"
 
-int			ft_rstrcmp(const char *str1, const char *str2)
-{
-	size_t	index;
-	size_t  len1;
-	size_t  len2;
-
-	index = 0;
-	len1 = ft_strlen(str1);
-	len2 = ft_strlen(str2);
-	if (!str1 || !str2)
-		return (0);
-	while ((str1[len1 - index] || str2[len2 - index]))
-	{
-		if (str1[len1 - index] != str2[len2 - index])
-		{
-			return ((int)((unsigned char)str1[len1 - index] - \
-			(unsigned char)str2[len2 - index]));
-		}
-		index++;
-	}
-	return (0);
-}
-
 void	init_champ(t_champ **champ)
 {
 	(*champ)->name = NULL;
 	(*champ)->code = NULL;
 	(*champ)->comment = NULL;
-	(*champ)->next = NULL;		
+	(*champ)->next = NULL;
 }
 
 void	list_add(t_champ **head, t_champ *new, int i)
 {
 	static size_t	lst_len = 0;
-	
+
 	if (lst_len == 0)
-	{	
+	{
 		if (i == -1)
 			(*head)->index = ++lst_len;
 		else
@@ -47,7 +24,7 @@ void	list_add(t_champ **head, t_champ *new, int i)
 	}
 	else
 	{
-		if (i != -1 && i > lst_len)
+		if (i != -1 && i > (int)lst_len)
 		{
 			new->index = i;
 			new->next = *head;
@@ -114,7 +91,7 @@ t_champ		*parse_args(int c, char **a)
 		}
     	i++;
   	}
-	  return (champs);
+	return (champs);
 }
 
 int main(int c, char **a)
