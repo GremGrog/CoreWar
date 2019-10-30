@@ -15,6 +15,6 @@ int ft_errno(int x)
 	if (x == 5)
 		ft_printf("error: too many argument\n");
 	if (x == 6)
-		ft_printf("error: wrong number of champion\n");
+		ft_printf("error: wrong number for champion\n");
   	return (0);
 }

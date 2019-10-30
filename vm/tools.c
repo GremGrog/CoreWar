@@ -10,25 +10,28 @@ size_t			scip_null_border(size_t i)
 	return (i);
 }
 
-int			ft_rstrcmp(const char *str1, const char *str2)
+int			ft_rstrcmp(const char *str, const char *substr)
 {
-	size_t	index;
-	size_t  len1;
-	size_t  len2;
+	size_t  strlen;
+	size_t  sublen;
 
-	index = 0;
-	len1 = ft_strlen(str1);
-	len2 = ft_strlen(str2);
-	if (!str1 || !str2)
-		return (0);
-	while ((str1[len1 - index] || str2[len2 - index]))
+	if (!str || !substr)
+		return (-1);
+	strlen = ft_strlen(str) - 1;
+	sublen = ft_strlen(substr) - 1;
+	if (str[strlen] == substr[sublen] && strlen == 0 && sublen == 0)
+		return (1);
+	while (strlen > 0 && sublen > 0)
 	{
-		if (str1[len1 - index] != str2[len2 - index])
+		if (str[strlen] == substr[sublen])
 		{
-			return ((int)((unsigned char)str1[len1 - index] - \
-			(unsigned char)str2[len2 - index]));
+			strlen--;
+			sublen--;
 		}
-		index++;
+		if (str[strlen] != substr[sublen] && sublen == 0)
+			return (1);
+		if (str[strlen] != substr[sublen] && sublen != 0)
+			return (0);
 	}
-	return (0);
+	return (1);
 }

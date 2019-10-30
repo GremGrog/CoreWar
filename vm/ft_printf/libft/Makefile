@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: ahalmon- <marvin@42.fr>                    +#+  +:+       +#+         #
+#    By: fmasha-h <fmasha-h@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/12/25 21:16:10 by ahalmon-          #+#    #+#              #
-#    Updated: 2019/04/13 20:16:14 by ahalmon-         ###   ########.fr        #
+#    Updated: 2019/10/30 16:21:48 by fmasha-h         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -88,7 +88,7 @@ OUT = $(FILES:.c=.o)
 INCLUDES = includes/
 
 all:  $(NAME)
-
+		@true
 
 $(NAME): $(FILES)
 	@gcc -g -Wall -Werror -Wextra -c $(FILES) -I $(INCLUDES)

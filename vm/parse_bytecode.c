@@ -68,16 +68,17 @@ int			get_name_comment_exec_code(t_champ *champ, unsigned char *bytecode)
 	j = 0;
 	while (j < champ->code_size && i < FILE_SIZE)
 		champ->code[j++] = bytecode[i++];
+	champ->code[j] = '\0';
 	return (0);
 }
 
 unsigned char	*read_bytecode(t_champ *champ, char *file)
 {
-	int			fd;
+	int					fd;
 	unsigned char		byte;
 	unsigned char		*buf;
-	int			ret;
-	size_t		i;
+	int					ret;
+	size_t				i;
 
 	i = 0;
 	fd = open(file, O_RDONLY);
@@ -88,7 +89,11 @@ unsigned char	*read_bytecode(t_champ *champ, char *file)
 		if (i < FILE_SIZE)
 			buf[i] = byte;
 		if (i >= FILE_SIZE)
+		{
 			ft_printf("%s\n", "error, too much code");
+			free(buf);
+			break ;
+		}
 		i++;
 	}
 	return (buf);
