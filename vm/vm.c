@@ -157,3 +157,6 @@ int		main(int c, char **a)
 	}
 	delete_champs(champs);
 }
+
+
+
