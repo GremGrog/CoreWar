@@ -6,6 +6,7 @@ void	init_champ(t_champ **champ)
 	(*champ)->code = NULL;
 	(*champ)->comment = NULL;
 	(*champ)->next = NULL;
+	(*champ)->index = 0;
 }
 
 t_champ		*create_champ(t_champ **head, char *file)
@@ -49,37 +50,16 @@ void	add_first_champ(t_champ **head, int n, size_t lst_len)
 	if (n == -1)
 		(*head)->index = lst_len;
 	else
-	{
 		(*head)->index = n;
-		lst_len;
-	}
 }
 
-void	insert_to_position(int n, t_champ **head, t_champ *new)
+
+void	insert_champ(t_champ **head, t_champ *new, size_t lst_len)
 {
-	size_t	i;
-
-	i = (*head)->index;
-	while (i > n)
-	{
-		(*head) = (*head)->next;
-		i = (*head)->index;
-	}
-	new->index = n;
-	new->next = (*head)->next;
-	(*head)->next = new;
+	new->index = lst_len;
+	new->next = (*head);
+	(*head) = new;
 }
-
-// void	insert_champ_to_position(t_champ **head, t_champ *new, int n)
-// {
-// 	t_champ	*tmp;
-
-// 	tmp = (*head);
-// 	if (tmp->index == n)
-// 	{
-// 		new->index = n;
-// 	}
-// }
 
 void	add_to_list(t_champ **head, t_champ *new, int n)
 {
@@ -92,16 +72,7 @@ void	add_to_list(t_champ **head, t_champ *new, int n)
 	else
 	{
 		if (n == -1)
-		{
-			new->index = ++lst_len;
-			new->next = (*head);
-			(*head) = new;
-		}
-		// else
-		// {
-		// 	insert_champ_to_position(head, new, n);
-		// 	lst_len++;
-		// }
+			insert_champ(head, new, ++lst_len);
 	}
 }
 
