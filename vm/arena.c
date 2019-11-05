@@ -24,7 +24,9 @@ void	battlefield(t_champ *warriors, int num)
 				field->list[j + (i * c)].com = warriors->code[j];
 			else
 				field->list[j + (i * c)].com = 0;
-			ft_printf("%x", field->list[j + (i * c)].com );
+			ft_printf(" %x", field->list[j + (i * c)].com );
+			if (j % 64 == 0)
+				ft_printf("\n");
 			j++;
 		}
 		warriors = warriors->next;
