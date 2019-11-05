@@ -51,13 +51,14 @@ typedef	struct				s_bogie
 
 typedef  struct 			s_com
 {
-	short com;
+	unsigned char com;
 	//colors
 }							t_com;
 
 typedef  struct 			s_coliseum // arena
 {
-	t_com					*list;
+	t_bogie					*jumper;
+	t_com					list[MEM_SIZE];
 	size_t 					raund;//global count
 	size_t 					mortal_flip;//live count
 	int 					doomsday_clock;//cycle_to_die count
@@ -74,5 +75,6 @@ void		parse_bytecode(t_champ *champ, char *file);
 int			ft_errno(int x);
 size_t		scip_null_border(size_t i);
 int			ft_rstrcmp(const char *str1, const char *str2);
+void		battlefield(t_champ *warriors, int num);
 
 #endif
