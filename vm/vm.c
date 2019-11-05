@@ -56,9 +56,14 @@ void	add_first_champ(t_champ **head, int n, size_t lst_len)
 
 void	insert_champ(t_champ **head, t_champ *new, size_t lst_len)
 {
+	t_champ	*tmp;
+
+	tmp = (*head);
 	new->index = lst_len;
-	new->next = (*head);
-	(*head) = new;
+	while (tmp->next)
+		tmp = tmp->next;
+	tmp->next = new;
+	// (*head)->next = new;
 }
 
 void	add_to_list(t_champ **head, t_champ *new, int n)
@@ -151,9 +156,10 @@ int		main(int c, char **a)
 		return (ft_errno(0));
 	champs = parse_args(c, a);
 	tmp = champs;
-	while (tmp) {
-		ft_printf("%s %d\n", tmp->name, tmp->index);
-		tmp = tmp->next;
-	}
+	battlefield(tmp, 3);
+	// while (tmp) {
+	// 	ft_printf("%s %d\n", tmp->name, tmp->index);
+	// 	tmp = tmp->next;
+	// }
 	delete_champs(champs);
 }

@@ -64,7 +64,7 @@ int			get_name_comment_exec_code(t_champ *champ, unsigned char *bytecode)
 	champ->comment[j] = '\0';
 	i = scip_null_border(i);
 	champ->code = (unsigned char*)malloc(sizeof(unsigned char) \
-												* champ->code_size);
+												* champ->code_size + 1);
 	j = 0;
 	while (j < champ->code_size && i < FILE_SIZE)
 		champ->code[j++] = bytecode[i++];

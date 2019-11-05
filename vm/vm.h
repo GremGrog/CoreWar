@@ -40,12 +40,12 @@ typedef	struct				s_bogie
 {
 	int 					num;
 	int 					carry;
-	short					com;
+	unsigned char			commmand;
 	size_t 					last_breath;//last raund with live
 	size_t 					its_a_highnoon;//time to do com
 	size_t 					index;
 	int 					aim;//count of byts to jump next
-	short					reg;
+	unsigned char			reg;
 	//color defolt white
 }							t_bogie;
 
