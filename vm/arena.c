@@ -8,7 +8,6 @@ void	battlefield(t_champ *warriors, int num)
 	int c;
 
 	i = 0;
-
 	c = MEM_SIZE / num;
 	field = (t_coliseum *)malloc(sizeof(t_coliseum));
 	field->raund = 0;
@@ -17,7 +16,6 @@ void	battlefield(t_champ *warriors, int num)
 	while (i < num)
 	{
 		j = 0;
-		//ft_printf("\n %d\n", c * (i+1));
 		while (j < c)
 		{
 			if (j < warriors->code_size)
@@ -30,6 +28,20 @@ void	battlefield(t_champ *warriors, int num)
 			j++;
 		}
 		warriors = warriors->next;
+		i++;
+	}
+}
+
+void	battlefield_print(t_coliseum *field)
+{
+	size_t i;
+
+	i = 0;
+	while (i < MEM_SIZE)
+	{
+		ft_printf(" %02x", field->list[i].com);
+		if (i % 64 == 63)
+			write(1, "\n", 1);
 		i++;
 	}
 }
