@@ -6,7 +6,6 @@ void	battlefield(t_champ *warriors, int num)
 	size_t i;
 	size_t j;
 	int c;
-	size_t	n;
 
 	i = 0;
 
@@ -18,7 +17,6 @@ void	battlefield(t_champ *warriors, int num)
 	while (i < num)
 	{
 		j = 0;
-		n = 0;
 		//ft_printf("\n %d\n", c * (i+1));
 		while (j < c)
 		{
@@ -27,12 +25,8 @@ void	battlefield(t_champ *warriors, int num)
 			else
 				field->list[j + (i * c)].com = 0;
 			ft_printf(" %02x", field->list[j + (i * c)].com);
-			n++;
-			if (n == 64)
-			{
-				n = 0;
+			if ((j + (i * c)) % 64 == 63)
 				write(1, "\n", 1);
-			}
 			j++;
 		}
 		warriors = warriors->next;
