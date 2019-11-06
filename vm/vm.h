@@ -46,6 +46,7 @@ typedef	struct				s_bogie
 	size_t 					index;
 	int 					aim;//count of byts to jump next
 	int						*regs;
+	struct s_bogie			*next;
 	//color defolt white
 }							t_bogie;
 
@@ -72,13 +73,21 @@ typedef struct	s_globals
 
 }				t_globals;
 
+t_champ			*parse_args(int c, char **a);
 void			parse_bytecode(t_champ *champ, char *file);
+
+int				add_champion(char *file, int index, t_champ **champs);
+int				count_champs(t_champ *champs);
+void			delete_champs(t_champ *head);
+
 int				ft_errno(int x);
 size_t			scip_null_border(size_t i);
 int				ft_rstrcmp(const char *str1, const char *str2);
-t_coliseum		*battlefield(t_champ *warriors, int num);
+
+t_coliseum		*init_battlefield(t_champ *warriors, int num);
 void			battlefield_print(t_coliseum *field);
 
+void			add_bogies_on_arena(t_coliseum *arena);
 t_bogie			*create_bogie(void);
 void			delete_bogie(t_bogie *bogie);
 

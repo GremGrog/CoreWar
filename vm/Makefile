@@ -12,10 +12,12 @@ LIBFT = ft_printf/libftprintf.a
 
 COREWAR_SRCS =	error_work.c \
 				vm.c \
-				parse_bytecode.c \
+				bytecode_parser.c \
+				args_parser.c \
+				champs.c \
 				tools.c \
 				arena.c \
-				create_bogie.c \
+				bogie.c \
 
 COREWAR_OBJF = $(addprefix $(COREWAR_DIR_O)/, $(patsubst %.c,%.o,$(COREWAR_SRCS)))
 

@@ -14,10 +14,11 @@ t_bogie		*create_bogie(void)
 	bogie->index = 0;
 	bogie->aim = 0;
 	bogie->regs = (int*)malloc(sizeof(int) * REG_NUMBER);
+	bogie->next = NULL;
 	i = 0;
 	while (i < REG_NUMBER)
 	{
-		bogie->regs = 0;
+		bogie->regs[i] = 0;
 		i++;
 	}
 	return (bogie);
