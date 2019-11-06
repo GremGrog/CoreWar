@@ -1,5 +1,19 @@
 #include "vm.h"
 
+void	battlefield_print(t_coliseum *field)
+{
+	size_t i;
+
+	i = 0;
+	while (i < MEM_SIZE)
+	{
+		ft_printf(" %02x", field->list[i].com);
+		if (i % 64 == 63)
+			write(1, "\n", 1);
+		i++;
+	}
+}
+
 void	battlefield(t_champ *warriors, int num)
 {
 	t_coliseum	*field;
@@ -22,26 +36,12 @@ void	battlefield(t_champ *warriors, int num)
 				field->list[j + (i * c)].com = warriors->code[j];
 			else
 				field->list[j + (i * c)].com = 0;
-			ft_printf(" %02x", field->list[j + (i * c)].com);
-			if ((j + (i * c)) % 64 == 63)
-				write(1, "\n", 1);
 			j++;
 		}
 		warriors = warriors->next;
 		i++;
 	}
-}
-
-void	battlefield_print(t_coliseum *field)
-{
-	size_t i;
-
-	i = 0;
-	while (i < MEM_SIZE)
-	{
-		ft_printf(" %02x", field->list[i].com);
-		if (i % 64 == 63)
-			write(1, "\n", 1);
-		i++;
-	}
+	if (MEM_SIZE % num != 0)
+		field->list[j + (i * c)].com = 0;
+	battlefield_print(field);
 }
