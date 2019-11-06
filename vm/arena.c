@@ -14,7 +14,7 @@ void	battlefield_print(t_coliseum *field)
 	}
 }
 
-void	battlefield(t_champ *warriors, int num)
+t_coliseum	*battlefield(t_champ *warriors, int num)
 {
 	t_coliseum	*field;
 	size_t i;
@@ -22,11 +22,12 @@ void	battlefield(t_champ *warriors, int num)
 	int c;
 
 	i = 0;
-	c = MEM_SIZE / num;
 	field = (t_coliseum *)malloc(sizeof(t_coliseum));
-	field->raund = 0;
+	field->champ_num = num;
+	field->round = 0;
 	field->mortal_flip = 0;
 	field->doomsday_clock = 0;
+	c = MEM_SIZE / num;
 	while (i < num)
 	{
 		j = 0;
@@ -43,5 +44,5 @@ void	battlefield(t_champ *warriors, int num)
 	}
 	if (MEM_SIZE % num != 0)
 		field->list[j + (i * c)].com = 0;
-	battlefield_print(field);
+	return (battlefield);
 }

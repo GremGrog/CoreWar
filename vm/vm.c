@@ -156,7 +156,7 @@ int		main(int c, char **a)
 		return (ft_errno(0));
 	champs = parse_args(c, a);
 	tmp = champs;
-	battlefield(tmp, 3);
+	battlefield(tmp, 1);
 	// while (tmp) {
 	// 	ft_printf("%s %d\n", tmp->name, tmp->index);
 	// 	tmp = tmp->next;

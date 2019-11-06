@@ -45,7 +45,7 @@ typedef	struct				s_bogie
 	size_t 					its_a_highnoon;//time to do com
 	size_t 					index;
 	int 					aim;//count of byts to jump next
-	unsigned char			reg;
+	int						*regs;
 	//color defolt white
 }							t_bogie;
 
@@ -59,9 +59,10 @@ typedef  struct 			s_coliseum // arena
 {
 	t_bogie					*jumper;
 	t_com					list[MEM_SIZE];
-	size_t 					raund;//global count
+	size_t 					round;//global count
 	size_t 					mortal_flip;//live count
 	int 					doomsday_clock;//cycle_to_die count
+	size_t					champ_num;
 }							t_coliseum;
 
 typedef struct	s_globals
@@ -71,11 +72,14 @@ typedef struct	s_globals
 
 }				t_globals;
 
-void		parse_bytecode(t_champ *champ, char *file);
-int			ft_errno(int x);
-size_t		scip_null_border(size_t i);
-int			ft_rstrcmp(const char *str1, const char *str2);
-void		battlefield(t_champ *warriors, int num);
-void		battlefield_print(t_coliseum *field);
+void			parse_bytecode(t_champ *champ, char *file);
+int				ft_errno(int x);
+size_t			scip_null_border(size_t i);
+int				ft_rstrcmp(const char *str1, const char *str2);
+t_coliseum		*battlefield(t_champ *warriors, int num);
+void			battlefield_print(t_coliseum *field);
+
+t_bogie			*create_bogie(void);
+void			delete_bogie(t_bogie *bogie);
 
 #endif
