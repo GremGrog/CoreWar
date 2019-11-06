@@ -1,7 +1,7 @@
 #ifndef VM_H
 # define VM_H
 
-# include "ft_printf/include/head.h"
+# include "libft/libft.h"
 # include "op.h"
 
 # define MAGIC_NUM_B 4
@@ -52,26 +52,21 @@ typedef	struct				s_bogie
 
 typedef  struct 			s_com
 {
-	unsigned char com;
-	//colors
+	unsigned char	com;
+	int				bogie;
+	int				champ;
+	char			color;
 }							t_com;
 
 typedef  struct 			s_coliseum // arena
 {
-	t_bogie					*jumper;
 	t_com					list[MEM_SIZE];
 	size_t 					round;//global count
 	size_t 					mortal_flip;//live count
 	int 					doomsday_clock;//cycle_to_die count
 	size_t					champ_num;
+	int						last_stand;
 }							t_coliseum;
-
-typedef struct	s_globals
-{
-	t_champ*		last_stand;
-
-
-}				t_globals;
 
 t_champ			*parse_args(int c, char **a);
 void			parse_bytecode(t_champ *champ, char *file);
@@ -87,8 +82,12 @@ int				ft_rstrcmp(const char *str1, const char *str2);
 t_coliseum		*init_battlefield(t_champ *warriors, int num);
 void			battlefield_print(t_coliseum *field);
 
-void			add_bogies_on_arena(t_coliseum *arena);
+int				define_cycles_to_die(unsigned char com);
+
+t_bogie			*add_bogies_on_arena(t_coliseum *arena);
 t_bogie			*create_bogie(void);
 void			delete_bogie(t_bogie *bogie);
+
+void			fight(t_coliseum *arena, t_bogie *bogies);
 
 #endif

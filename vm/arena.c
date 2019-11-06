@@ -7,7 +7,22 @@ void	battlefield_print(t_coliseum *field)
 	i = 0;
 	while (i < MEM_SIZE)
 	{
-		ft_printf(" %02x", field->list[i].com);
+		if (field->list[i].bogie == 1)
+			ft_printf(" \x1b[46m%{black}02x", field->list[i].com);
+		else
+		{
+			if (field->list[i].color == 'g')
+				ft_printf(" %{green}02x", field->list[i].com);
+			if (field->list[i].color == 'r')
+				ft_printf(" %{red}02x", field->list[i].com);
+			if (field->list[i].color == 'y')
+				ft_printf(" %{yellow}02x", field->list[i].com);
+			if (field->list[i].color == 'b')
+				ft_printf(" %{blue}02x", field->list[i].com);
+			if (field->list[i].color == 'e')
+				ft_printf(" %{grey}02x", field->list[i].com);
+				// ft_printf(" %02x", field->list[i].com);
+		}
 		if (i % 64 == 63)
 			write(1, "\n", 1);
 		i++;
@@ -34,79 +49,37 @@ t_coliseum	*init_battlefield(t_champ *warriors, int num)
 		while (j < c)
 		{
 			if (j < warriors->code_size)
+			{
 				field->list[j + (i * c)].com = warriors->code[j];
+				field->list[j + (i * c)].bogie = 0;
+				field->list[j + (i * c)].champ = i + 1;
+				if (i == 0)
+					field->list[j + (i * c)].color = 'g';
+				else if (i == 1)
+					field->list[j + (i * c)].color = 'r';
+				else if (i == 2)
+					field->list[j + (i * c)].color = 'y';
+				else if (i == 3)
+					field->list[j + (i * c)].color = 'b';
+			}
 			else
+			{
 				field->list[j + (i * c)].com = 0;
+				field->list[j + (i * c)].bogie = 0;
+				field->list[j + (i * c)].champ = 0;
+				field->list[j + (i * c)].color = 'e';
+			}
 			j++;
 		}
 		warriors = warriors->next;
 		i++;
 	}
 	if (MEM_SIZE % num != 0)
-		field->list[j + (i * c)].com = 0;
-	return (field);
-}
-
-int		define_cycles_to_die(unsigned char com)
-{
-	if (com == 0x1 || com == 0x2 || com == 0x3)
-		return (5);
-	if (com == 0x4 || com == 0x5 || com == 0xd)
-		return (10);
-	if (com == 0x6 || com == 0x7 || com == 0x8)
-		return (6);
-	if (com == 0x9)
-		return (20);
-	if (com == 0xa || com == 0xb)
-		return (25);
-	if (com == 0xc)
-		return (800);
-	if (com == 0xe)
-		return (50);
-	if (com == 15)
-		return (1000);
-	if (com == 0x10)
-		return (2);
-	else
-		return (-1);
-}
-
-void	add_bogies_on_arena(t_coliseum *arena)
-{
-	size_t	index;
-	t_bogie	*head;
-	t_bogie	*new;
-	size_t	c;
-	size_t	step;
-
-	c = 1;
-	index = 0;
-	head = NULL;
-	step = MEM_SIZE / arena->champ_num;
-	while (c <= arena->champ_num)
 	{
-		new = create_bogie();
-		new->num = c;
-		new->commmand = arena->list[index].com;
-		new->its_a_highnoon = define_cycles_to_die(arena->list[index].com);
-		new->last_breath = 0;
-		new->regs[0] = c * (-1);
-		if (head == NULL)
-			head = new;
-		else if (head != NULL)
-		{
-			new->next = head;
-			head = new;
-		}
-		index += step; 
-		c++;
+		field->list[MEM_SIZE - 1].com = 0;
+		field->list[MEM_SIZE - 1].bogie = 0;
+		field->list[MEM_SIZE - 1].champ = 0;
+		field->list[MEM_SIZE - 1].color = 'e';
 	}
-	arena->jumper = head;
-		t_bogie	*tmp;
-	tmp = arena->jumper;
-	while (tmp) {
-		ft_printf("%x %d\n", tmp->commmand, tmp->index);
-		tmp = tmp->next;
-	}
-	// return (arena);
+	return (field);
 }

@@ -1,6 +1,6 @@
 COREWAR = corewar
 
-LIB = make -C ft_printf
+LIB = make -C libft
 
 FLAGS = -Wall -Wextra -Werror -g
 
@@ -8,7 +8,7 @@ COREWAR_DIR_O = corewar_obj
 
 INCLUDES =  vm.h
 
-LIBFT = ft_printf/libftprintf.a
+LIBFT = libft/libft.a
 
 COREWAR_SRCS =	error_work.c \
 				vm.c \
@@ -18,6 +18,7 @@ COREWAR_SRCS =	error_work.c \
 				tools.c \
 				arena.c \
 				bogie.c \
+				define_cycles_to_die.c \
 
 COREWAR_OBJF = $(addprefix $(COREWAR_DIR_O)/, $(patsubst %.c,%.o,$(COREWAR_SRCS)))
 
@@ -27,7 +28,7 @@ $(COREWAR_DIR_O):
 	@mkdir -p corewar_obj
 
 $(LIB):
-	@make -C ft_printf
+	@make -C libft
 
 $(COREWAR): $(COREWAR_DIR_O) $(COREWAR_OBJF) $(LIB)
 	@gcc $(COREWAR_OBJF) $(LIBFT) -o $(COREWAR)
@@ -37,10 +38,10 @@ $(COREWAR_DIR_O)/%.o: %.c
 
 clean:
 	@rm -rf $(COREWAR_DIR_O)
-	@make clean -C ft_printf
+	@make clean -C libft
 
 fclean: clean
 	@rm -rf $(COREWAR)
-	@make fclean -C ft_printf
+	@make fclean -C libft
 
 re: fclean all
