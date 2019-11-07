@@ -50,12 +50,14 @@ typedef	struct				s_bogie
 	//color defolt white
 }							t_bogie;
 
+t_bogie						*g_bogies;
+
 typedef  struct 			s_com
 {
-	unsigned char	com;
-	int				bogie;
-	int				champ;
-	char			color;
+	unsigned char			com;
+	int						bogie;
+	int						champ;
+	char					color;
 }							t_com;
 
 typedef  struct 			s_coliseum // arena
@@ -68,26 +70,28 @@ typedef  struct 			s_coliseum // arena
 	int						last_stand;
 }							t_coliseum;
 
-t_champ			*parse_args(int c, char **a);
-void			parse_bytecode(t_champ *champ, char *file);
+t_coliseum					*g_arena;
 
-int				add_champion(char *file, int index, t_champ **champs);
-int				count_champs(t_champ *champs);
-void			delete_champs(t_champ *head);
+t_champ						*parse_args(int c, char **a);
+void						parse_bytecode(t_champ *champ, char *file);
 
-int				ft_errno(int x);
-size_t			scip_null_border(size_t i);
-int				ft_rstrcmp(const char *str1, const char *str2);
+int							add_champion(char *file, int index, t_champ **champs);
+int							count_champs(t_champ *champs);
+void						delete_champs(t_champ *head);
 
-t_coliseum		*init_battlefield(t_champ *warriors, int num);
-void			battlefield_print(t_coliseum *field);
+int							ft_errno(int x);
+size_t						scip_null_border(size_t i);
+int							ft_rstrcmp(const char *str1, const char *str2);
 
-int				define_cycles_to_die(unsigned char com);
+void						init_battlefield(t_champ *warriors, int num);
+void						battlefield_print(void);
 
-t_bogie			*add_bogies_on_arena(t_coliseum *arena);
-t_bogie			*create_bogie(void);
-void			delete_bogie(t_bogie *bogie);
+int							define_cycles_to_die(unsigned char com);
 
-void			fight(t_coliseum *arena, t_bogie *bogies);
+void						add_bogies_on_arena(void);
+t_bogie						*create_bogie(void);
+void						delete_bogie(t_bogie *bogie);
+
+void						fight(void);
 
 #endif

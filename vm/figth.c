@@ -1,19 +1,40 @@
 #include "vm.h"
 
-void	fight(t_coliseum *arena, t_bogie *bogies)
+size_t	count_bogies(void)
+{
+	t_bogie	*tmp;
+	size_t	c;
+
+	c = 0;
+	tmp = g_bogies;
+	while(tmp)
+	{
+		tmp = tmp->next;
+		c++;
+	}
+	return (c);
+}
+
+void	exec_function(void)
+{
+	if (g_bogies->commmand == 0x2)
+		ld_operation();
+}
+
+void	fight(void)
 {
 	size_t	all_bogies;
-	t_bogie	*tmp;
+	t_bogie	*tmp_bogie;
 
-	all_bogies = 0;
+	all_bogies = count_bogies();
 	while (all_bogies > 0)
 	{
-		bogies = tmp;
-		while (tmp)
+		tmp_bogie = g_bogies;
+		while (tmp_bogie)
 		{
 			exec_function();
-			tmp = tmp->next;
+			tmp_bogie = tmp_bogie->next;
 		}
-		arena->round++;
+		g_arena->round++;
 	}
 }

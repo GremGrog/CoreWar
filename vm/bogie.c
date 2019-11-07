@@ -27,36 +27,34 @@ void	delete_bogie(t_bogie *bogie)
 	free(bogie);
 }
 
-t_bogie	*add_bogies_on_arena(t_coliseum *arena)
+void	add_bogies_on_arena(void)
 {
 	size_t	index;
-	t_bogie	*head;
 	t_bogie	*new;
 	size_t	c;
 	size_t	step;
 
 	c = 1;
 	index = 0;
-	head = NULL;
-	step = MEM_SIZE / arena->champ_num;
-	while (c <= arena->champ_num)
+	g_bogies = NULL;
+	step = MEM_SIZE / g_arena->champ_num;
+	while (c <= g_arena->champ_num)
 	{
 		new = create_bogie();
 		new->num = c;
-		new->commmand = arena->list[index].com;
-		new->its_a_highnoon = define_cycles_to_die(arena->list[index].com);
+		new->commmand = g_arena->list[index].com;
+		new->its_a_highnoon = define_cycles_to_die(g_arena->list[index].com);
 		new->last_breath = 0;
 		new->regs[0] = c * (-1);
-		if (head == NULL)
-			head = new;
-		else if (head != NULL)
+		if (g_bogies == NULL)
+			g_bogies = new;
+		else if (g_bogies != NULL)
 		{
-			new->next = head;
-			head = new;
+			new->next = g_bogies;
+			g_bogies = new;
 		}
-		arena->list[index].bogie = 1;
+		g_arena->list[index].bogie = 1;
 		index += step; 
 		c++;
 	}
-	return (head);
 }

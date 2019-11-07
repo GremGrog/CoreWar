@@ -13,22 +13,9 @@ int		main(int c, char **a)
 	champs = parse_args(c, a);
 	tmp = champs;
 	champs_num = count_champs(champs);
-	arena = init_battlefield(champs, champs_num);
-	bogies = add_bogies_on_arena(arena);
-	// begin_game(arena, bogies);
-	battlefield_print(arena);
+	init_battlefield(champs, champs_num);
+	add_bogies_on_arena();
+	// fight();
+	battlefield_print();
 	delete_champs(tmp);
-	// while (amount_alive_cursors > 0)
-	// {
-	// 	while (cursors)
-	// 	{
-	// 		exec_operation(cursors);
-	// 		cursors->code;
-	// 		cursors->exec_cycles;
-	// 		cursors = cursors->next;
-	// 	}
-	// 	if (currsnt_cycle = CDT) {
-
-	// 	}
-	// }
 }
