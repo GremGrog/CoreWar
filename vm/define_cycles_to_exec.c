@@ -1,6 +1,6 @@
 #include "vm.h"
 
-int		define_cycles_to_die(unsigned char com)
+int		define_cycles_to_exec(unsigned char com)
 {
 	if (com == 0x1 || com == 0x2 || com == 0x3)
 		return (5);

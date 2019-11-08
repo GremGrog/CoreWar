@@ -23,12 +23,11 @@ void	exec_function(void)
 
 void	fight(void)
 {
-	size_t	all_bogies;
 	t_bogie	*tmp_bogie;
 
-	all_bogies = count_bogies();
+	g_arena->all_bogies = count_bogies();
 	tmp_bogie = g_bogies;
-	while (all_bogies > 0)
+	while (g_arena->all_bogies > 0)
 	{
 		g_bogies = tmp_bogie;
 		while (g_bogies)

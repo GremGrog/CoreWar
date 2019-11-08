@@ -1,12 +1,10 @@
 #include "vm.h"
 
-int		get_tdir(void)
+int		get_tdir(int i)
 {
 	int		tdir;
-	size_t	i;
 	size_t	c;
 
-	i = g_bogies->index + 2;
 	c = 0;
 	while (c < DIR_SIZE)
 	{
@@ -28,6 +26,16 @@ int		get_treg(void)
 	return (treg);
 }
 
+int		get_tind(void)
+{
+	int	tind;
+
+	tind = get_tdir(g_bogies->index + 2);
+	tind %= IDX_MOD;
+	tind = get_tdir(tind);
+	return (tind);
+}
+
 void	load(void)
 {
 	int				arg;
@@ -39,7 +47,12 @@ void	load(void)
 	treg = 0;
 	if (IS_T_DIR(arg_byte, FIRST_ARG))
 	{
-		arg = get_tdir();
+		arg = get_tdir(g_bogies->index + 2);
+		treg = get_treg();
+	}
+	else if (IS_T_IND(arg_byte, FIRST_ARG))
+	{
+		arg = get_tind();
 		treg = get_treg();
 	}
 	g_bogies->regs[treg] = arg;
@@ -48,6 +61,8 @@ void	load(void)
 	else
 		g_bogies->carry = 0;
 	g_arena->list[g_bogies->index].bogie = 0;
-	g_arena->list[g_bogies->index + DIR_SIZE + 3].bogie = 1;
-	ft_printf("%x %x\n", arg, treg);
+	g_bogies->index = g_bogies->index + DIR_SIZE + 3;
+	g_arena->list[g_bogies->index].bogie = 1;
+	g_bogies->commmand = g_arena->list[g_bogies->index].com;
+	define_cycles_to_exec(g_bogies->commmand);
 }

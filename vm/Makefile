@@ -18,7 +18,7 @@ COREWAR_SRCS =	error_work.c \
 				tools.c \
 				arena.c \
 				bogie.c \
-				define_cycles_to_die.c \
+				define_cycles_to_exec.c \
 				fight.c \
 				operations_1.c \
 

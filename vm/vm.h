@@ -77,6 +77,7 @@ typedef  struct 			s_coliseum // arena
 	int 					doomsday_clock;//cycle_to_die count
 	size_t					champ_num;
 	int						last_stand;
+	int						all_bogies;
 }							t_coliseum;
 
 t_coliseum					*g_arena;
@@ -95,7 +96,7 @@ int							ft_rstrcmp(const char *str1, const char *str2);
 void						init_battlefield(t_champ *warriors, int num);
 void						battlefield_print(void);
 
-int							define_cycles_to_die(unsigned char com);
+int							define_cycles_to_exec(unsigned char com);
 
 void						add_bogies_on_arena(void);
 t_bogie						*create_bogie(void);
