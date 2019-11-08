@@ -34,12 +34,12 @@ int		get_tdir_small_size(int i)
 	return (tdir);
 }
 
-int		get_treg(void)
+int		get_treg(int scip_size)
 {
 	int		treg;
 	size_t	i;
 
-	i = g_bogies->index + 2 + DIR_SIZE;
+	i = g_bogies->index + scip_size;
 	treg = g_arena->list[i].com;
 	return (treg);
 }

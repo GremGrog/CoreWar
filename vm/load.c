@@ -14,12 +14,12 @@ void	load(void)
 	if (IS_T_DIR(arg_byte, FIRST_ARG))
 	{
 		arg = get_tdir_big_size(g_bogies->index + 2);
-		treg = get_treg();
+		treg = get_treg(DIR_SIZE + 2);
 	}
 	else if (IS_T_IND(arg_byte, FIRST_ARG))
 	{
 		arg = get_tind(1);
-		treg = get_treg();
+		treg = get_treg(IND_SIZE + 2);
 	}
 	g_bogies->regs[treg] = arg;
 	g_bogies->carry = ((arg == 0) ? 1 : 0);
