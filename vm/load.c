@@ -18,7 +18,7 @@ void	load(void)
 	}
 	else if (IS_T_IND(arg_byte, FIRST_ARG))
 	{
-		arg = get_tind();
+		arg = get_tind(1);
 		treg = get_treg();
 	}
 	g_bogies->regs[treg] = arg;

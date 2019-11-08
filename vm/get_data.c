@@ -44,12 +44,18 @@ int		get_treg(void)
 	return (treg);
 }
 
-int		get_tind(void)
+int		get_tind(int size_flag)
 {
 	int	tind;
 
-	tind = get_tdir_big_size(g_bogies->index + 2);
+	if (size_flag == 1)
+		tind = get_tdir_big_size(g_bogies->index + 2);
+	else
+		tind = get_tdir_small_size(g_bogies->index + 2);
 	tind %= IDX_MOD;
-	tind = get_tdir_big_size(tind);
+	if (size_flag == 1)
+		tind = get_tdir_big_size(tind);
+	else
+		tind = get_tdir_small_size(tind);
 	return (tind);
 }
