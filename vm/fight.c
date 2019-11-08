@@ -23,7 +23,8 @@ void	exec_function(void)
 
 void	get_data_for_bogie(int current)
 {
-	if (g_bogies->commmand != g_arena->list[g_bogies->index].com || g_bogies->its_a_highnoon == 0)
+	if (g_bogies->commmand != g_arena->list[g_bogies->index].com 
+		|| g_bogies->its_a_highnoon == 0)
 	{
 		g_bogies->commmand = g_arena->list[g_bogies->index].com;
 		g_bogies->its_a_highnoon = define_cycles_to_exec(g_bogies->commmand) + current;
@@ -37,7 +38,7 @@ void	fight(void)
 	c = 0;
 	g_arena->all_bogies = count_bogies();
 	tmp_bogie = g_bogies;
-	while (g_arena->round < 10)
+	while (g_arena->round < 100)
 	{
 		g_bogies = tmp_bogie;
 		while (g_bogies)

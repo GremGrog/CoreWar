@@ -104,6 +104,12 @@ void						delete_bogie(t_bogie *bogie);
 
 void						fight(void);
 
+int							get_tdir_big_size(int i);
+int							get_tdir_small_size(int i);
+int							get_treg(void);
+int							get_tind(void);
+
 void						load(void);
+void						store(void);
 
 #endif
