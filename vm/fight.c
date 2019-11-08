@@ -17,8 +17,8 @@ size_t	count_bogies(void)
 
 void	exec_function(void)
 {
-	if (g_bogies->commmand == 0x2)
-		ld_operation();
+	if (g_bogies->commmand == g_op[1].code)
+		load();
 }
 
 void	fight(void)
@@ -36,5 +36,6 @@ void	fight(void)
 			tmp_bogie = tmp_bogie->next;
 		}
 		g_arena->round++;
+		break ;
 	}
 }

@@ -2,29 +2,38 @@
 # define VM_H
 
 # include "libft/libft.h"
-# include "op.h"
+# include "../includes/corewar.h"
+# include "../includes/op.h"
 
 # define MAGIC_NUM_B 4
 # define NULL_B 4
 # define HALF_SIZE PROG_NAME_LENGTH + COMMENT_LENGTH + NULL_B * 2
 # define FILE_SIZE HALF_SIZE + MAGIC_NUM_B + CHAMP_MAX_SIZE
 
-# define LIVE 10
-# define LD 5
-# define ST 5
-# define ADD 10
-# define SUB 10
-# define AND 6
-# define OR 6
-# define XOR 6
-# define ZJMP 20
-# define LDI 25
-# define STI 25
-# define FORK 800
-# define LLD 10
-# define LLDI 50
-# define LFORK 1000
-# define AFF 2
+# define LIVE		10
+# define LD			5
+# define ST			5
+# define ADD		10
+# define SUB		10
+# define AND		6
+# define OR			6
+# define XOR		6
+# define ZJMP		20
+# define LDI		25
+# define STI		25
+# define FORK		800
+# define LLD		10
+# define LLDI		50
+# define LFORK		1000
+# define AFF		2
+
+# define IS_T_REG(val, pos) (((val >> pos) & REG_CODE) == REG_CODE) ? 1 : 0
+# define IS_T_DIR(val, pos) (((val >> pos) & DIR_CODE) == DIR_CODE) ? 1 : 0
+# define IS_T_IND(val, pos) (((val >> pos) & IND_CODE) == IND_CODE) ? 1 : 0
+
+# define FIRST_ARG	6
+# define SECOND_ARG	4
+# define THIRD_ARG	2
 
 typedef struct				s_champ
 {
@@ -93,5 +102,7 @@ t_bogie						*create_bogie(void);
 void						delete_bogie(t_bogie *bogie);
 
 void						fight(void);
+
+void						load(void);
 
 #endif

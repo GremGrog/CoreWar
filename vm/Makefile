@@ -19,6 +19,8 @@ COREWAR_SRCS =	error_work.c \
 				arena.c \
 				bogie.c \
 				define_cycles_to_die.c \
+				fight.c \
+				operations_1.c \
 
 COREWAR_OBJF = $(addprefix $(COREWAR_DIR_O)/, $(patsubst %.c,%.o,$(COREWAR_SRCS)))
 
