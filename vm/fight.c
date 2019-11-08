@@ -19,6 +19,10 @@ void	exec_function(void)
 {
 	if (g_bogies->commmand == g_op[1].code)
 		load();
+	if (g_bogies->commmand == g_op[2].code)
+		store();
+	if (g_bogies->commmand == g_op[3].code)
+		addition();
 }
 
 void	get_data_for_bogie(int current)
@@ -38,13 +42,14 @@ void	fight(void)
 	c = 0;
 	g_arena->all_bogies = count_bogies();
 	tmp_bogie = g_bogies;
-	while (g_arena->round < 100)
+	while (g_arena->round < 10)
 	{
 		g_bogies = tmp_bogie;
 		while (g_bogies)
 		{
 			get_data_for_bogie(g_arena->round);
-			exec_function();
+			if (g_bogies->its_a_highnoon == g_arena->round)
+				exec_function();
 			g_bogies = g_bogies->next;
 		}
 		g_arena->round++;

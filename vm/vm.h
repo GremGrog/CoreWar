@@ -107,9 +107,11 @@ void						fight(void);
 int							get_tdir_big_size(int i);
 int							get_tdir_small_size(int i);
 int							get_treg(int scip_size);
-int							get_tind(int size_flag);
+int							get_tind(int size_flag, int scip_size);
 
 void						load(void);
 void						store(void);
+void						addition(void);
+void						subtraction(void);
 
 #endif

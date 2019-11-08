@@ -6,8 +6,6 @@ void	load(void)
 	int				treg;
 	unsigned char	arg_byte;
 
-	if (g_bogies->its_a_highnoon != g_arena->round)
-		return ;
 	arg_byte = g_arena->list[g_bogies->index + 1].com;
 	arg = 0;
 	treg = 0;
@@ -18,7 +16,7 @@ void	load(void)
 	}
 	else if (IS_T_IND(arg_byte, FIRST_ARG))
 	{
-		arg = get_tind(1);
+		arg = get_tind(1, 2);
 		treg = get_treg(IND_SIZE + 2);
 	}
 	g_bogies->regs[treg] = arg;
