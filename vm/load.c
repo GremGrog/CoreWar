@@ -18,11 +18,13 @@ void	load(void)
 	{
 		arg = get_tind(1, 2);
 		treg = get_treg(IND_SIZE + 2);
+		if (treg >= 16)
+		{
+			scip_bytes();
+			return ;
+		}
 	}
 	g_bogies->regs[treg] = arg;
 	g_bogies->carry = ((arg == 0) ? 1 : 0);
-	g_arena->list[g_bogies->index].bogie = 0;
-	g_bogies->index = g_bogies->index + DIR_SIZE + 3;
-	g_arena->list[g_bogies->index].bogie = 1;
-	g_bogies->its_a_highnoon = 0;
+	move_caret(DIR_SIZE + 3);
 }

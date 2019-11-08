@@ -35,6 +35,8 @@ void	exec_function(void)
 		bitwise_xor();
 	if (g_bogies->commmand == g_op[9].code)
 		zjump();
+	// else
+		// move_caret(1);
 }
 
 void	get_data_for_bogie(int current)

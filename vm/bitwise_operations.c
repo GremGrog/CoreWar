@@ -4,8 +4,13 @@ int		get_arg(int *arg, int position, unsigned char arg_byte)
 {
 	if (IS_T_REG(arg_byte, position))
 	{
-		*arg = g_bogies->regs[arg_byte + 2];
-		return (1);
+		if ((*arg = g_bogies->regs[arg_byte + 2]) < 16)
+			return (1);
+		else
+		{
+			*arg = -1;
+			return (0);
+		}
 	}
 	if (IS_T_DIR(arg_byte, position))
 	{
@@ -33,13 +38,13 @@ void	bitwise_and(void)
 	arg_byte = g_arena->list[g_bogies->index + 1].com;
 	jump_i = get_arg(&arg1, FIRST_ARG, arg_byte);
 	jump_i += get_arg(&arg2, SECOND_ARG, arg_byte);
+	// if (arg1 == -1 || arg2 == -1)
+	// 	scip_bytes();
 	if ((g_bogies->regs[++jump_i] = arg1 & arg2) == 0)
 		g_bogies->carry = 1;
 	else
 		g_bogies->carry = 0;
-	g_arena->list[g_bogies->index].bogie = 0;
-	g_bogies->index += jump_i;
-	g_arena->list[g_bogies->index].bogie = 1;
+	move_caret(jump_i);
 }
 
 void	bitwise_or(void)
@@ -54,13 +59,13 @@ void	bitwise_or(void)
 	arg_byte = g_arena->list[g_bogies->index + 1].com;
 	jump_i = get_arg(&arg1, FIRST_ARG, arg_byte);
 	jump_i += get_arg(&arg2, SECOND_ARG, arg_byte);
+	// if (arg1 == -1 || arg2 == -1)
+	// 	scip_bytes();
 	if ((g_bogies->regs[++jump_i] = arg1 | arg2) == 0)
 		g_bogies->carry = 1;
 	else
 		g_bogies->carry = 0;
-	g_arena->list[g_bogies->index].bogie = 0;
-	g_bogies->index += jump_i;
-	g_arena->list[g_bogies->index].bogie = 1;
+	move_caret(jump_i);
 }
 
 void	bitwise_xor(void)
@@ -75,11 +80,11 @@ void	bitwise_xor(void)
 	arg_byte = g_arena->list[g_bogies->index + 1].com;
 	jump_i = get_arg(&arg1, FIRST_ARG, arg_byte);
 	jump_i += get_arg(&arg2, SECOND_ARG, arg_byte);
+	// if (arg1 == -1 || arg2 == -1)
+	// 	scip_bytes();
 	if ((g_bogies->regs[++jump_i] = arg1 ^ arg2) == 0)
 		g_bogies->carry = 1;
 	else
 		g_bogies->carry = 0;
-	g_arena->list[g_bogies->index].bogie = 0;
-	g_bogies->index += jump_i;
-	g_arena->list[g_bogies->index].bogie = 1;
+	move_caret(jump_i);
 }

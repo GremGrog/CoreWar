@@ -14,8 +14,8 @@ void	addition(void)
 			g_bogies->carry = 1;
 		else
 			g_bogies->carry = 0;
-		g_arena->list[g_bogies->index].bogie = 0;
-		g_bogies->index += 3;
-		g_arena->list[g_bogies->index].bogie = 1;
+		move_caret(3);
 	}
+	// else
+	// 	scip_bytes();
 }
