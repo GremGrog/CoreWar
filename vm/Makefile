@@ -25,6 +25,7 @@ COREWAR_SRCS =	error_work.c \
 				store.c \
 				addition.c \
 				subtraction.c \
+				bitwise_and.c \
 
 COREWAR_OBJF = $(addprefix $(COREWAR_DIR_O)/, $(patsubst %.c,%.o,$(COREWAR_SRCS)))
 
