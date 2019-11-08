@@ -114,6 +114,8 @@ void						store(void);
 void						addition(void);
 void						subtraction(void);
 void						bitwise_and(void);
+void						bitwise_or(void);
+void						bitwise_xor(void);
 void						live(void);
 void						zjump(void);
 

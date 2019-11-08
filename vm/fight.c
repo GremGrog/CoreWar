@@ -25,6 +25,14 @@ void	exec_function(void)
 		store();
 	if (g_bogies->commmand == g_op[3].code)
 		addition();
+	if (g_bogies->commmand == g_op[4].code)
+		subtraction();
+	if (g_bogies->commmand == g_op[5].code)
+		bitwise_and();
+	if (g_bogies->commmand == g_op[6].code)
+		bitwise_or();
+	if (g_bogies->commmand == g_op[7].code)
+		bitwise_xor();
 	if (g_bogies->commmand == g_op[9].code)
 		zjump();
 }
