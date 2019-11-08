@@ -27,15 +27,17 @@ void	fight(void)
 	t_bogie	*tmp_bogie;
 
 	all_bogies = count_bogies();
+	tmp_bogie = g_bogies;
 	while (all_bogies > 0)
 	{
-		tmp_bogie = g_bogies;
-		while (tmp_bogie)
+		g_bogies = tmp_bogie;
+		while (g_bogies)
 		{
 			exec_function();
-			tmp_bogie = tmp_bogie->next;
+			g_bogies = g_bogies->next;
 		}
 		g_arena->round++;
 		break ;
 	}
+	battlefield_print();
 }

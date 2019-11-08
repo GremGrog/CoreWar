@@ -43,6 +43,7 @@ void	add_bogies_on_arena(void)
 		new = create_bogie();
 		new->num = c;
 		new->commmand = g_arena->list[index].com;
+		new->index = index;
 		new->its_a_highnoon = define_cycles_to_die(g_arena->list[index].com);
 		new->last_breath = 0;
 		new->regs[0] = c * (-1);
