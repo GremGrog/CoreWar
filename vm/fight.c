@@ -17,12 +17,16 @@ size_t	count_bogies(void)
 
 void	exec_function(void)
 {
+	if (g_bogies->commmand == g_op[0].code)
+		live();
 	if (g_bogies->commmand == g_op[1].code)
 		load();
 	if (g_bogies->commmand == g_op[2].code)
 		store();
 	if (g_bogies->commmand == g_op[3].code)
 		addition();
+	if (g_bogies->commmand == g_op[9].code)
+		zjump();
 }
 
 void	get_data_for_bogie(int current)
