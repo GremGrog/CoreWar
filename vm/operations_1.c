@@ -42,6 +42,8 @@ void	load(void)
 	int				treg;
 	unsigned char	arg_byte;
 
+	if (g_bogies->its_a_highnoon != g_arena->round)
+		return ;
 	arg_byte = g_arena->list[g_bogies->index + 1].com;
 	arg = 0;
 	treg = 0;
@@ -56,13 +58,9 @@ void	load(void)
 		treg = get_treg();
 	}
 	g_bogies->regs[treg] = arg;
-	if (arg == 0)
-		g_bogies->carry = 1;
-	else
-		g_bogies->carry = 0;
+	g_bogies->carry = ((arg == 0) ? 1 : 0);
 	g_arena->list[g_bogies->index].bogie = 0;
 	g_bogies->index = g_bogies->index + DIR_SIZE + 3;
 	g_arena->list[g_bogies->index].bogie = 1;
-	g_bogies->commmand = g_arena->list[g_bogies->index].com;
-	define_cycles_to_exec(g_bogies->commmand);
+	g_bogies->its_a_highnoon = 0;
 }

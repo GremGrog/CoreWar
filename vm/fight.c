@@ -21,22 +21,32 @@ void	exec_function(void)
 		load();
 }
 
+void	get_data_for_bogie(int current)
+{
+	if (g_bogies->commmand != g_arena->list[g_bogies->index].com || g_bogies->its_a_highnoon == 0)
+	{
+		g_bogies->commmand = g_arena->list[g_bogies->index].com;
+		g_bogies->its_a_highnoon = define_cycles_to_exec(g_bogies->commmand) + current;
+	}
+}
+
 void	fight(void)
 {
 	t_bogie	*tmp_bogie;
-
+	int	c;
+	c = 0;
 	g_arena->all_bogies = count_bogies();
 	tmp_bogie = g_bogies;
-	while (g_arena->all_bogies > 0)
+	while (g_arena->round < 10)
 	{
 		g_bogies = tmp_bogie;
 		while (g_bogies)
 		{
+			get_data_for_bogie(g_arena->round);
 			exec_function();
 			g_bogies = g_bogies->next;
 		}
 		g_arena->round++;
-		break ;
 	}
 	battlefield_print();
 }
