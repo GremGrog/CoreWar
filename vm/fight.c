@@ -33,8 +33,14 @@ void	exec_function(void)
 		bitwise_or();
 	if (g_bogies->commmand == g_op[7].code)
 		bitwise_xor();
-	if (g_bogies->commmand == g_op[9].code)
+	if (g_bogies->commmand == g_op[8].code)
 		zjump();
+	if (g_bogies->commmand == g_op[11].code)
+		ft_fork();
+	if (g_bogies->commmand == g_op[14].code)
+		long_fork();
+	if (g_bogies->commmand == g_op[15].code)
+		aff();
 	// else
 		// move_caret(1);
 }

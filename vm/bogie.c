@@ -1,5 +1,20 @@
 #include "vm.h"
 
+void		copy_bogie(t_bogie *new, t_bogie *bogie)
+{
+	size_t	i;
+
+	i = 0;
+	new->num = bogie->num;
+	new->carry = bogie->carry;
+	new->last_breath = bogie->last_breath;
+	while (i < REG_NUMBER)
+	{
+		new->regs[i] = bogie->regs[i];
+		i++;
+	}
+}
+
 t_bogie		*create_bogie(void)
 {
 	t_bogie	*bogie;

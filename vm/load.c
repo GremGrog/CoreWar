@@ -18,12 +18,14 @@ void	load(void)
 	{
 		arg = get_tind(1, 2);
 		treg = get_treg(IND_SIZE + 2);
-		if (treg >= 16)
-		{
-			scip_bytes();
-			return ;
-		}
+		// if (treg >= 16)
+		// {
+		// 	scip_bytes();
+		// 	return ;
+		// }
 	}
+	// else
+		// scip_bytes();
 	g_bogies->regs[treg] = arg;
 	g_bogies->carry = ((arg == 0) ? 1 : 0);
 	move_caret(DIR_SIZE + 3);

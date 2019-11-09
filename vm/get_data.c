@@ -17,7 +17,7 @@ int		get_tdir_big_size(int i)
 	return (tdir);
 }
 
-int		get_tdir_small_size(int i)
+short		get_tdir_small_size(int i)
 {
 	int		tdir;
 	size_t	c;

@@ -100,12 +100,13 @@ int							define_cycles_to_exec(unsigned char com);
 
 void						add_bogies_on_arena(void);
 t_bogie						*create_bogie(void);
+void						copy_bogie(t_bogie *new, t_bogie *bogie);
 void						delete_bogie(t_bogie *bogie);
 
 void						fight(void);
 
 int							get_tdir_big_size(int i);
-int							get_tdir_small_size(int i);
+short						get_tdir_small_size(int i);
 int							get_treg(int scip_size);
 int							get_tind(int size_flag, int scip_size);
 void						move_caret(int steps);
@@ -119,5 +120,8 @@ void						bitwise_or(void);
 void						bitwise_xor(void);
 void						live(void);
 void						zjump(void);
+void						ft_fork(void);
+void						long_fork(void);
+void						aff(void);
 
 #endif
