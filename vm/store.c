@@ -14,7 +14,10 @@ void	store(void)
 	if (IS_T_REG(arg_byte, FIRST_ARG))
 		treg = get_treg(1);
 	else
-		scip_bytes(ST_OP);
+	{
+		skip_bytes(ST_OP);
+		return ;
+	}
 	if (IS_T_REG(arg_byte, SECOND_ARG))
 	{
 		arg = get_treg(T_REG);
@@ -28,6 +31,9 @@ void	store(void)
 		g_bogies->aim = 1 + IND_SIZE;
 	}
 	else
-		scip_bytes(ST_OP);
+	{
+		skip_bytes(ST_OP);
+		return ;
+	}
 	move_caret(g_bogies->aim);
 }

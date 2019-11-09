@@ -43,11 +43,11 @@ void ldi(void)
 		i += 2;
 	}
 	arg_3 = get_tdir_small_size(g_bogies->index + i);
-	i ++;
-	g_arena->list[g_bogies->index + (arg_1 + arg_2) % IDX_MOD] = arg_3 / 16777216;
-	g_arena->list[g_bogies->index + 1 + (arg_1 + arg_2) % IDX_MOD ] = (arg_3 % 16777216) / 65536;
-	g_arena->list[g_bogies->index + 2 + (arg_1 + arg_2) % IDX_MOD] = (arg_3 % 65536) / 256;
-	g_arena->list[g_bogies->index + 3 + (arg_1 + arg_2) % IDX_MOD] = arg_3 % 256;
+	i++;
+	g_arena->list[g_bogies->index + (arg_1 + arg_2) % IDX_MOD].com = arg_3 / 16777216;
+	g_arena->list[g_bogies->index + 1 + (arg_1 + arg_2) % IDX_MOD].com = (arg_3 % 16777216) / 65536;
+	g_arena->list[g_bogies->index + 2 + (arg_1 + arg_2) % IDX_MOD].com = (arg_3 % 65536) / 256;
+	g_arena->list[g_bogies->index + 3 + (arg_1 + arg_2) % IDX_MOD].com = arg_3 % 256;
 	g_arena->list[g_bogies->index].bogie = 0;
 	g_bogies->index = g_bogies->index + i;
 	g_arena->list[g_bogies->index].bogie = 1;
@@ -85,7 +85,7 @@ void sti(void)
 	}
 	else
 	{
-		arg_1 = get_tind(0, g_bogies->index + i;
+		arg_1 = get_tind(0, g_bogies->index + i);
 		i += 2;
 	}
 	if (IS_T_REG(arg_byte, THIRD_ARG))
@@ -98,10 +98,10 @@ void sti(void)
 		arg_2 = get_tdir_small_size(g_bogies->index + i);
 		i += 2;
 	}
-	g_arena->list[g_bogies->index + (arg_3+ arg_2) % IDX_MOD] = arg_1 / 16777216;
-	g_arena->list[g_bogies->index + 1 + (arg_3 + arg_2) % IDX_MOD ] = (arg_1 % 16777216) / 65536;
-	g_arena->list[g_bogies->index + 2 + (arg_3 + arg_2) % IDX_MOD] = (arg_1 % 65536) / 256;
-	g_arena->list[g_bogies->index + 3 + (arg_3 + arg_2) % IDX_MOD] = arg_1 % 256;
+	g_arena->list[g_bogies->index + (arg_3+ arg_2) % IDX_MOD].com = arg_1 / 16777216;
+	g_arena->list[g_bogies->index + 1 + (arg_3 + arg_2) % IDX_MOD].com = (arg_1 % 16777216) / 65536;
+	g_arena->list[g_bogies->index + 2 + (arg_3 + arg_2) % IDX_MOD].com = (arg_1 % 65536) / 256;
+	g_arena->list[g_bogies->index + 3 + (arg_3 + arg_2) % IDX_MOD].com = arg_1 % 256;
 	g_arena->list[g_bogies->index].bogie = 0;
 	g_bogies->index = g_bogies->index + i;
 	g_arena->list[g_bogies->index].bogie = 1;
@@ -137,7 +137,7 @@ void lldi(void)
 		}
 		else
 		{
-			arg_1 = get_tind(0, g_bogies->index + i;
+			arg_1 = get_tind(0, g_bogies->index + i);
 			i += 2;
 		}
 	if (IS_T_REG(arg_byte, SECOND_ARG))
@@ -151,11 +151,11 @@ void lldi(void)
 		i += 2;
 	}
 	arg_3 = get_tdir_small_size(g_bogies->index + i);
-	i ++;
-	g_arena->list[g_bogies->index + arg_1 + arg_2] = arg_3 / 16777216;
-	g_arena->list[g_bogies->index + 1 + arg_1 + arg_2] = (arg_3 % 16777216) / 65536;
-	g_arena->list[g_bogies->index + 2 + arg_1 + arg_2] = (arg_3 % 65536) / 256;
-	g_arena->list[g_bogies->index + 3 + arg_1 + arg_2] = arg_3 % 256;
+	i++;
+	g_arena->list[g_bogies->index + arg_1 + arg_2].com = arg_3 / 16777216;
+	g_arena->list[g_bogies->index + 1 + arg_1 + arg_2].com = (arg_3 % 16777216) / 65536;
+	g_arena->list[g_bogies->index + 2 + arg_1 + arg_2].com = (arg_3 % 65536) / 256;
+	g_arena->list[g_bogies->index + 3 + arg_1 + arg_2].com = arg_3 % 256;
 	g_arena->list[g_bogies->index].bogie = 0;
 	g_bogies->index = g_bogies->index + i;
 	g_arena->list[g_bogies->index].bogie = 1;

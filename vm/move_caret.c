@@ -27,7 +27,7 @@ void	count_first_args_len(int op_code, unsigned char arg_byte, int position)
 		g_bogies->aim += 2;
 }
 
-void	scip_bytes(int op_code)
+void	skip_bytes(int op_code)
 {
 	unsigned char	arg_byte;
 	size_t			steps;

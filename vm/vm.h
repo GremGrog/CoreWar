@@ -127,7 +127,7 @@ short						get_tdir_small_size(int i);
 int							get_treg(int scip_size);
 int							get_tind(int size_flag, int scip_size);
 void						move_caret(int steps);
-void						scip_bytes(int op_code);
+void						skip_bytes(int op_code);
 
 void						load(void);
 void						long_load(void);
@@ -143,7 +143,6 @@ void						ft_fork(void);
 void						long_fork(void);
 void						aff(void);
 void						ldi(void);
-
 void						sti(void);
 void						lldi(void);
 #endif

@@ -20,9 +20,15 @@ void	long_load(void)
 		treg = get_treg(g_bogies->index + arg);
 	}
 	else
-		scip_bytes(LLD_OP);
+	{
+		skip_bytes(LLD_OP);
+		return ;
+	}
 	if (treg >= 16)
-		scip_bytes(LLD_OP);
+	{
+		skip_bytes(LLD_OP);
+		return ;
+	}
 	g_bogies->aim = DIR_SIZE + 3;
 	g_bogies->regs[treg] = arg;
 	g_bogies->carry = ((arg == 0) ? 1 : 0);
@@ -51,9 +57,15 @@ void	load(void)
 		g_bogies->aim = IND_SIZE + 3;
 	}
 	else
-		scip_bytes(LD_OP);
+	{
+		skip_bytes(LD_OP);
+		return ;
+	}
 	if (treg >= 16)
-		scip_bytes(LD_OP);
+	{
+		skip_bytes(LD_OP);
+		return ;
+	}
 	g_bogies->regs[treg] = arg;
 	g_bogies->carry = ((arg == 0) ? 1 : 0);
 	move_caret(g_bogies->aim);

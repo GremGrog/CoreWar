@@ -3,18 +3,26 @@
 void	aff(void)
 {
 	unsigned char	arg_byte;
-    int				arg;
+    int				reg;
 	char			sym;
 
 	arg_byte = g_arena->list[g_bogies->index + 1].com;
     if (IS_T_REG(arg_byte, FIRST_ARG))
     {
-        arg = get_treg(g_bogies->index + 2);
-		sym = (char)g_bogies->regs[arg];
-        ft_printf("%c", (char)arg);
+        reg = get_treg(g_bogies->index + 2);
+		if (reg >= 16)
+		{
+			skip_bytes(AFF_OP);
+			return ;
+		}
+		sym = (char)g_bogies->regs[reg];
+        ft_printf("%c", (char)reg);
 		g_bogies->aim = 3;
 		move_caret(g_bogies->aim);
     }
 	else
-		scip_bytes(AFF_OP);
+	{
+		skip_bytes(AFF_OP);
+		return ;
+	}
 }
