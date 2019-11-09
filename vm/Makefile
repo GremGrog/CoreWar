@@ -21,7 +21,7 @@ COREWAR_SRCS =	error_work.c \
 				define_cycles_to_exec.c \
 				fight.c \
 				get_data.c \
-				load.c \
+				load_lload.c \
 				store.c \
 				addition.c \
 				subtraction.c \

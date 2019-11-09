@@ -12,8 +12,9 @@ void	aff(void)
         arg = get_treg(g_bogies->index + 2);
 		sym = (char)g_bogies->regs[arg];
         ft_printf("%c", (char)arg);
-		move_caret(3);
+		g_bogies->aim = 3;
+		move_caret(g_bogies->aim);
     }
-	// else
-	// 	scip_bytes();
+	else
+		scip_bytes(AFF_OP);
 }

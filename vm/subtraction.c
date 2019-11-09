@@ -14,8 +14,9 @@ void	subtraction(void)
 			g_bogies->carry = 1;
 		else
 			g_bogies->carry = 0;
-		move_caret(3);
+		g_bogies->aim = 3;
+		move_caret(g_bogies->aim);
 	}
-	// else
-	// 	scip_bytes();
+	else
+		scip_bytes(SUB_OP);
 }

@@ -38,8 +38,8 @@ void	bitwise_and(void)
 	arg_byte = g_arena->list[g_bogies->index + 1].com;
 	jump_i = get_arg(&arg1, FIRST_ARG, arg_byte);
 	jump_i += get_arg(&arg2, SECOND_ARG, arg_byte);
-	// if (arg1 == -1 || arg2 == -1)
-	// 	scip_bytes();
+	if (arg1 == -1 || arg2 == -1)
+		scip_bytes(AND_OP);
 	if ((g_bogies->regs[++jump_i] = arg1 & arg2) == 0)
 		g_bogies->carry = 1;
 	else
@@ -59,8 +59,8 @@ void	bitwise_or(void)
 	arg_byte = g_arena->list[g_bogies->index + 1].com;
 	jump_i = get_arg(&arg1, FIRST_ARG, arg_byte);
 	jump_i += get_arg(&arg2, SECOND_ARG, arg_byte);
-	// if (arg1 == -1 || arg2 == -1)
-	// 	scip_bytes();
+	if (arg1 == -1 || arg2 == -1)
+		scip_bytes(OR_OP);
 	if ((g_bogies->regs[++jump_i] = arg1 | arg2) == 0)
 		g_bogies->carry = 1;
 	else
@@ -80,8 +80,8 @@ void	bitwise_xor(void)
 	arg_byte = g_arena->list[g_bogies->index + 1].com;
 	jump_i = get_arg(&arg1, FIRST_ARG, arg_byte);
 	jump_i += get_arg(&arg2, SECOND_ARG, arg_byte);
-	// if (arg1 == -1 || arg2 == -1)
-	// 	scip_bytes();
+	if (arg1 == -1 || arg2 == -1)
+		scip_bytes(XOR_OP);
 	if ((g_bogies->regs[++jump_i] = arg1 ^ arg2) == 0)
 		g_bogies->carry = 1;
 	else

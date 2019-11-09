@@ -27,6 +27,23 @@
 # define LFORK		1000
 # define AFF		2
 
+# define LIVE_OP	0
+# define LD_OP		1
+# define ST_OP		2
+# define ADD_OP		3
+# define SUB_OP		4
+# define AND_OP		5
+# define OR_OP		6
+# define XOR_OP		7
+# define ZJMP_OP	8
+# define LDI_OP		9
+# define STI_OP		10
+# define FORK_OP	11
+# define LLD_OP		12
+# define LLDI_OP	13
+# define LFORK_OP	14
+# define AFF_OP		15
+
 # define IS_T_REG(val, pos) (((val >> pos) & REG_CODE) == REG_CODE) ? 1 : 0
 # define IS_T_DIR(val, pos) (((val >> pos) & DIR_CODE) == DIR_CODE) ? 1 : 0
 # define IS_T_IND(val, pos) (((val >> pos) & IND_CODE) == IND_CODE) ? 1 : 0
@@ -110,8 +127,10 @@ short						get_tdir_small_size(int i);
 int							get_treg(int scip_size);
 int							get_tind(int size_flag, int scip_size);
 void						move_caret(int steps);
+void						scip_bytes(int op_code);
 
 void						load(void);
+void						long_load(void);
 void						store(void);
 void						addition(void);
 void						subtraction(void);
@@ -123,6 +142,6 @@ void						zjump(void);
 void						ft_fork(void);
 void						long_fork(void);
 void						aff(void);
-void						ldi(void)
+void						ldi(void);
 
 #endif
