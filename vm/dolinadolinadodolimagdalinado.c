@@ -16,7 +16,10 @@ void ldi(void)
 	arg_1 = 0;
 	arg_2 = 0;
 	if (IS_T_IND(arg_byte, SECOND_ARG) || IS_T_IND(arg_byte, THIRD_ARG) || IS_T_DIR(arg_byte, THIRD_ARG))
-
+	{
+		skip_bytes(LDI_OP);
+		return ;
+	}
 		if (IS_T_REG(arg_byte, FIRST_ARG))
 		{
 			arg_1 = get_treg(i);
@@ -66,7 +69,10 @@ void sti(void)
 	if (g_bogies->its_a_highnoon != g_arena->round)
 		return ;
 	if (IS_T_IND(arg_byte, THIRD_ARG) || IS_T_IND(arg_byte, FIRST_ARG) || IS_T_DIR(arg_byte, FIRST_ARG))
-
+	{
+		skip_bytes(STI_OP);
+		return ;
+	}
 	arg_byte = g_arena->list[g_bogies->index + i].com;
 	i++;
 	arg_2 = 0;
@@ -124,7 +130,10 @@ void lldi(void)
 	arg_1 = 0;
 	arg_2 = 0;
 	if (IS_T_IND(arg_byte, SECOND_ARG) || IS_T_IND(arg_byte, THIRD_ARG) || IS_T_DIR(arg_byte, THIRD_ARG))
-
+	{
+		skip_bytes(LLDI_OP);
+		return ;
+	}
 		if (IS_T_REG(arg_byte, FIRST_ARG))
 		{
 			arg_1 = get_treg(i);
