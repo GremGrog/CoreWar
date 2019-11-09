@@ -35,6 +35,8 @@ void	exec_function(void)
 		bitwise_xor();
 	if (g_bogies->commmand == g_op[8].code)
 		zjump();
+	if (g_bogies->commmand == g_op[9].code)
+		ldi();
 	if (g_bogies->commmand == g_op[11].code)
 		ft_fork();
 	if (g_bogies->commmand == g_op[14].code)
