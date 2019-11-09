@@ -123,6 +123,7 @@ void						zjump(void);
 void						ft_fork(void);
 void						long_fork(void);
 void						aff(void);
-void						ldi(void)
-
+void						ldi(void);
+void						sti(void);
+void						lldi(void);
 #endif
