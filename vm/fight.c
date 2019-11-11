@@ -41,14 +41,16 @@ void	exec_function(void)
 		sti();
 	if (g_bogies->commmand == g_op[11].code)
 		ft_fork();
+	if (g_bogies->commmand == g_op[12].code)
+		long_load();
 	if (g_bogies->commmand == g_op[13].code)
 		lldi();
 	if (g_bogies->commmand == g_op[14].code)
 		long_fork();
 	if (g_bogies->commmand == g_op[15].code)
 		aff();
-	// else
-		// move_caret(1);
+	else
+		move_caret(1);
 }
 
 void	get_data_for_bogie(int current)
@@ -68,7 +70,7 @@ void	fight(void)
 	c = 0;
 	g_arena->all_bogies = count_bogies();
 	tmp_bogie = g_bogies;
-	while (g_arena->round < 10)
+	while (g_arena->round < 100)
 	{
 		g_bogies = tmp_bogie;
 		while (g_bogies)

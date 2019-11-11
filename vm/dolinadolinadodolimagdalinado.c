@@ -32,7 +32,7 @@ void ldi(void)
 		}
 		else
 		{
-			arg_1 = get_tind(0, g_bogies->index + i;
+			arg_1 = get_tind(0, g_bogies->index + i);
 			i += 2;
 		}
 	if (IS_T_REG(arg_byte, SECOND_ARG))
