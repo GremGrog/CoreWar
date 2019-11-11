@@ -121,7 +121,7 @@ t_bogie						*create_bogie(void);
 void						copy_bogie(t_bogie *new, t_bogie *bogie);
 void						delete_bogie(t_bogie *bogie);
 
-void						fight(void);
+void						fight(t_champ *champs);
 
 int							get_tdir_big_size(int i);
 short						get_tdir_small_size(int i);

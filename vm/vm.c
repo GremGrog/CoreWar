@@ -12,9 +12,9 @@ int		main(int c, char **a)
 		return (ft_errno(0));
 	champs = parse_args(c, a);
 	tmp = champs;
-	champs_num = count_champs(champs);
+	champs_num = count_champs(tmp);
 	init_battlefield(champs, champs_num);
 	add_bogies_on_arena();
-	fight();
-	delete_champs(tmp);
+	fight(champs);
+	delete_champs(champs);
 }

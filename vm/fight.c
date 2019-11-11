@@ -63,43 +63,102 @@ void	get_data_for_bogie(int current)
 	}
 }
 
-void	print_nc(void)
+void	print_arena(WINDOW *win)
 {
-	size_t i;
+	size_t	i;
+	size_t	step;
+	int		y;
+	int		x;
 
 	i = 0;
+	step = 0;
+	y = 2;
+	x = 2;
 	while (i < MEM_SIZE)
 	{
-		// if (g_arena->list[i].bogie == 1)
-		// 	ft_printf(" \x1b[46m%{black}02x", g_arena->list[i].com);
-		// else
-		// {
-			 printw(" %02x", g_arena->list[i].com);
-			// if (g_arena->list[i].color == 'g')
-			// 	ft_printf(" %{green}02x", g_arena->list[i].com);
-			// if (g_arena->list[i].color == 'r')
-			// 	ft_printf(" %{red}02x", g_arena->list[i].com);
-			// if (g_arena->list[i].color == 'y')
-			// 	ft_printf(" %{yellow}02x", g_arena->list[i].com);
-			// if (g_arena->list[i].color == 'b')
-			// 	ft_printf(" %{blue}02x", g_arena->list[i].com);
-			// if (g_arena->list[i].color == 'e')
-			// 	ft_printf(" %{grey}02x", g_arena->list[i].com);
-				// ft_printf(" %02x", field->list[i].com);
-		// }
-
+		if (g_arena->list[i].bogie == 1)
+			color_set(5, NULL);
+		else
+		{
+			if (g_arena->list[i].color == 'g')
+				color_set(1, NULL);
+			else if (g_arena->list[i].color == 'r')
+				color_set(2, NULL);
+			else if (g_arena->list[i].color == 'y')
+				color_set(3, NULL);
+			else if (g_arena->list[i].color == 'b')
+				color_set(4, NULL);
+			else
+				color_set(6, NULL);
+		}
+		mvprintw(y, x + step, "%02x", g_arena->list[i].com);
+		step += 3;
+		if (i % 64 == 63)
+		{
+			step = 0;
+			y += 1;
+		}
 		i++;
 	}
+	mvprintw(10, 200, "Cycle: %d", g_arena->round);
 }
 
-void	fight(void)
+// void	print_info(WINDOW *win, t_champ *champs)
+// {
+// 	t_champ	*tmp;
+// 	int		y;
+// 	int		x;
+
+// 	y = 10;
+// 	x = 200;
+// 	tmp = champs;
+// 	while (tmp)
+// 	{
+// 		mvprintw(y, x, "%s", tmp->name);
+// 		y++;
+// 		tmp = tmp->next;
+// 	}
+// }
+
+WINDOW	*init_w(t_champ *champs)
+{
+	WINDOW *win;
+
+    if (!initscr())
+    {
+        fprintf(stderr, "Error initialising ncurses.\n");
+        exit(1);
+	}
+	initscr();
+    curs_set(0);
+    refresh();
+	win = newwin(LINES, COLS - (COLS / 100) * 30, 0, 0);
+    // wborder(win, 0, 0, 0, 0, 0,0,0,0);
+	// wrefresh(win);
+	start_color();
+	init_pair(1, COLOR_GREEN, COLOR_BLACK);
+	init_pair(2, COLOR_RED, COLOR_BLACK);
+	init_pair(3, COLOR_YELLOW, COLOR_BLACK);
+	init_pair(4, COLOR_BLUE, COLOR_BLACK);
+	init_pair(5, COLOR_BLACK, COLOR_CYAN);
+	init_pair(6, COLOR_WHITE, COLOR_BLACK);
+	// print_arena(win);
+	// wrefresh(win);
+	// getch();
+	// delwin(win);
+	// endwin();
+	return (win);
+}
+
+void	fight(t_champ *champs)
 {
 	t_bogie	*tmp_bogie;
+	WINDOW	*win;
 	int	c;
 	c = 0;
 	g_arena->all_bogies = count_bogies();
 	tmp_bogie = g_bogies;
-	initscr();
+	win = init_w(champs);
 	while (g_arena->round < 100)
 	{
 		g_bogies = tmp_bogie;
@@ -108,13 +167,15 @@ void	fight(void)
 			get_data_for_bogie(g_arena->round);
 			if (g_bogies->its_a_highnoon == g_arena->round)
 				exec_function();
+			print_arena(win);
+			wrefresh(win);
+			getch();
 			g_bogies = g_bogies->next;
 		}
 		g_arena->round++;
 	}
-	print_nc();
-	refresh();
-		getch();
+	// getch();
+	delwin(win);
 	endwin();
 	// battlefield_print();
 }
