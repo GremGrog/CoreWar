@@ -10,10 +10,7 @@ void live(void)
 	g_bogies->last_breath = g_arena->round;
 	if (arg >= g_arena->champ_num * -1  && arg <= -1)
 		g_arena->last_stand = arg;
-	g_arena->list[g_bogies->index].bogie = 0;
-	g_bogies->index = g_bogies->index + DIR_SIZE;
-	g_arena->list[g_bogies->index].bogie = 1;
-	g_bogies->its_a_highnoon = 0;
+	move_caret(DIR_SIZE);
 }
 
 void zjump(void)
@@ -26,16 +23,8 @@ void zjump(void)
 	if (g_bogies->carry)
 	{
 		arg = get_tdir_small_size(g_bogies->index + 1);
-		g_arena->list[g_bogies->index].bogie = 0;
-		g_bogies->index = g_bogies->index + (arg % IDX_MOD);
-		g_arena->list[g_bogies->index].bogie = 1;
-		g_bogies->its_a_highnoon = 0;
+		move_caret(arg % IDX_MOD);
 	}
 	else
-	{
-		g_arena->list[g_bogies->index].bogie = 0;
-		g_bogies->index = g_bogies->index + DIR_SIZE;
-		g_arena->list[g_bogies->index].bogie = 1;
-		g_bogies->its_a_highnoon = 0;
-	}
+		move_caret(DIR_SIZE);
 }
