@@ -1,6 +1,7 @@
 #ifndef VM_H
 # define VM_H
 
+# include <ncurses.h>
 # include "libft/libft.h"
 # include "../includes/corewar.h"
 # include "../includes/op.h"
@@ -145,4 +146,7 @@ void						aff(void);
 void						ldi(void);
 void						sti(void);
 void						lldi(void);
+
+void						visualisator(void);
+
 #endif

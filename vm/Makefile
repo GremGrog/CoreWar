@@ -34,7 +34,7 @@ COREWAR_SRCS =	error_work.c \
 
 COREWAR_OBJF = $(addprefix $(COREWAR_DIR_O)/, $(patsubst %.c,%.o,$(COREWAR_SRCS)))
 
-all: $(LIB) $(COREWAR)
+all: $(LIB) $(COREWAR) $(VIS)
 
 $(COREWAR_DIR_O):
 	@mkdir -p corewar_obj
@@ -43,10 +43,10 @@ $(LIB):
 	@make -C libft
 
 $(COREWAR): $(COREWAR_DIR_O) $(COREWAR_OBJF) $(LIB)
-	@gcc $(COREWAR_OBJF) $(LIBFT) -o $(COREWAR)
+	@gcc $(FLAGS) $(COREWAR_OBJF) $(LIBFT) -o $(COREWAR) -lncurses
 
 $(COREWAR_DIR_O)/%.o: %.c 
-	@gcc  -I $(INCLUDES) -o $@ -c $<
+	@gcc -lncurses -I $(INCLUDES) -o $@ -c $<
 
 clean:
 	@rm -rf $(COREWAR_DIR_O)

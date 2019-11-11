@@ -63,6 +63,35 @@ void	get_data_for_bogie(int current)
 	}
 }
 
+void	print_nc(void)
+{
+	size_t i;
+
+	i = 0;
+	while (i < MEM_SIZE)
+	{
+		// if (g_arena->list[i].bogie == 1)
+		// 	ft_printf(" \x1b[46m%{black}02x", g_arena->list[i].com);
+		// else
+		// {
+			 printw(" %02x", g_arena->list[i].com);
+			// if (g_arena->list[i].color == 'g')
+			// 	ft_printf(" %{green}02x", g_arena->list[i].com);
+			// if (g_arena->list[i].color == 'r')
+			// 	ft_printf(" %{red}02x", g_arena->list[i].com);
+			// if (g_arena->list[i].color == 'y')
+			// 	ft_printf(" %{yellow}02x", g_arena->list[i].com);
+			// if (g_arena->list[i].color == 'b')
+			// 	ft_printf(" %{blue}02x", g_arena->list[i].com);
+			// if (g_arena->list[i].color == 'e')
+			// 	ft_printf(" %{grey}02x", g_arena->list[i].com);
+				// ft_printf(" %02x", field->list[i].com);
+		// }
+
+		i++;
+	}
+}
+
 void	fight(void)
 {
 	t_bogie	*tmp_bogie;
@@ -70,6 +99,7 @@ void	fight(void)
 	c = 0;
 	g_arena->all_bogies = count_bogies();
 	tmp_bogie = g_bogies;
+	initscr();
 	while (g_arena->round < 100)
 	{
 		g_bogies = tmp_bogie;
@@ -82,5 +112,9 @@ void	fight(void)
 		}
 		g_arena->round++;
 	}
-	battlefield_print();
+	print_nc();
+	refresh();
+		getch();
+	endwin();
+	// battlefield_print();
 }
