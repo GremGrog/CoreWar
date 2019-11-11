@@ -30,7 +30,7 @@ COREWAR_SRCS =	error_work.c \
 				move_caret.c \
 				aff.c \
 				fork_lfork.c \
-				dolinadolinadodolimagdalinado.c \
+				ldi_sti.c \
 
 COREWAR_OBJF = $(addprefix $(COREWAR_DIR_O)/, $(patsubst %.c,%.o,$(COREWAR_SRCS)))
 
