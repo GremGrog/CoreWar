@@ -187,8 +187,11 @@ void	fight(t_champ *champs)
 				exec_function();
 				get_data_for_bogie(g_arena->round);
 			}
-			print_arena(win);
-			getch();
+			if (g_arena->round > 800)
+			{
+				print_arena(win);
+				getch();
+			}
 			g_bogies = g_bogies->next;
 		}
 		g_arena->round++;

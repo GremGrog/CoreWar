@@ -24,8 +24,9 @@ void zjump(void)
 	if (g_bogies->carry)
 	{
 		arg = get_tdir_small_size(g_bogies->index + 1);
-		move_caret(arg % IDX_MOD);
+		arg %= IDX_MOD;
+		move_caret(arg - 1);
 	}
 	else
-		move_caret(DIR_SIZE);
+		move_caret(2);
 }

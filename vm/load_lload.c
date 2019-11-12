@@ -44,20 +44,21 @@ void	load(void)
 	arg_byte = g_arena->list[g_bogies->index + 1].com;
 	arg = 0;
 	treg = 0;
-	if (IS_T_DIR(arg_byte, FIRST_ARG) && IS_T_REG(arg_byte, SECOND_ARG))
-	{
-		arg = get_tdir_big_size(g_bogies->index + 2);
-		treg = get_treg(DIR_SIZE + 2);
-		g_bogies->aim = DIR_SIZE + 2;
-	}
-	else if (IS_T_IND(arg_byte, FIRST_ARG) && IS_T_REG(arg_byte, SECOND_ARG) )
+	if (IS_T_IND(arg_byte, FIRST_ARG) && IS_T_REG(arg_byte, SECOND_ARG) )
 	{
 		arg = get_tind(1, 2);
 		treg = get_treg(IND_SIZE + 2);
 		g_bogies->aim = IND_SIZE + 2;
 	}
+	else if (IS_T_DIR(arg_byte, FIRST_ARG) && IS_T_REG(arg_byte, SECOND_ARG))
+	{
+		arg = get_tdir_big_size(g_bogies->index + 2);
+		treg = get_treg(DIR_SIZE + 2);
+		g_bogies->aim = DIR_SIZE + 2;
+	}
 	else
 	{
+		ft_printf("s\n");
 		skip_bytes(LD_OP);
 		return ;
 	}
