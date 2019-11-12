@@ -13,6 +13,7 @@ void	long_fork(void)
 	new->next = g_bogies->next;
 	g_bogies->next = new;
 	g_bogies->aim = 2;
+	g_arena->all_bogies++;
 	move_caret(g_bogies->aim);
 }
 
@@ -30,5 +31,6 @@ void	ft_fork(void)
 	new->next = g_bogies->next;
 	g_bogies->next = new;
 	g_bogies->aim = 2;
+	g_arena->all_bogies++;
 	move_caret(g_bogies->aim);
 }
