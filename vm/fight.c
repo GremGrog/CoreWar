@@ -159,7 +159,7 @@ void	fight(t_champ *champs)
 	g_arena->all_bogies = count_bogies();
 	tmp_bogie = g_bogies;
 	win = init_w(champs);
-	while (g_arena->round < 100)
+	while (g_arena->round < 1200)
 	{
 		g_bogies = tmp_bogie;
 		while (g_bogies)
@@ -168,7 +168,6 @@ void	fight(t_champ *champs)
 			if (g_bogies->its_a_highnoon == g_arena->round)
 				exec_function();
 			print_arena(win);
-			wrefresh(win);
 			getch();
 			g_bogies = g_bogies->next;
 		}
