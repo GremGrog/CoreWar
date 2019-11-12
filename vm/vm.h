@@ -150,5 +150,6 @@ void						sti(void);
 void						lldi(void);
 
 void						visualisator(void);
+void						get_data_for_bogie(int current);
 
 #endif

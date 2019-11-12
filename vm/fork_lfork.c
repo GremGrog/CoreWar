@@ -11,6 +11,8 @@ void	long_fork(void)
 	g_arena->list[g_bogies->index + arg].bogie = 1;
 	new->index = g_bogies->index + arg;
 	new->next = g_bogies->next;
+	new->commmand = g_arena->list[new->index].com;
+	new->its_a_highnoon = define_cycles_to_exec(new->commmand) + g_arena->round;
 	g_bogies->next = new;
 	g_bogies->aim = 2;
 	g_arena->all_bogies++;
@@ -28,7 +30,8 @@ void	ft_fork(void)
 	copy_bogie(new, g_bogies);
 	g_arena->list[g_bogies->index + arg].bogie = 1;
 	new->index = g_bogies->index + arg;
-	new->next = g_bogies->next;
+	new->commmand = g_arena->list[new->index].com;
+	new->its_a_highnoon = define_cycles_to_exec(new->commmand) + g_arena->round;
 	g_bogies->next = new;
 	g_bogies->aim = 2;
 	g_arena->all_bogies++;

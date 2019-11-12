@@ -13,6 +13,7 @@ void		copy_bogie(t_bogie *new, t_bogie *bogie)
 		new->regs[i] = bogie->regs[i];
 		i++;
 	}
+	new->next = bogie->next;
 }
 
 t_bogie		*create_bogie(void)
