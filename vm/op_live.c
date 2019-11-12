@@ -8,6 +8,7 @@ void live(void)
 		return ;
 	arg = get_tdir_big_size(g_bogies->index + 1);
 	g_bogies->last_breath = g_arena->round;
+	g_bogies->live_op++;
 	if (arg >= g_arena->champ_num * -1  && arg <= -1)
 		g_arena->last_stand = arg;
 	move_caret(DIR_SIZE);

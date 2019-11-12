@@ -28,6 +28,7 @@ t_bogie		*create_bogie(void)
 	bogie->its_a_highnoon = 0;
 	bogie->index = 0;
 	bogie->aim = 0;
+	bogie->live_op = 0;
 	bogie->regs = (int*)malloc(sizeof(int) * REG_NUMBER);
 	bogie->next = NULL;
 	i = 0;

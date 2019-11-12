@@ -151,6 +151,20 @@ void	get_data_for_bogie(int current)
 	}
 }
 
+// void	lives_check(void)
+// {
+// 	size_t	all_live_ops;
+// 	t_bogie	*tmp_bogie;
+
+// 	tmp_bogie = g_bogies;
+// 	all_live_ops = 0;
+// 	while (tmp_bogie)
+// 	{
+// 		if (tmp_bogie->last_breath <= g_arena->round )
+// 		all_live_ops += tmp_bogie->live_op;
+// 		tmp_bogie = tmp_bogie->next;
+// 	}
+// }
 
 void	fight(t_champ *champs)
 {
@@ -164,7 +178,8 @@ void	fight(t_champ *champs)
 	while (g_arena->all_bogies > 0)
 	{
 		g_bogies = tmp_bogie;
-		// if (g_arena->round == CYCLE_TO_DIE)
+		if (g_arena->doomsday_clock == g_arena->cycle_to_die)
+			lives_check();
 		while (g_bogies)
 		{
 			if (g_bogies->its_a_highnoon == g_arena->round)
@@ -177,6 +192,7 @@ void	fight(t_champ *champs)
 			g_bogies = g_bogies->next;
 		}
 		g_arena->round++;
+		g_arena->doomsday_clock++;
 	}
 	// getch();
 	delwin(win);

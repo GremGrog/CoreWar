@@ -71,6 +71,7 @@ typedef	struct				s_bogie
 	size_t 					last_breath;//last raund with live
 	size_t 					its_a_highnoon;//time to do com
 	size_t 					index;
+	size_t					live_op;
 	int 					aim;//count of byts to jump next
 	int						*regs;
 	struct s_bogie			*next;
@@ -94,6 +95,7 @@ typedef  struct 			s_coliseum // arena
 	size_t 					mortal_flip;//live count
 	int 					doomsday_clock;//cycle_to_die count
 	size_t					champ_num;
+	int						cycle_to_die;
 	int						last_stand;
 	int						all_bogies;
 }							t_coliseum;
