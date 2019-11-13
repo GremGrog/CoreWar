@@ -60,20 +60,32 @@ void	get_data_for_bogie(int current)
 	g_bogies->color =  g_arena->list[g_bogies->index].color;
 }
 
-// void	lives_check(void)
-// {
-// 	size_t	all_live_ops;
-// 	t_bogie	*tmp_bogie;
+ void	lives_check(void)
+ {
+ 	size_t	all_live_ops;
+ 	t_bogie	*tmp_bogie;
+ 	t_bogie *delta;
 
-// 	tmp_bogie = g_bogies;
-// 	all_live_ops = 0;
-// 	while (tmp_bogie)
-// 	{
-// 		if (tmp_bogie->last_breath <= g_arena->round )
-// 		all_live_ops += tmp_bogie->live_op;
-// 		tmp_bogie = tmp_bogie->next;
-// 	}
-// }
+ 	tmp_bogie = g_arena->bogie_head;
+ 	while (tmp_bogie)
+ 		if (g_arena->round - tmp_bogie->last_breath >= g_arena->cycle_to_die)
+			tmp_bogie = delete_bogie(tmp_bogie);
+ 		else
+ 			tmp_bogie = tmp_bogie->next;
+ 	if (g_arena->mortal_flip >= NBR_LIVE)
+	{
+		g_arena->cycle_to_die -= CYCLE_DELTA;
+		g_arena->mortal_flip = 0;
+	}
+ 	if (g_arena->death_gaze >= MAX_CHECKS)
+	{
+		g_arena->cycle_to_die -= CYCLE_DELTA;
+		g_arena->death_gaze = 0;
+	}
+ 	else
+ 		g_arena->death_gaze++;
+ 	g_arena->doomsday_clock = 0;
+ }
 
 void	fight(t_champ *champs)
 {
@@ -83,12 +95,13 @@ void	fight(t_champ *champs)
 	c = 0;
 	g_arena->all_bogies = count_bogies();
 	g_arena->bogie_head = g_bogies;
+	g_arena->cycle_to_die = CYCLE_TO_DIE;
 	win = init_w(champs);
 	while (g_arena->all_bogies > 0)
 	{
 		g_bogies = g_arena->bogie_head;
-		// if (g_arena->doomsday_clock == g_arena->cycle_to_die)
-		// 	lives_check();
+		 if (g_arena->doomsday_clock == g_arena->cycle_to_die)
+		 	lives_check();
 		while (g_bogies)
 		{
 			if (g_arena->round == 0)

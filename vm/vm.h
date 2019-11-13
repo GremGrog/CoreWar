@@ -94,6 +94,7 @@ typedef  struct 			s_coliseum // arena
 	t_com					list[MEM_SIZE];
 	size_t 					round;//global count
 	size_t 					mortal_flip;//live count
+	size_t 					death_gaze;
 	int 					doomsday_clock;//cycle_to_die count
 	size_t					champ_num;
 	int						cycle_to_die;
@@ -123,7 +124,7 @@ int							define_cycles_to_exec(unsigned char com);
 void						add_bogies_on_arena(void);
 t_bogie						*create_bogie(void);
 void						copy_bogie(t_bogie *new, t_bogie *bogie);
-void						delete_bogie(t_bogie *bogie);
+t_bogie						*delete_bogie(t_bogie *bogie);
 
 void						fight(t_champ *champs);
 

@@ -11,6 +11,7 @@ void live(void)
 	g_bogies->live_op++;
 	if (arg >= g_arena->champ_num * -1  && arg <= -1)
 		g_arena->last_stand = arg;
+	g_arena->mortal_flip++;
 	move_caret(DIR_SIZE);
 }
 
