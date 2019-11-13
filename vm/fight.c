@@ -86,6 +86,7 @@ WINDOW	*init_w(t_champ *champs)
     curs_set(0);
     refresh();
 	win = newwin(LINES, COLS - (COLS / 100) * 30, 0, 0);
+	noecho();
     // wborder(win, 0, 0, 0, 0, 0,0,0,0);
 	// wrefresh(win);
 	start_color();
@@ -166,6 +167,34 @@ void	get_data_for_bogie(int current)
 // 	}
 // }
 
+void	control_input(WINDOW *win)
+{
+	char	ch;
+	static int	delay = 0;
+
+	ch = getch();
+	if (ch == ' ' && delay == 0)
+	{
+		nodelay(stdscr, TRUE);
+		halfdelay(1);
+		delay = 1;
+		return ;
+	}
+	else if (ch == ' ' && delay == 1)
+	{
+		delay = 0;
+		nodelay(stdscr, FALSE);
+		cbreak();
+		return ;
+	}
+	else if (ch == 's' && delay == 0)
+	{
+		intrflush(stdscr, TRUE);
+		delay = 1;
+		return ;
+	}
+}
+
 void	fight(t_champ *champs)
 {
 	t_bogie	*tmp_bogie;
@@ -187,13 +216,10 @@ void	fight(t_champ *champs)
 				exec_function();
 				get_data_for_bogie(g_arena->round);
 			}
-			if (g_arena->round > 800)
-			{
-				print_arena(win);
-				getch();
-			}
 			g_bogies = g_bogies->next;
 		}
+		print_arena(win);
+		control_input(win);
 		g_arena->round++;
 		g_arena->doomsday_clock++;
 	}
