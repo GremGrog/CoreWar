@@ -167,28 +167,36 @@ void	get_data_for_bogie(int current)
 void	control_input(WINDOW *win)
 {
 	char	ch;
-	static int	delay = 0;
+	static int	delay;
+	static size_t speed;
 
 	ch = getch();
 	if (ch == ' ' && delay == 0)
 	{
 		nodelay(stdscr, TRUE);
-		halfdelay(1);
+		halfdelay(speed);
 		delay = 1;
-		return ;
 	}
 	else if (ch == ' ' && delay == 1)
 	{
 		delay = 0;
 		nodelay(stdscr, FALSE);
 		cbreak();
-		return ;
 	}
-	else if (ch == 's' && delay == 0)
+	else if (ch == 's')
 	{
 		intrflush(stdscr, TRUE);
 		delay = 1;
-		return ;
+	}
+	else if (ch == 'q')
+	{
+		speed++;
+		halfdelay(speed);
+	}
+	else if (ch == 'w')
+	{
+		speed = 0;
+		halfdelay(speed);
 	}
 }
 
@@ -199,11 +207,11 @@ void	fight(t_champ *champs)
 	int	c;
 	c = 0;
 	g_arena->all_bogies = count_bogies();
-	tmp_bogie = g_bogies;
+	g_arena->bogie_head = g_bogies;
 	win = init_w(champs);
-	while (g_arena->round < 2000)
+	while (g_arena->all_bogies > 0)
 	{
-		g_bogies = tmp_bogie;
+		g_bogies = g_arena->bogie_head;
 		// if (g_arena->doomsday_clock == g_arena->cycle_to_die)
 		// 	lives_check();
 		while (g_bogies)

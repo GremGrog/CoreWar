@@ -5,7 +5,7 @@ void		copy_bogie(t_bogie *new, t_bogie *bogie)
 	size_t	i;
 
 	i = 0;
-	new->num = bogie->num;
+	new->num = bogie->num + 1;
 	new->carry = bogie->carry;
 	new->last_breath = bogie->last_breath;
 	while (i < REG_NUMBER)

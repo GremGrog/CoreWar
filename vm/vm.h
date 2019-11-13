@@ -99,6 +99,7 @@ typedef  struct 			s_coliseum // arena
 	int						cycle_to_die;
 	int						last_stand;
 	int						all_bogies;
+	t_bogie					*bogie_head;
 }							t_coliseum;
 
 t_coliseum					*g_arena;
