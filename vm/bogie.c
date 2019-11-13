@@ -39,10 +39,19 @@ t_bogie		*create_bogie(void)
 	return (bogie);
 }
 
-void	delete_bogie(t_bogie *bogie)
+t_bogie	*delete_bogie(t_bogie *bogie)
 {
+	t_bogie *tmp;
+	t_bogie *next;
+
+	tmp = g_arena->bogie_head;
+	while (tmp->next->num != bogie->num)
+		tmp = tmp->next;
+	next = tmp->next->next;
+	tmp->next = next;
 	free(bogie->regs);
 	free(bogie);
+	return (next);
 }
 
 void	add_bogies_on_arena(void)
