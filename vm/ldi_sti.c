@@ -57,9 +57,13 @@ void	print_4bytes(int a1, int a2, int a3, int flag_l)
 //	if (g_arena->round > 930)
 //		printf("index %d reg %x ind %d\n",g_bogies->index, a3 , c);
 	g_arena->list[c].com = a3 >> 24;
+	g_arena->list[c].color = g_bogies->color;
 	g_arena->list[1 + c].com = (a3 << 8) >> 24;
+	g_arena->list[1 + c].color = g_bogies->color;
 	g_arena->list[2 + c].com = (a3 << 16) >> 24;
+	g_arena->list[2 + c].color = g_bogies->color;
 	g_arena->list[3 + c].com = (a3 << 24) >> 24;
+	g_arena->list[3 + c].color = g_bogies->color;
 }
 
 void ldi(void)

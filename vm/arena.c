@@ -53,13 +53,13 @@ void	init_battlefield(t_champ *warriors, int num)
 				g_arena->list[j + (i * c)].com = warriors->code[j];
 				g_arena->list[j + (i * c)].bogie = 0;
 				g_arena->list[j + (i * c)].champ = i + 1;
-				if (i == 0)
+				if (warriors->index == 1)
 					g_arena->list[j + (i * c)].color = 'g';
-				else if (i == 1)
+				else if (warriors->index == 2)
 					g_arena->list[j + (i * c)].color = 'r';
-				else if (i == 2)
+				else if (warriors->index == 3)
 					g_arena->list[j + (i * c)].color = 'y';
-				else if (i == 3)
+				else if (warriors->index == 4)
 					g_arena->list[j + (i * c)].color = 'b';
 			}
 			else

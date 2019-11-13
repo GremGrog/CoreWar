@@ -144,12 +144,9 @@ void	exec_function(void)
 
 void	get_data_for_bogie(int current)
 {
-//	if (g_bogies->commmand != g_arena->list[g_bogies->index].com
-//		|| g_bogies->its_a_highnoon == 0)
-//	{
-		g_bogies->commmand = g_arena->list[g_bogies->index].com;
-		g_bogies->its_a_highnoon = define_cycles_to_exec(g_bogies->commmand) + current;
-//	}
+	g_bogies->commmand = g_arena->list[g_bogies->index].com;
+	g_bogies->its_a_highnoon = define_cycles_to_exec(g_bogies->commmand) + current;
+	g_bogies->color =  g_arena->list[g_bogies->index].color;
 }
 
 // void	lives_check(void)
@@ -211,6 +208,8 @@ void	fight(t_champ *champs)
 		// 	lives_check();
 		while (g_bogies)
 		{
+			if (g_arena->round == 0)
+				get_data_for_bogie(g_arena->round);
 			if (g_bogies->its_a_highnoon == g_arena->round)
 			{
 				exec_function();
@@ -218,10 +217,8 @@ void	fight(t_champ *champs)
 			}
 			g_bogies = g_bogies->next;
 		}
-		if (g_arena->round > 850) {
-			print_arena(win);
-			control_input(win);
-		}
+		print_arena(win);
+		control_input(win);
 		g_arena->round++;
 		g_arena->doomsday_clock++;
 	}

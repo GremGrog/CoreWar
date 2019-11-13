@@ -74,6 +74,7 @@ typedef	struct				s_bogie
 	size_t					live_op;
 	int 					aim;//count of byts to jump next
 	int						*regs;
+	char					color;
 	struct s_bogie			*next;
 	//color defolt white
 }							t_bogie;
