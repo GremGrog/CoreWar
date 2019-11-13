@@ -15,95 +15,6 @@ size_t	count_bogies(void)
 	return (c);
 }
 
-// void	print_info(WINDOW *win, t_champ *champs)
-// {
-// 	t_champ	*tmp;
-// 	int		y;
-// 	int		x;
-
-// 	y = 10;
-// 	x = 200;
-// 	tmp = champs;
-// 	while (tmp)
-// 	{
-// 		mvprintw(y, x, "%s", tmp->name);
-// 		y++;
-// 		tmp = tmp->next;
-// 	}
-// }
-
-void	print_arena(WINDOW *win)
-{
-	size_t	i;
-	size_t	step;
-	int		y;
-	int		x;
-
-	i = 0;
-	step = 0;
-	y = 2;
-	x = 2;
-	while (i < MEM_SIZE)
-	{
-		if (g_arena->list[i].bogie == 1)
-			color_set(5, NULL);
-		else
-		{
-			if (g_arena->list[i].color == 'g')
-				color_set(1, NULL);
-			else if (g_arena->list[i].color == 'r')
-				color_set(2, NULL);
-			else if (g_arena->list[i].color == 'y')
-				color_set(3, NULL);
-			else if (g_arena->list[i].color == 'b')
-				color_set(4, NULL);
-			else
-				color_set(6, NULL);
-		}
-		mvprintw(y, x + step, "%02x", g_arena->list[i].com);
-		step += 3;
-		if (i % 64 == 63)
-		{
-			step = 0;
-			y += 1;
-		}
-		i++;
-	}
-	mvprintw(10, 200, "Cycle: %d", g_arena->round);
-}
-
-
-WINDOW	*init_w(t_champ *champs)
-{
-	WINDOW *win;
-
-    if (!initscr())
-    {
-        fprintf(stderr, "Error initialising ncurses.\n");
-        exit(1);
-	}
-	initscr();
-    curs_set(0);
-    refresh();
-	win = newwin(LINES, COLS - (COLS / 100) * 30, 0, 0);
-	noecho();
-    // wborder(win, 0, 0, 0, 0, 0,0,0,0);
-	// wrefresh(win);
-	start_color();
-	init_pair(1, COLOR_GREEN, COLOR_BLACK);
-	init_pair(2, COLOR_RED, COLOR_BLACK);
-	init_pair(3, COLOR_YELLOW, COLOR_BLACK);
-	init_pair(4, COLOR_BLUE, COLOR_BLACK);
-	init_pair(5, COLOR_BLACK, COLOR_CYAN);
-	init_pair(6, COLOR_WHITE, COLOR_BLACK);
-	// print_arena(win);
-	// wrefresh(win);
-	// getch();
-	// delwin(win);
-	// endwin();
-	return (win);
-}
-
 void	exec_function(void)
 {
 	if (g_bogies->commmand == g_op[0].code)
@@ -164,42 +75,6 @@ void	get_data_for_bogie(int current)
 // 	}
 // }
 
-void	control_input(WINDOW *win)
-{
-	char	ch;
-	static int	delay;
-	static size_t speed;
-
-	ch = getch();
-	if (ch == ' ' && delay == 0)
-	{
-		nodelay(stdscr, TRUE);
-		halfdelay(speed);
-		delay = 1;
-	}
-	else if (ch == ' ' && delay == 1)
-	{
-		delay = 0;
-		nodelay(stdscr, FALSE);
-		cbreak();
-	}
-	else if (ch == 's')
-	{
-		intrflush(stdscr, TRUE);
-		delay = 1;
-	}
-	else if (ch == 'q')
-	{
-		speed++;
-		halfdelay(speed);
-	}
-	else if (ch == 'w')
-	{
-		speed = 0;
-		halfdelay(speed);
-	}
-}
-
 void	fight(t_champ *champs)
 {
 	t_bogie	*tmp_bogie;
@@ -225,8 +100,8 @@ void	fight(t_champ *champs)
 			}
 			g_bogies = g_bogies->next;
 		}
-		print_arena(win);
-		control_input(win);
+		// print_arena(win);
+		// control_input(win);
 		g_arena->round++;
 		g_arena->doomsday_clock++;
 	}
