@@ -156,5 +156,6 @@ void						get_data_for_bogie(int current);
 
 WINDOW						*init_w(t_champ *champs);
 void						print_arena(WINDOW *win);
+void						control_input(WINDOW *win);
 
 #endif

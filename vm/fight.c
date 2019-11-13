@@ -100,8 +100,8 @@ void	fight(t_champ *champs)
 	while (g_arena->all_bogies > 0)
 	{
 		g_bogies = g_arena->bogie_head;
-		 if (g_arena->doomsday_clock == g_arena->cycle_to_die)
-		 	lives_check();
+		//  if (g_arena->doomsday_clock == g_arena->cycle_to_die)
+		//  	lives_check();
 		while (g_bogies)
 		{
 			if (g_arena->round == 0)

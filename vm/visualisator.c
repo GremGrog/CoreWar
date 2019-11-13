@@ -29,7 +29,7 @@ void	print_info(WINDOW *win)
 	// 	y++;
 	// 	tmp = tmp->next;
 	// }
-	mvwprintw(win, 10, 10, "Cycle: %d", 3);
+	mvwprintw(win, 10, 10, "Cycle: %d", g_arena->round);
 	wrefresh(win);
 }
 
@@ -85,20 +85,21 @@ WINDOW	*init_w(t_champ *champs)
         fprintf(stderr, "Error initialising ncurses.\n");
         exit(1);
 	}
-	initscr();
     curs_set(0);
 	win = newwin(300, 300, 0, 0);
-	arena = derwin(win, 200, 200, 0, 0);
-	wborder(arena, 0, 0, 0,0,0,0,0,0);
-	// infowin = derwin(win, 100, 100, 0, 200);
+	arena = derwin(win, 67, 200, 0, 0);
+	infowin = derwin(win, 67, 60, 0, 199);
 	refresh();
 	noecho();
-	// wrefresh(infowin);
+	
+	wborder(arena, 0, 0, 0, 0, 0, 0, 0, 0);
+	wborder(infowin, 0, 0, 0, 0, 0, 0, 0, 0);
 	wrefresh(arena);
+	wrefresh(infowin);
 	wrefresh(win);
 	init_colors(win);
 	print_arena(arena);
-	// print_info(infowin);
+	print_info(infowin);
 	return (win);
 }
 
