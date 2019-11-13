@@ -6,7 +6,7 @@ int	all_three(unsigned char	arg_byte, int num)
 
 	if (IS_T_REG(arg_byte, num))
 	{
-		arg = g_bogies->regs[get_treg(g_bogies->aim) - 1];
+		arg = g_bogies->regs[get_treg(g_bogies->aim)];
 		g_bogies->aim++;
 	}
 	else if (IS_T_DIR(arg_byte, num))
@@ -28,8 +28,8 @@ int reg_dir(unsigned char	arg_byte, int num)
 
 	if (IS_T_REG(arg_byte, num))
 	{
-		arg = get_tdir_small_size(g_bogies->index + g_bogies->aim);
-		g_bogies->aim += 2;
+		arg = g_bogies->regs[get_treg(g_bogies->aim)];
+		g_bogies->aim++;
 	}
 	else
 	{
@@ -42,15 +42,24 @@ int reg_dir(unsigned char	arg_byte, int num)
 void	print_4bytes(int a1, int a2, int a3, int flag_l)
 {
 	int c;
+
 	if (flag_l)
 		c =  a1 + a2;
 	else
 		c = (a1 + a2) % IDX_MOD;
+//	if (g_arena->round > 930)
+//	{
+//		printf("c %d\n", c);
+//		printf("reg %x regnum %d\n",  g_bogies->regs[a3], a3);
+//	}
 	a3 = g_bogies->regs[a3];
-	g_arena->list[g_bogies->index + c].com = a3 >> 24;
-	g_arena->list[g_bogies->index + 1 + c].com = (a3 << 8) >> 24;
-	g_arena->list[g_bogies->index + 2 + c].com = (a3 << 16) >> 24;
-	g_arena->list[g_bogies->index + 3 + c].com = (a3 << 24) >> 24;
+	c = (g_bogies->index + c) % MEM_SIZE;
+//	if (g_arena->round > 930)
+//		printf("index %d reg %x ind %d\n",g_bogies->index, a3 , c);
+	g_arena->list[c].com = a3 >> 24;
+	g_arena->list[1 + c].com = (a3 << 8) >> 24;
+	g_arena->list[2 + c].com = (a3 << 16) >> 24;
+	g_arena->list[3 + c].com = (a3 << 24) >> 24;
 }
 
 void ldi(void)
@@ -91,7 +100,7 @@ void sti(void)
 		return ;
 	}
 	arg_byte = g_arena->list[g_bogies->index + 1].com;
-	arg_1 = get_treg(2) - 1;
+	arg_1 = get_treg(2);
 	g_bogies->aim = 3;
 	arg_2 = all_three(arg_byte, SECOND_ARG);
 	arg_3 = reg_dir(arg_byte, THIRD_ARG);

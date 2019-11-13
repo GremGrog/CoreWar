@@ -31,7 +31,7 @@ int		get_tdir_small_size(int i)
 		i++;
 		c++;
 	}
-	return (tdir);
+	return ((short)tdir);
 }
 
 int		get_treg(int scip_size)
@@ -41,6 +41,8 @@ int		get_treg(int scip_size)
 
 	i = g_bogies->index + scip_size;
 	treg = g_arena->list[i].com;
+//	if (g_arena->round > 952)
+//		printf("treg %d\n", treg);
 	return (treg);
 }
 
