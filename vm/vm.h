@@ -67,6 +67,7 @@ typedef	struct				s_bogie
 {
 	int 					num;
 	int 					carry;
+	int						player;
 	unsigned char			commmand;
 	size_t 					last_breath;//last raund with live
 	size_t 					its_a_highnoon;//time to do com
@@ -101,9 +102,18 @@ typedef  struct 			s_coliseum // arena
 	int						last_stand;
 	int						all_bogies;
 	t_bogie					*bogie_head;
+	t_champ					*champs;
 }							t_coliseum;
 
 t_coliseum					*g_arena;
+
+typedef struct				s_windows
+{
+	WINDOW					*main_win;
+	WINDOW					*arena;
+	WINDOW					*infowin;
+	long long				delay;
+}							t_windows;
 
 t_champ						*parse_args(int c, char **a);
 void						parse_bytecode(t_champ *champ, char *file);
@@ -126,7 +136,7 @@ t_bogie						*create_bogie(void);
 void						copy_bogie(t_bogie *new, t_bogie *bogie);
 t_bogie						*delete_bogie(t_bogie *bogie);
 
-void						fight(t_champ *champs);
+void						fight(void);
 
 int							get_tdir_big_size(int i);
 int							get_tdir_small_size(int i);
@@ -154,8 +164,11 @@ void						lldi(void);
 
 void						get_data_for_bogie(int current);
 
-WINDOW						*init_w(t_champ *champs);
-void						print_arena(WINDOW *win);
-void						control_input(WINDOW *win);
+t_windows					*init_w(void);
+void						print_wins(t_windows *wins);
+void						delete_windows(t_windows *wins);
+void						control_input(t_windows *wins);
+int							search_live_in_bogie(int champ_index);
+int							search_last_breath(int champ_index);
 
 #endif

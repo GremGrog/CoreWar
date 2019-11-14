@@ -1,36 +1,63 @@
 #include "vm.h"
 
-void	init_colors(WINDOW *win)
+void	info_printing_cycle(WINDOW *win, size_t y, size_t i)
 {
-	start_color();
-	init_pair(1, COLOR_GREEN, COLOR_BLACK);
-	init_pair(2, COLOR_RED, COLOR_BLACK);
-	init_pair(3, COLOR_YELLOW, COLOR_BLACK);
-	init_pair(4, COLOR_BLUE, COLOR_BLACK);
-	init_pair(5, COLOR_BLACK, COLOR_CYAN);
-	init_pair(6, COLOR_WHITE, COLOR_BLACK);
-	wrefresh(win);
-	init_pair(7, COLOR_MAGENTA, COLOR_BLACK);
-	if (can_change_color())
-		init_color(COLOR_MAGENTA, 444, 444, 444);
+	t_champ	*tmp_champ;
+	int		live_op;
+	int		last_breath;
+
+	tmp_champ = g_arena->champs;
+	while (tmp_champ && i <= g_arena->champ_num)
+	{
+		mvwprintw(win, y, 6, "Player-%d", tmp_champ->index);
+		if (tmp_champ->index == 1)
+			wcolor_set(win, 1, NULL);
+		else if (tmp_champ->index == 2)
+			wcolor_set(win, 2, NULL);
+		else if (tmp_champ->index == 3)
+			wcolor_set(win, 3, NULL);
+		else if (tmp_champ->index == 4)
+			wcolor_set(win, 4, NULL);
+		mvwprintw(win, y, 16, "%s", tmp_champ->name);
+		wcolor_set(win, 6, NULL);
+		live_op = search_live_in_bogie(tmp_champ->index);
+		mvwprintw(win, y + 1, 8, "Live %17d", live_op);
+		last_breath = search_last_breath(tmp_champ->index);
+		mvwprintw(win, y + 2, 8, "Last breath %10d", last_breath);
+		tmp_champ = tmp_champ->next;
+		y += 4;
+	}
 }
 
 void	print_info(WINDOW *win)
 {
-	int		y;
-	int		x;
+	size_t	i;
+	size_t	y;
 
-	// y = 10;
-	// x = 200;
-	// tmp = champs;
-	// while (tmp)
-	// {
-	// 	mvprintw(y, x, "%s", tmp->name);
-	// 	y++;
-	// 	tmp = tmp->next;
-	// }
-	mvwprintw(win, 10, 10, "Cycle: %d", g_arena->round);
+	wattron(win, A_BOLD);
+	mvwprintw(win, 4, 30, "GAME INFO");
+	mvwprintw(win, 7, 6, "Cycle: %d", g_arena->round);
+	mvwprintw(win, 10, 6, "Cycles To Die: %d", g_arena->cycle_to_die);
+	i = 1;
+	y = 13;
+	info_printing_cycle(win, y, i);
+	wcolor_set(win, 6, NULL);
+	wattroff(win, A_BOLD);
 	wrefresh(win);
+}
+
+void	set_arena_colors(WINDOW *win, size_t i)
+{
+	if (g_arena->list[i].color == 'g')
+		wcolor_set(win, 1, NULL);
+	else if (g_arena->list[i].color == 'r')
+		wcolor_set(win, 2, NULL);
+	else if (g_arena->list[i].color == 'y')
+		wcolor_set(win, 3, NULL);
+	else if (g_arena->list[i].color == 'b')
+		wcolor_set(win, 4, NULL);
+	else if (g_arena->list[i].color == 'e')
+		wcolor_set(win, 7, NULL);
 }
 
 void	print_arena(WINDOW *win)
@@ -43,24 +70,13 @@ void	print_arena(WINDOW *win)
 	i = 0;
 	step = 0;
 	y = 2;
-	x = 4;
+	x = 5;
 	while (i < MEM_SIZE)
 	{
 		if (g_arena->list[i].bogie == 1)
 			wcolor_set(win, 5, NULL);
 		else
-		{
-			if (g_arena->list[i].color == 'g')
-				wcolor_set(win, 1, NULL);
-			else if (g_arena->list[i].color == 'r')
-				wcolor_set(win, 2, NULL);
-			else if (g_arena->list[i].color == 'y')
-				wcolor_set(win, 3, NULL);
-			else if (g_arena->list[i].color == 'b')
-				wcolor_set(win, 4, NULL);
-			else if (g_arena->list[i].color == 'e')
-				wcolor_set(win, 7, NULL);
-		}
+			set_arena_colors(win, i);
 		mvwprintw(win, y, x + step, "%02x", g_arena->list[i].com);
 		step += 3;
 		if (i % 64 == 63)
@@ -70,71 +86,17 @@ void	print_arena(WINDOW *win)
 		}
 		i++;
 	}
-	// mvwprintw(win, 10, 200, "Cycle: %d", g_arena->round);
 	wrefresh(win);
 }
 
-WINDOW	*init_w(t_champ *champs)
+void	print_wins(t_windows *wins)
 {
-	WINDOW *win;
-	WINDOW *infowin;
-	WINDOW *arena;
-
-    if (!initscr())
-    {
-        fprintf(stderr, "Error initialising ncurses.\n");
-        exit(1);
-	}
-    curs_set(0);
-	win = newwin(300, 300, 0, 0);
-	arena = derwin(win, 67, 200, 0, 0);
-	infowin = derwin(win, 67, 60, 0, 199);
+	print_arena(wins->arena);
+	print_info(wins->infowin);
+	control_input(wins);
+	wrefresh(wins->arena);
+	wrefresh(wins->infowin);
+	wrefresh(wins->main_win);
 	refresh();
-	noecho();
-	
-	wborder(arena, 0, 0, 0, 0, 0, 0, 0, 0);
-	wborder(infowin, 0, 0, 0, 0, 0, 0, 0, 0);
-	wrefresh(arena);
-	wrefresh(infowin);
-	wrefresh(win);
-	init_colors(win);
-	print_arena(arena);
-	print_info(infowin);
-	return (win);
-}
-
-void	control_input(WINDOW *win)
-{
-	char	ch;
-	static int	delay;
-	static size_t speed;
-
-	ch = getch();
-	if (ch == ' ' && delay == 0)
-	{
-		nodelay(stdscr, TRUE);
-		halfdelay(speed);
-		delay = 1;
-	}
-	else if (ch == ' ' && delay == 1)
-	{
-		delay = 0;
-		nodelay(stdscr, FALSE);
-		cbreak();
-	}
-	else if (ch == 's')
-	{
-		intrflush(stdscr, TRUE);
-		delay = 1;
-	}
-	else if (ch == 'q')
-	{
-		speed++;
-		halfdelay(speed);
-	}
-	else if (ch == 'w')
-	{
-		speed = 0;
-		halfdelay(speed);
-	}
+	usleep(wins->delay * 50000);
 }

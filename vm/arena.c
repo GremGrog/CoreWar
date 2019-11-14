@@ -42,6 +42,7 @@ void	init_battlefield(t_champ *warriors, int num)
 	g_arena->mortal_flip = 0;
 	g_arena->doomsday_clock = 0;
 	g_arena->cycle_to_die = CYCLE_TO_DIE;
+	g_arena->champs = warriors;
 	c = MEM_SIZE / num;
 	while (i < num)
 	{

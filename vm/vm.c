@@ -15,6 +15,6 @@ int		main(int c, char **a)
 	champs_num = count_champs(tmp);
 	init_battlefield(champs, champs_num);
 	add_bogies_on_arena();
-	fight(champs);
+	fight();
 	delete_champs(champs);
 }

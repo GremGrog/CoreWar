@@ -58,6 +58,14 @@ void	get_data_for_bogie(int current)
 	g_bogies->commmand = g_arena->list[g_bogies->index].com;
 	g_bogies->its_a_highnoon = define_cycles_to_exec(g_bogies->commmand) + current;
 	g_bogies->color =  g_arena->list[g_bogies->index].color;
+	if (g_bogies->color == 'g')
+		g_bogies->player = 1;
+	if (g_bogies->color == 'r')
+		g_bogies->player = 2;
+	if (g_bogies->color == 'y')
+		g_bogies->player = 3;
+	if (g_bogies->color == 'b')
+		g_bogies->player = 4;
 }
 
  void	lives_check(void)
@@ -68,10 +76,12 @@ void	get_data_for_bogie(int current)
 
  	tmp_bogie = g_arena->bogie_head;
  	while (tmp_bogie)
+	{
  		if (g_arena->round - tmp_bogie->last_breath >= g_arena->cycle_to_die)
 			tmp_bogie = delete_bogie(tmp_bogie);
  		else
  			tmp_bogie = tmp_bogie->next;
+	}
  	if (g_arena->mortal_flip >= NBR_LIVE)
 	{
 		g_arena->cycle_to_die -= CYCLE_DELTA;
@@ -87,21 +97,22 @@ void	get_data_for_bogie(int current)
  	g_arena->doomsday_clock = 0;
  }
 
-void	fight(t_champ *champs)
+void	fight(void)
 {
 	t_bogie	*tmp_bogie;
-	WINDOW	*win;
+	t_windows	*wins;
 	int	c;
+
 	c = 0;
 	g_arena->all_bogies = count_bogies();
 	g_arena->bogie_head = g_bogies;
 	g_arena->cycle_to_die = CYCLE_TO_DIE;
-	win = init_w(champs);
+	wins = init_w();
 	while (g_arena->all_bogies > 0)
 	{
 		g_bogies = g_arena->bogie_head;
-		//  if (g_arena->doomsday_clock == g_arena->cycle_to_die)
-		//  	lives_check();
+		 if (g_arena->doomsday_clock == g_arena->cycle_to_die)
+		 	lives_check();
 		while (g_bogies)
 		{
 			if (g_arena->round == 0)
@@ -113,13 +124,9 @@ void	fight(t_champ *champs)
 			}
 			g_bogies = g_bogies->next;
 		}
-		// print_arena(win);
-		// control_input(win);
+		print_wins(wins);
 		g_arena->round++;
 		g_arena->doomsday_clock++;
 	}
-	// getch();
-	delwin(win);
-	endwin();
-	// battlefield_print();
+	delete_windows(wins);
 }
