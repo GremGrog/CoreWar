@@ -74,7 +74,7 @@ typedef	struct				s_bogie
 	size_t 					index;
 	size_t					live_op;
 	int 					aim;//count of byts to jump next
-	int						*regs;
+	unsigned int			*regs;
 	char					color;
 	struct s_bogie			*next;
 	//color defolt white
@@ -138,10 +138,10 @@ t_bogie						*delete_bogie(t_bogie *bogie);
 
 void						fight(void);
 
-int							get_tdir_big_size(int i);
+unsigned int				get_tdir_big_size(int i);
 int							get_tdir_small_size(int i);
 int							get_treg(int scip_size);
-int							get_tind(int size_flag, int scip_size);
+unsigned int				get_tind(int size_flag, int scip_size);
 void						move_caret(int steps);
 void						skip_bytes(int op_code);
 

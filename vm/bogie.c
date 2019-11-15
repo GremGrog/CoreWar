@@ -31,7 +31,7 @@ t_bogie		*create_bogie(void)
 	bogie->aim = 0;
 	bogie->color = 0;
 	bogie->live_op = 0;
-	bogie->regs = (int*)malloc(sizeof(int) * REG_NUMBER);
+	bogie->regs = (unsigned int*)malloc(sizeof(unsigned int) * REG_NUMBER);
 	bogie->next = NULL;
 	i = 0;
 	while (i < REG_NUMBER)

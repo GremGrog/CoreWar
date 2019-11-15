@@ -2,7 +2,7 @@
 
 void	long_load(void)
 {
-	int				arg;
+	unsigned int	arg;
 	int				treg;
 	unsigned char	arg_byte;
 
@@ -37,7 +37,7 @@ void	long_load(void)
 
 void	load(void)
 {
-	int				arg;
+	unsigned int	arg;
 	int				treg;
 	unsigned char	arg_byte;
 
@@ -58,7 +58,6 @@ void	load(void)
 	}
 	else
 	{
-		ft_printf("s\n");
 		skip_bytes(LD_OP);
 		return ;
 	}

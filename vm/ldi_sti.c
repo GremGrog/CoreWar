@@ -2,7 +2,7 @@
 
 int	all_three(unsigned char	arg_byte, int num)
 {
-	int arg;
+	unsigned int arg;
 
 	if (IS_T_REG(arg_byte, num))
 	{
@@ -24,7 +24,7 @@ int	all_three(unsigned char	arg_byte, int num)
 
 int reg_dir(unsigned char	arg_byte, int num)
 {
-	int arg;
+	unsigned int arg;
 
 	if (IS_T_REG(arg_byte, num))
 	{
@@ -87,7 +87,7 @@ void ldi(void)
 	arg_3 = get_tdir_small_size(g_bogies->index + g_bogies->aim);
 	g_bogies->aim++;
 	print_4bytes(arg_1, arg_2, arg_3, 0);
-	move_caret(g_bogies->aim);
+	move_caret(g_bogies->aim - 1);
 	g_bogies->aim = 0;
 }
 
@@ -135,6 +135,6 @@ void lldi(void)
 	arg_3 = get_tdir_small_size(g_bogies->index + g_bogies->aim);
 	g_bogies->aim++;
 	print_4bytes(arg_1, arg_2, arg_3, 1);
-	move_caret(g_bogies->aim);
+	move_caret(g_bogies->aim - 1);
 	g_bogies->aim = 0;
 }

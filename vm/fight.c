@@ -75,6 +75,7 @@ void	get_data_for_bogie(int current)
  	t_bogie *delta;
 
  	tmp_bogie = g_arena->bogie_head;
+	 g_arena->death_gaze++;
  	while (tmp_bogie)
 	{
  		if (g_arena->round - tmp_bogie->last_breath >= g_arena->cycle_to_die)
@@ -86,14 +87,13 @@ void	get_data_for_bogie(int current)
 	{
 		g_arena->cycle_to_die -= CYCLE_DELTA;
 		g_arena->mortal_flip = 0;
+		g_arena->death_gaze = 0;
 	}
  	if (g_arena->death_gaze >= MAX_CHECKS)
 	{
 		g_arena->cycle_to_die -= CYCLE_DELTA;
 		g_arena->death_gaze = 0;
 	}
- 	else
- 		g_arena->death_gaze++;
  	g_arena->doomsday_clock = 0;
  }
 
@@ -107,7 +107,7 @@ void	fight(void)
 	g_arena->all_bogies = count_bogies();
 	g_arena->bogie_head = g_bogies;
 	g_arena->cycle_to_die = CYCLE_TO_DIE;
-	wins = init_w();
+//	wins = init_w();
 	while (g_arena->all_bogies > 0)
 	{
 		g_bogies = g_arena->bogie_head;
@@ -124,9 +124,9 @@ void	fight(void)
 			}
 			g_bogies = g_bogies->next;
 		}
-		print_wins(wins);
+//		print_wins(wins);
 		g_arena->round++;
 		g_arena->doomsday_clock++;
 	}
-	delete_windows(wins);
+//	delete_windows(wins);
 }
