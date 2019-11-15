@@ -48,8 +48,8 @@ $(LIB):
 $(COREWAR): $(COREWAR_DIR_O) $(COREWAR_OBJF) $(LIB)
 	@gcc $(FLAGS) $(COREWAR_OBJF) $(LIBFT) -o $(COREWAR) -lncurses
 
-$(COREWAR_DIR_O)/%.o: %.c 
-	@gcc -lncurses -I $(INCLUDES) -o $@ -c $<
+$(COREWAR_DIR_O)/%.o: %.c
+	@gcc -g -lncurses -I $(INCLUDES) -o $@ -c $<
 
 clean:
 	@rm -rf $(COREWAR_DIR_O)

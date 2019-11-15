@@ -9,8 +9,9 @@ unsigned int		get_tdir_big_size(int i)
 	tdir = 0;
 	while (c < DIR_SIZE)
 	{
-		tdir <<= 8;
-		tdir += g_arena->list[i].com;
+		tdir |= g_arena->list[i].com;
+		if (c <= 2)
+			tdir <<= 8;
 		i++;
 		c++;
 	}
