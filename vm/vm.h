@@ -115,6 +115,15 @@ typedef struct				s_windows
 	long long				delay;
 }							t_windows;
 
+typedef struct				s_flags
+{
+	int						dump;
+	int						n;
+	int						v;
+}							t_flags;
+
+t_flags						*g_flags;
+
 t_champ						*parse_args(int c, char **a);
 void						parse_bytecode(t_champ *champ, char *file);
 

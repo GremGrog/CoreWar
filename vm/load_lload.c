@@ -44,7 +44,7 @@ void	load(void)
 	arg_byte = g_arena->list[g_bogies->index + 1].com;
 	arg = 0;
 	treg = 0;
-	if (IS_T_IND(arg_byte, FIRST_ARG) && IS_T_REG(arg_byte, SECOND_ARG) )
+	if (IS_T_IND(arg_byte, FIRST_ARG) && IS_T_REG(arg_byte, SECOND_ARG))
 	{
 		arg = get_tind(1, 2);
 		treg = get_treg(IND_SIZE + 2);
