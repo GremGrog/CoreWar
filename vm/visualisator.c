@@ -42,6 +42,27 @@ void	print_info(WINDOW *win)
 	y = 13;
 	info_printing_cycle(win, y, i);
 	wcolor_set(win, 6, NULL);
+
+	t_bogie *tmp;
+	size_t	j;
+	size_t	k;
+	j = 17;
+	k = 0;
+	tmp = g_arena->bogie_head;
+	while (tmp)
+	{
+		mvwprintw(win, j, 6, "Bogie index %d \n", tmp->num);
+		k = 0;
+		j += 2;
+		while (k < 16)
+		{
+			mvwprintw(win, j, 6, "Regnum %-15d [%x]\n", k + 1, tmp->regs[k]);
+			j++;
+			k++;
+		}
+		j += 3;
+		tmp = tmp->next;
+	}
 	wattroff(win, A_BOLD);
 	wrefresh(win);
 }
