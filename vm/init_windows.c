@@ -28,7 +28,7 @@ void		draw_borders(t_windows *wins)
 		if (i < 200)
 		{
 			color_set(7, NULL);
-			mvaddch(57, i, ' ' | A_REVERSE);
+			mvaddch(80, i, ' ' | A_REVERSE);
 		}
 	}
 }
@@ -45,7 +45,7 @@ t_windows	*init_w(void)
 	curs_set(0);
 	wins = (t_windows*)malloc(sizeof(t_windows));
 	wins->main_win = newwin(300, 300, 0, 0);
-	wins->arena = derwin(wins->main_win, 55, 200, 0, 0);
+	wins->arena = derwin(wins->main_win, 80, 200, 0, 0);
 	wins->infowin = derwin(wins->main_win, 50, 60, 0, 199);
 	wins->delay = 0;
 	refresh();
