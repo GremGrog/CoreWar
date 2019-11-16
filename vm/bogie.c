@@ -7,6 +7,7 @@ void		copy_bogie(t_bogie *new, t_bogie *bogie)
 	i = 0;
 	new->num = bogie->num + 1;
 	new->carry = bogie->carry;
+	new->champ = bogie->champ;
 	new->last_breath = bogie->last_breath;
 	while (i < REG_NUMBER)
 	{
@@ -16,9 +17,10 @@ void		copy_bogie(t_bogie *new, t_bogie *bogie)
 	new->next = bogie->next;
 }
 
-t_bogie		*create_bogie(void)
+t_bogie		*create_bogie(size_t c)
 {
 	t_bogie	*bogie;
+	t_champ *tmp;
 	size_t	i;
 
 	bogie = (t_bogie*)malloc(sizeof(t_bogie));
@@ -33,6 +35,10 @@ t_bogie		*create_bogie(void)
 	bogie->live_op = 0;
 	bogie->regs = (unsigned int*)malloc(sizeof(unsigned int) * REG_NUMBER);
 	bogie->next = NULL;
+	tmp = g_arena->champs;
+	while (tmp->index != c)
+		tmp = tmp->next;
+	bogie->champ = tmp;
 	i = 0;
 	while (i < REG_NUMBER)
 		bogie->regs[i++] = 0;
@@ -67,7 +73,7 @@ void	add_bogies_on_arena(void)
 	step = MEM_SIZE / g_arena->champ_num;
 	while (c <= g_arena->champ_num)
 	{
-		new = create_bogie();
+		new = create_bogie(c);
 		new->num = c;
 		new->index = index;
 		new->last_breath = 0;

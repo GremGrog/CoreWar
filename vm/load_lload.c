@@ -29,6 +29,8 @@ void	long_load(void)
 		skip_bytes(LLD_OP);
 		return ;
 	}
+	if (g_flags->v == 1 || g_flags->v == 30)
+		ft_printf("lld %x %x\n", arg, treg);
 	g_bogies->aim = DIR_SIZE + 3;
 	g_bogies->regs[treg] = arg;
 	g_bogies->carry = ((arg == 0) ? 1 : 0);
@@ -66,6 +68,8 @@ void	load(void)
 		skip_bytes(LD_OP);
 		return ;
 	}
+	if (g_flags->v == 1 || g_flags->v == 30)
+		ft_printf("ld %x %x\n", arg, treg);
 	g_bogies->regs[treg] = arg;
 	g_bogies->carry = ((arg == 0) ? 1 : 0);
 	move_caret(g_bogies->aim);
