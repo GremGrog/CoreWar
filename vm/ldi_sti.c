@@ -108,6 +108,9 @@ void sti(void)
 	g_bogies->aim = 3;
 	arg_2 = all_three(arg_byte, SECOND_ARG);
 	arg_3 = reg_dir(arg_byte, THIRD_ARG);
+	if (g_flags->v == 1 || g_flags->v == 30)
+		ft_printf("sti %x %x %x\n -> store to %d + %d = %d (with pc and mod %d) ", arg_1, arg_2, arg_3,
+				arg_2, arg_3, arg_2 + arg_3, g_bogies->index + ((arg_2 + arg_3) % IDX_MOD));
 	print_4bytes(arg_2, arg_3, arg_1, 0);
 	move_caret(g_bogies->aim - 1);
 }

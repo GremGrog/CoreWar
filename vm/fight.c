@@ -59,13 +59,13 @@ void	get_data_for_bogie(int current)
 	g_bogies->its_a_highnoon = define_cycles_to_exec(g_bogies->commmand) + current;
 	g_bogies->color =  g_arena->list[g_bogies->index].color;
 	if (g_bogies->color == 'g')
-		g_bogies->player = 1;
+		g_bogies->champ->index = 1;
 	if (g_bogies->color == 'r')
-		g_bogies->player = 2;
+		g_bogies->champ->index = 2;
 	if (g_bogies->color == 'y')
-		g_bogies->player = 3;
+		g_bogies->champ->index = 3;
 	if (g_bogies->color == 'b')
-		g_bogies->player = 4;
+		g_bogies->champ->index = 4;
 }
 
  void	lives_check(void)
@@ -86,12 +86,16 @@ void	get_data_for_bogie(int current)
  	if (g_arena->mortal_flip >= NBR_LIVE)
 	{
 		g_arena->cycle_to_die -= CYCLE_DELTA;
+		if (g_flags->v == 2)
+			ft_printf("Cycle to die is now %d", g_arena->cycle_to_die);
 		g_arena->mortal_flip = 0;
 		g_arena->death_gaze = 0;
 	}
- 	if (g_arena->death_gaze >= MAX_CHECKS)
+ 	else if (g_arena->death_gaze >= MAX_CHECKS)
 	{
 		g_arena->cycle_to_die -= CYCLE_DELTA;
+		if (g_flags->v == 2)
+			ft_printf("Cycle to die is now %d", g_arena->cycle_to_die);
 		g_arena->death_gaze = 0;
 	}
  	g_arena->doomsday_clock = 0;
@@ -111,8 +115,10 @@ void	fight(void)
 	while (g_arena->all_bogies > 0)
 	{
 		g_bogies = g_arena->bogie_head;
-		 if (g_arena->doomsday_clock == g_arena->cycle_to_die)
-		 	lives_check();
+		if (g_flags->v == 2)
+			ft_printf("It is now cycle %d", g_arena->round);
+			if (g_arena->doomsday_clock == g_arena->cycle_to_die)
+		 		lives_check();
 		while (g_bogies)
 		{
 			if (g_arena->round == 0)

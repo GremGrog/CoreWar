@@ -2,6 +2,19 @@
 
 void	move_caret(int steps)
 {
+	int i;
+
+	i = 0;
+	if (g_flags->v == 5)
+	{
+		ft_printf("ADV %d (%#04x -> %#04x) ", steps, g_bogies->index, g_bogies->index + steps);
+		while (i < steps)
+		{
+			ft_printf("%02x ", g_bogies->index + i);
+			i++;
+		}
+		ft_printf("\n");
+	}
 	g_arena->list[g_bogies->index].bogie = 0;
 	if (g_bogies->index += steps >= MEM_SIZE)
 		g_bogies->index = (g_bogies->index + steps) % MEM_SIZE;

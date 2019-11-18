@@ -67,7 +67,7 @@ typedef	struct				s_bogie
 {
 	int 					num;
 	int 					carry;
-	int						player;
+	t_champ					*champ;
 	unsigned char			commmand;
 	size_t 					last_breath;//last raund with live
 	size_t 					its_a_highnoon;//time to do com
@@ -141,7 +141,7 @@ void						battlefield_print(void);
 int							define_cycles_to_exec(unsigned char com);
 
 void						add_bogies_on_arena(void);
-t_bogie						*create_bogie(void);
+t_bogie						*create_bogie(size_t c);
 void						copy_bogie(t_bogie *new, t_bogie *bogie);
 t_bogie						*delete_bogie(t_bogie *bogie);
 
