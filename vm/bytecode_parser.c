@@ -81,7 +81,8 @@ unsigned char	*read_bytecode(t_champ *champ, char *file)
 	size_t				i;
 
 	i = 0;
-	fd = open(file, O_RDONLY);
+	if ((fd = open(file, O_RDONLY)) == -1)
+		return (NULL);
 	buf = (unsigned char*)malloc(sizeof(unsigned char) * FILE_SIZE);
 	byte = 0;
 	while ((ret = read(fd, &byte, 1)) > 0)
@@ -99,13 +100,15 @@ unsigned char	*read_bytecode(t_champ *champ, char *file)
 	return (buf);
 }
 
-void		parse_bytecode(t_champ *champ, char *file)
+int		parse_bytecode(t_champ *champ, char *file)
 {
 	unsigned char	*bytecode;
 
-	bytecode = read_bytecode(champ, file);
+	if ((bytecode = read_bytecode(champ, file)) == NULL)
+		return (-2);
 	if (check_magic_header(bytecode) == -1)
 		ft_errno(3);
 	get_name_comment_exec_code(champ, bytecode);
 	free(bytecode);
+	return (1);
 }

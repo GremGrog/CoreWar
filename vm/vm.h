@@ -126,7 +126,7 @@ typedef struct				s_flags
 t_flags						*g_flags;
 
 t_champ						*parse_args(int c, char **a);
-void						parse_bytecode(t_champ *champ, char *file);
+int							parse_bytecode(t_champ *champ, char *file);
 
 int							add_champion(char *file, int index, t_champ **champs);
 int							count_champs(t_champ *champs);

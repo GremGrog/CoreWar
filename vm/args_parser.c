@@ -44,7 +44,10 @@ int			parse_flags(char **a, int i)
 			if (a[i][j] >= '1' && a[i][j] <= '9')
 				g_flags->v = ft_atoi(a[i]);
 			else
-				ft_errno(2);
+			{
+				ft_errno(7);
+				return (-1);
+			}
 		}
 		else if (ft_strcmp(a[i], "-i") == 0)
 		{
@@ -56,27 +59,37 @@ int			parse_flags(char **a, int i)
 	}
 	return (i);
 }
+
+void		init_flags_struct(void)
+{
+	g_flags = (t_flags*)malloc(sizeof(t_flags));
+	g_flags->dump = 0;
+	g_flags->n = 0;
+	g_flags->i = 0;
+	g_flags->v = 0;
+}
+
 t_champ		*parse_args(int c, char **a)
 {
 	int		i;
 	int		n;
 	t_champ	*champs;
 
-	g_flags = (t_flags*)malloc(sizeof(t_flags));
-	g_flags->dump = 0;
-	g_flags->n = 0;
-	g_flags->i = 0;
-	g_flags->v = 0;
+	init_flags_struct();
 	champs = NULL;
 	i = 1;
 	n = -1;
 	while (i < c)
 	{
 		if (ft_rstrcmp(a[i], ".cor") == 1)
-			n = add_champion(a[i], n, &champs);
+		{
+			if ((n = add_champion(a[i], n, &champs)) == -2)
+				return (NULL);
+		}
 		else if (*a[i] == '-')
 		{
-			i = parse_flags(a, i);
+			if ((i = parse_flags(a, i)) == -1)
+				return (NULL);
 		}
 		else
 		{

@@ -45,15 +45,25 @@ t_bogie		*create_bogie(size_t c)
 	return (bogie);
 }
 
-t_bogie	*delete_bogie(t_bogie *bogie)
+t_bogie		*delete_bogie(t_bogie *bogie)
 {
 	t_bogie *tmp;
 	t_bogie *next;
 
 	tmp = g_arena->bogie_head;
+	if (tmp->next == NULL)
+	{
+		free(tmp->regs);
+		free(tmp);
+		return (NULL);
+	}
 	while (tmp->next && tmp->next->num != bogie->num)
 		tmp = tmp->next;
-	next = tmp->next->next;
+	if (tmp->next != NULL)
+		next = tmp->next->next;
+	else
+		next = NULL;
+	bogie = tmp->next;
 	tmp->next = next;
 	free(bogie->regs);
 	free(bogie);

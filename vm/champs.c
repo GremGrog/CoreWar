@@ -18,16 +18,35 @@ t_champ		*create_champ(t_champ **head, char *file)
 	{
 		(*head) = (t_champ*)malloc(sizeof(t_champ));
 		init_champ(head);
-		parse_bytecode(*head, file);
+		if ((parse_bytecode(*head, file)) == -1)
+		{
+			ft_errno(3);
+			free(*head);
+			return (NULL);
+		}
 		return (*head);
 	}
 	else
 	{
 		champ = (t_champ*)malloc(sizeof(t_champ));
 		init_champ(&champ);
-		parse_bytecode(champ, file);
+		if ((parse_bytecode(*head, file)) == -2)
+		{
+			ft_errno(3);
+			free(champ);
+			delete_champs(*head);
+			return (NULL);
+		}
 	}
 	return (champ);
+}
+
+void		delete_champ(t_champ *tmp)
+{
+	free(tmp->code);
+	free(tmp->name);
+	free(tmp->comment);
+	free(tmp);
 }
 
 void		delete_champs(t_champ *head)
@@ -38,10 +57,7 @@ void		delete_champs(t_champ *head)
 	{
 		tmp = head;
 		head = head->next;
-		free(tmp->code);
-		free(tmp->name);
-		free(tmp->comment);
-		free(tmp);
+		delete_champ(tmp);
 	}
 }
 
@@ -84,7 +100,8 @@ int		add_champion(char *file, int index, t_champ **champs)
 	t_champ	*new;
 
 	new = NULL;
-	new = create_champ(champs, file);
+	if ((new = create_champ(champs, file)) == NULL)
+		return (-2);
 	add_to_list(champs, new, index);
 	if (index != -1)
 		index = -1;

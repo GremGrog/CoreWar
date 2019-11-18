@@ -16,5 +16,7 @@ int ft_errno(int x)
 		ft_printf("error: too many argument\n");
 	if (x == 6)
 		ft_printf("error: wrong number for champion\n");
+	if (x == 7)
+		ft_printf("error: invalid flag\n");
   	return (0);
 }
