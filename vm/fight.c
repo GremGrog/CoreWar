@@ -111,7 +111,8 @@ void	fight(void)
 	g_arena->all_bogies = count_bogies();
 	g_arena->bogie_head = g_bogies;
 	g_arena->cycle_to_die = CYCLE_TO_DIE;
-	wins = init_w();
+	if (g_flags->i == 1)
+		wins = init_w();
 	while (g_arena->all_bogies > 0)
 	{
 		g_bogies = g_arena->bogie_head;
@@ -130,9 +131,11 @@ void	fight(void)
 			}
 			g_bogies = g_bogies->next;
 		}
-		print_wins(wins);
+		if (g_flags->i == 1)
+			print_wins(wins);
 		g_arena->round++;
 		g_arena->doomsday_clock++;
 	}
-	delete_windows(wins);
+	if (g_flags->i == 1)
+		delete_windows(wins);
 }

@@ -117,6 +117,7 @@ typedef struct				s_windows
 
 typedef struct				s_flags
 {
+	int 					i;
 	int						dump;
 	int						n;
 	int						v;

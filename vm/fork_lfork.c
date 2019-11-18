@@ -6,7 +6,9 @@ void	long_fork(void)
 	t_bogie			*new;
 
 	arg = get_tdir_small_size(g_bogies->index + 1);
-	new = create_bogie();
+	if (g_flags->v == 1 || g_flags->v == 30)
+		ft_printf("P %d | lfork %d \n", g_bogies->num, arg);
+	new = create_bogie(g_bogies->champ->index);
 	copy_bogie(new, g_bogies);
 	g_arena->list[g_bogies->index + arg].bogie = 1;
 	new->index = g_bogies->index + arg;
@@ -26,8 +28,10 @@ void	ft_fork(void)
 	t_bogie			*new;
 
 	arg = get_tdir_small_size(g_bogies->index + 1);
+	if (g_flags->v == 1 || g_flags->v == 30)
+		ft_printf("P %d | fork %d (%d)\n", g_bogies->num, arg, arg % IDX_MOD);
 	arg %= IDX_MOD;
-	new = create_bogie();
+	new = create_bogie(g_bogies->champ->index);
 	copy_bogie(new, g_bogies);
 	g_arena->list[g_bogies->index + arg].bogie = 1;
 	new->index = g_bogies->index + arg;
@@ -37,5 +41,6 @@ void	ft_fork(void)
 	g_arena->bogie_head = new;
 	g_bogies->aim = 2;
 	g_arena->all_bogies++;
+
 	move_caret(g_bogies->aim);
 }

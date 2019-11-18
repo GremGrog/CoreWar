@@ -22,6 +22,9 @@ void	subtraction(void)
 		else
 			g_bogies->carry = 0;
 		g_bogies->aim = 3;
+		if (g_flags->v == 1 || g_flags->v == 30)
+			ft_printf("P %d | sub r%d r%d r%d %d\n", g_bogies->num, arg_byte, arg_byte + 1, arg_byte + 2, \
+			g_bogies->regs[arg_byte + 2]);
 		move_caret(g_bogies->aim);
 	}
 	else

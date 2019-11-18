@@ -5,7 +5,7 @@ void	move_caret(int steps)
 	int i;
 
 	i = 0;
-	if (g_flags->v == 5)
+	if (g_flags->v == 5 || g_flags->v == 30)
 	{
 		ft_printf("ADV %d (%#04x -> %#04x) ", steps, g_bogies->index, g_bogies->index + steps);
 		while (i < steps)

@@ -22,12 +22,16 @@ void	store(void)
 	{
 		arg = get_treg(T_REG);
 		g_bogies->regs[treg] = arg;
+		if (g_flags->v == 1 || g_flags->v == 30)
+			ft_printf("P %d | st r%d r%d\n", g_bogies->num, treg, arg);
 		g_bogies->aim = 2;
 	}
 	else if (IS_T_IND(arg_byte, SECOND_ARG))
 	{
 		arg = get_tind(1, T_REG);
 		g_arena->list[g_bogies->index + arg].com = treg;
+		if (g_flags->v == 1 || g_flags->v == 30)
+			ft_printf("P %d | st r%d %d\n", g_bogies->num, treg, arg);
 		g_bogies->aim = 1 + IND_SIZE;
 	}
 	else

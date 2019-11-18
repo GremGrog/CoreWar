@@ -9,7 +9,7 @@ unsigned int		get_tdir_big_size(int i)
 	tdir = 0;
 	while (c < DIR_SIZE)
 	{
-		tdir |= g_arena->list[i].com;
+		tdir |= g_arena->list[i % MEM_SIZE].com;
 		if (c <= 2)
 			tdir <<= 8;
 		i++;
@@ -27,10 +27,10 @@ short	get_tdir_small_size(int i)
 	tdir = 0;
 	// while (c < 2)
 	// {
-		tdir |= g_arena->list[i].com;
+		tdir |= g_arena->list[i % MEM_SIZE].com;
 		tdir <<= 8;
 		i++;
-		tdir |= g_arena->list[i].com;
+		tdir |= g_arena->list[i % MEM_SIZE].com;
 		// c++;
 	// }
 	return (tdir);
@@ -42,7 +42,7 @@ int		get_treg(int scip_size)
 	size_t	i;
 
 	i = g_bogies->index + scip_size;
-	treg = g_arena->list[i].com;
+	treg = g_arena->list[i % MEM_SIZE].com;
 //	if (g_arena->round > 952)
 //		printf("treg %d\n", treg);
 	return (--treg);

@@ -38,6 +38,7 @@ int			parse_flags(char **a, int i)
 	g_flags = (t_flags*)malloc(sizeof(t_flags));
 	g_flags->dump = 0;
 	g_flags->n = 0;
+	g_flags->i = 0;
 	g_flags->v = 0;
 	j = 0;
 	while (a[i])
@@ -50,6 +51,8 @@ int			parse_flags(char **a, int i)
 			else
 				ft_errno(2);
 		}
+		else if (ft_strcmp(a[i], "-i") == 0)
+			g_flags->i = 1;
 		else
 			break ;
 	}
