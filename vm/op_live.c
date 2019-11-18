@@ -22,7 +22,6 @@ void live(void)
 void zjump(void)
 {
 	int				arg;
-	unsigned char	arg_byte;
 
 	if (g_bogies->its_a_highnoon != g_arena->round)
 		return;

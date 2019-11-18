@@ -1,8 +1,8 @@
 #include "vm.h"
 
-unsigned int		get_tdir_big_size(int i)
+int		get_tdir_big_size(int i)
 {
-	unsigned int		tdir;
+	int		tdir;
 	size_t	c;
 
 	c = 0;
@@ -43,21 +43,19 @@ int		get_treg(int scip_size)
 
 	i = g_bogies->index + scip_size;
 	treg = g_arena->list[i % MEM_SIZE].com;
-//	if (g_arena->round > 952)
-//		printf("treg %d\n", treg);
 	return (--treg);
 }
 
-unsigned int		get_tind(int size_flag, int scip_size)
+int		get_tind(int size_flag, int scip_size)
 {
 	short			tind;
-	unsigned int	temp;
+	int				temp;
 
 	tind = get_tdir_small_size(g_bogies->index + scip_size);
 	tind %= IDX_MOD;
 	if (size_flag == 1)
-		temp = get_tdir_big_size(tind);
+		temp = get_tdir_big_size(g_bogies->index + tind);
 	else
-		temp = get_tdir_small_size(tind);
+		temp = get_tdir_small_size(g_bogies->index + tind);
 	return (temp);
 }

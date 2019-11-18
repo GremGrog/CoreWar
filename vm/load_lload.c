@@ -6,7 +6,7 @@ void	long_load(void)
 	int				treg;
 	unsigned char	arg_byte;
 
-	arg_byte = g_arena->list[g_bogies->index + 1].com;
+	arg_byte = g_arena->list[(g_bogies->index + 1) % MEM_SIZE].com;
 	arg = 0;
 	treg = 0;
 	if (IS_T_DIR(arg_byte, FIRST_ARG) && IS_T_REG(arg_byte, SECOND_ARG))
@@ -30,7 +30,7 @@ void	long_load(void)
 		return ;
 	}
 	if (g_flags->v == 1 || g_flags->v == 30)
-		ft_printf("P %d | lld %d r%d\n", g_bogies->num, arg, treg);
+		ft_printf("P %d | lld %d r%d\n", g_bogies->num, arg, treg + 1);
 	g_bogies->aim = DIR_SIZE + 3;
 	g_bogies->regs[treg] = arg;
 	g_bogies->carry = ((arg == 0) ? 1 : 0);
@@ -43,7 +43,7 @@ void	load(void)
 	int				treg;
 	unsigned char	arg_byte;
 
-	arg_byte = g_arena->list[g_bogies->index + 1].com;
+	arg_byte = g_arena->list[(g_bogies->index + 1) % MEM_SIZE].com;
 	arg = 0;
 	treg = 0;
 	if (IS_T_IND(arg_byte, FIRST_ARG) && IS_T_REG(arg_byte, SECOND_ARG))
@@ -69,7 +69,7 @@ void	load(void)
 		return ;
 	}
 	if (g_flags->v == 1 || g_flags->v == 30)
-		ft_printf("P %d | ld %d r%d\n", g_bogies->num, arg, treg);
+		ft_printf("P %d | ld %d r%d\n", g_bogies->num, arg, treg + 1);
 	g_bogies->regs[treg] = arg;
 	g_bogies->carry = ((arg == 0) ? 1 : 0);
 	move_caret(g_bogies->aim);

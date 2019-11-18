@@ -35,7 +35,7 @@ void	bitwise_and(void)
 
 	arg1 = 0;
 	arg2 = 0;
-	arg_byte = g_arena->list[g_bogies->index + 1].com;
+	arg_byte = g_arena->list[(g_bogies->index + 1) % MEM_SIZE].com;
 	jump_i = get_arg(&arg1, FIRST_ARG, arg_byte);
 	jump_i += get_arg(&arg2, SECOND_ARG, arg_byte);
 	if (arg1 == -1 || arg2 == -1 || jump_i + 1 >= 16)
@@ -62,7 +62,7 @@ void	bitwise_or(void)
 
 	arg1 = 0;
 	arg2 = 0;
-	arg_byte = g_arena->list[g_bogies->index + 1].com;
+	arg_byte = g_arena->list[(g_bogies->index + 1) % MEM_SIZE].com;
 	jump_i = get_arg(&arg1, FIRST_ARG, arg_byte);
 	jump_i += get_arg(&arg2, SECOND_ARG, arg_byte);
 	if (arg1 == -1 || arg2 == -1 || jump_i + 1 >= 16)
@@ -89,7 +89,7 @@ void	bitwise_xor(void)
 
 	arg1 = 0;
 	arg2 = 0;
-	arg_byte = g_arena->list[g_bogies->index + 1].com;
+	arg_byte = g_arena->list[(g_bogies->index + 1) % MEM_SIZE].com;
 	jump_i = get_arg(&arg1, FIRST_ARG, arg_byte);
 	jump_i += get_arg(&arg2, SECOND_ARG, arg_byte);
 	if (arg1 == -1 || arg2 == -1 || jump_i + 1 >= 16)

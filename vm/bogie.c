@@ -51,7 +51,7 @@ t_bogie	*delete_bogie(t_bogie *bogie)
 	t_bogie *next;
 
 	tmp = g_arena->bogie_head;
-	while (tmp->next->num != bogie->num)
+	while (tmp->next && tmp->next->num != bogie->num)
 		tmp = tmp->next;
 	next = tmp->next->next;
 	tmp->next = next;

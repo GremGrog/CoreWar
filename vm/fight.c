@@ -75,29 +75,33 @@ void	get_data_for_bogie(int current)
  	t_bogie *delta;
 
  	tmp_bogie = g_arena->bogie_head;
-	 g_arena->death_gaze++;
  	while (tmp_bogie)
 	{
  		if (g_arena->round - tmp_bogie->last_breath >= g_arena->cycle_to_die)
 			tmp_bogie = delete_bogie(tmp_bogie);
  		else
+		{
+			tmp_bogie->live_op = 0;
  			tmp_bogie = tmp_bogie->next;
+		}
 	}
  	if (g_arena->mortal_flip >= NBR_LIVE)
 	{
 		g_arena->cycle_to_die -= CYCLE_DELTA;
 		if (g_flags->v == 2)
 			ft_printf("Cycle to die is now %d", g_arena->cycle_to_die);
-		g_arena->mortal_flip = 0;
 		g_arena->death_gaze = 0;
 	}
- 	else if (g_arena->death_gaze >= MAX_CHECKS)
+ 	else
+	 	g_arena->death_gaze++;
+	if (g_arena->death_gaze >= MAX_CHECKS)
 	{
 		g_arena->cycle_to_die -= CYCLE_DELTA;
 		if (g_flags->v == 2)
 			ft_printf("Cycle to die is now %d", g_arena->cycle_to_die);
 		g_arena->death_gaze = 0;
 	}
+	g_arena->mortal_flip = 0;
  	g_arena->doomsday_clock = 0;
  }
 

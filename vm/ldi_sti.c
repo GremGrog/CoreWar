@@ -2,7 +2,7 @@
 
 int	all_three(unsigned char	arg_byte, int num)
 {
-	unsigned int arg;
+	int arg;
 
 	if (IS_T_REG(arg_byte, num))
 	{
@@ -22,9 +22,9 @@ int	all_three(unsigned char	arg_byte, int num)
 	return (arg);
 }
 
-int reg_dir(unsigned char	arg_byte, int num)
+int reg_dir(unsigned char arg_byte, int num)
 {
-	unsigned int arg;
+	int arg;
 
 	if (IS_T_REG(arg_byte, num))
 	{
@@ -58,12 +58,12 @@ void	print_4bytes(int a1, int a2, int a3, int flag_l)
 //		printf("index %d reg %x ind %d\n",g_bogies->index, a3 , c);
 	g_arena->list[c].com = a3 >> 24;
 	g_arena->list[c].color = g_bogies->color;
-	g_arena->list[1 + c].com = (a3 << 8) >> 24;
-	g_arena->list[1 + c].color = g_bogies->color;
-	g_arena->list[2 + c].com = (a3 << 16) >> 24;
-	g_arena->list[2 + c].color = g_bogies->color;
-	g_arena->list[3 + c].com = (a3 << 24) >> 24;
-	g_arena->list[3 + c].color = g_bogies->color;
+	g_arena->list[(1 + c) % MEM_SIZE].com = (a3 << 8) >> 24;
+	g_arena->list[(1 + c) % MEM_SIZE].color = g_bogies->color;
+	g_arena->list[(2 + c) % MEM_SIZE].com = (a3 << 16) >> 24;
+	g_arena->list[(2 + c) % MEM_SIZE].color = g_bogies->color;
+	g_arena->list[(3 + c) % MEM_SIZE].com = (a3 << 24) >> 24;
+	g_arena->list[(3 + c) % MEM_SIZE].color = g_bogies->color;
 }
 
 void ldi(void)
@@ -75,7 +75,7 @@ void ldi(void)
 
 	if (g_bogies->its_a_highnoon != g_arena->round)
 		return ;
-	arg_byte = g_arena->list[g_bogies->index + 1].com;
+	arg_byte = g_arena->list[(g_bogies->index + 1) % MEM_SIZE].com;
 	g_bogies->aim = 2;
 	if (IS_T_IND(arg_byte, SECOND_ARG) || IS_T_IND(arg_byte, THIRD_ARG) || IS_T_DIR(arg_byte, THIRD_ARG))
 	{
@@ -106,13 +106,13 @@ void sti(void)
 		skip_bytes(STI_OP);
 		return ;
 	}
-	arg_byte = g_arena->list[g_bogies->index + 1].com;
+	arg_byte = g_arena->list[(g_bogies->index + 1) % MEM_SIZE].com;
 	arg_1 = get_treg(2);
 	g_bogies->aim = 3;
 	arg_2 = all_three(arg_byte, SECOND_ARG);
 	arg_3 = reg_dir(arg_byte, THIRD_ARG);
 	if (g_flags->v == 1 || g_flags->v == 30)
-		ft_printf("P %d | sti %x %x %x\n -> store to %d + %d = %d (with pc and mod %d) ", g_bogies->num, arg_1,
+		ft_printf("P %d | sti %d r%d %d %d\n    |-> store to %d + %d = %d (with pc and mod %d) \n", g_bogies->num, g_arena->round, arg_1 + 1,
 				arg_2, arg_3, arg_2, arg_3, arg_2 + arg_3, g_bogies->index + ((arg_2 + arg_3) % IDX_MOD));
 	print_4bytes(arg_2, arg_3, arg_1, 0);
 	move_caret(g_bogies->aim - 1);
@@ -127,7 +127,7 @@ void lldi(void)
 
 	if (g_bogies->its_a_highnoon != g_arena->round)
 		return ;
-	arg_byte = g_arena->list[g_bogies->index + 1].com;
+	arg_byte = g_arena->list[(g_bogies->index + 1) % MEM_SIZE].com;
 	arg_1 = 0;
 	arg_2 = 0;
 	g_bogies->aim = 2;
@@ -139,7 +139,7 @@ void lldi(void)
 	arg_1 = all_three(arg_byte, FIRST_ARG);
 	arg_2 = reg_dir(arg_byte, SECOND_ARG);
 	arg_3 = get_tdir_small_size(g_bogies->index + g_bogies->aim);
-	ft_printf("P %d | lldi %x %x %x\n -> store to %d + %d = %d (with pc %d) ", g_bogies->num, arg_1, arg_2,
+	ft_printf("P %d | lldi r%d %d %d\n -> store to %d + %d = %d (with pc %d) \n", g_bogies->num, arg_1, arg_2,
 			arg_3, arg_1, arg_2, arg_1 + arg_2, g_bogies->index + arg_1 + arg_2);
 	g_bogies->aim++;
 	print_4bytes(arg_1, arg_2, arg_3, 1);

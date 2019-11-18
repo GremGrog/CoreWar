@@ -5,7 +5,7 @@ void	subtraction(void)
 	unsigned char	arg_byte;
 	int				reg;
 
-	arg_byte = g_arena->list[g_bogies->index + 1].com;
+	arg_byte = g_arena->list[(g_bogies->index + 1) % MEM_SIZE].com;
 	if (IS_T_REG(arg_byte, FIRST_ARG) && IS_T_REG(arg_byte, SECOND_ARG) &&
 		IS_T_REG(arg_byte, THIRD_ARG))
 	{
