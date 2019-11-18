@@ -11,11 +11,10 @@ int		main(int c, char **a)
 	if (c < 2)
 		return (ft_errno(0));
 	champs = parse_args(c, a);
-	ft_printf("%d\n", g_flags->v);
 	tmp = champs;
 	champs_num = count_champs(tmp);
 	init_battlefield(champs, champs_num);
 	add_bogies_on_arena();
-	// fight();
+	fight();
 	delete_champs(champs);
 }

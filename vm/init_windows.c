@@ -46,7 +46,7 @@ t_windows	*init_w(void)
 	wins = (t_windows*)malloc(sizeof(t_windows));
 	wins->main_win = newwin(300, 300, 0, 0);
 	wins->arena = derwin(wins->main_win, 80, 200, 0, 0);
-	wins->infowin = derwin(wins->main_win, 80, 60, 0, 199);
+	wins->infowin = derwin(wins->main_win, 80, 80, 0, 199);
 	wins->delay = 0;
 	refresh();
 	noecho();

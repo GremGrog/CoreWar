@@ -148,7 +148,7 @@ t_bogie						*delete_bogie(t_bogie *bogie);
 void						fight(void);
 
 unsigned int				get_tdir_big_size(int i);
-int							get_tdir_small_size(int i);
+short						get_tdir_small_size(int i);
 int							get_treg(int scip_size);
 unsigned int				get_tind(int size_flag, int scip_size);
 void						move_caret(int steps);

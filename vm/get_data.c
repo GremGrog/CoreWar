@@ -18,21 +18,22 @@ unsigned int		get_tdir_big_size(int i)
 	return (tdir);
 }
 
-int		get_tdir_small_size(int i)
+short	get_tdir_small_size(int i)
 {
-	int		tdir;
+	short	tdir;
 	size_t	c;
 
 	c = 0;
-	tdir = 0x0;
-	while (c < 2)
-	{
+	tdir = 0;
+	// while (c < 2)
+	// {
+		tdir |= g_arena->list[i].com;
 		tdir <<= 8;
-		tdir += g_arena->list[i].com;
 		i++;
-		c++;
-	}
-	return ((short)tdir);
+		tdir |= g_arena->list[i].com;
+		// c++;
+	// }
+	return (tdir);
 }
 
 int		get_treg(int scip_size)

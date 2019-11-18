@@ -56,7 +56,7 @@ void	print_info(WINDOW *win)
 		j += 2;
 		while (k < 16)
 		{
-			mvwprintw(win, j, 6, "Regnum %-15d [%x]\n", k + 1, tmp->regs[k]);
+			mvwprintw(win, j, 6, "Regnum %-10d %d\n", k + 1, tmp->regs[k]);
 			j++;
 			k++;
 		}
