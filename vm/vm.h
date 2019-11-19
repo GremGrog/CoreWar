@@ -150,6 +150,9 @@ t_bogie						*delete_bogie(t_bogie *bogie);
 
 void						fight(void);
 
+int							is_treg(unsigned char arg_byte, int position);
+int							is_tdir(unsigned char arg_byte, int position);
+int							is_tind(unsigned char arg_byte, int position);
 int							get_tdir_big_size(int i);
 short						get_tdir_small_size(int i);
 int							get_treg(int scip_size);
@@ -173,7 +176,7 @@ void						aff(void);
 void						ldi(void);
 void						sti(void);
 void						lldi(void);
-
+void						print_4bytes(int a1, int a2, int a3, int flag_l);
 void						get_data_for_bogie(int current);
 
 t_windows					*init_w(void);

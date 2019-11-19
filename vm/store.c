@@ -2,7 +2,7 @@
 
 void	store(void)
 {
-	int				arg;
+	short			arg;
 	int				treg;
 	unsigned char	arg_byte;
 	int				tmp_index;
@@ -11,14 +11,15 @@ void	store(void)
 	arg = 0;
 	treg = 0;
 	tmp_index = g_bogies->index;
-	if (IS_T_REG(arg_byte, FIRST_ARG))
+	// if (IS_T_REG(arg_byte, FIRST_ARG))
+	if ((is_treg(arg_byte, 1)) == 1)
 		treg = get_treg(2);
 	else
 	{
 		skip_bytes(ST_OP);
 		return ;
 	}
-	if (IS_T_REG(arg_byte, SECOND_ARG))
+	if (is_treg(arg_byte, 2))
 	{
 		arg = get_treg(3);
 		if (arg >= 6)
@@ -28,21 +29,18 @@ void	store(void)
 			ft_printf("P %4d | st r%d %d\n", g_bogies->num, treg + 1, arg);
 		g_bogies->aim = 3;
 	}
-	else if (IS_T_IND(arg_byte, SECOND_ARG))
+	// if (IS_T_IND(arg_byte, SECOND_ARG))
+	else if (is_tind(arg_byte, 2))
 	{
-		arg = get_tind(1, 3);
-		g_arena->list[(g_bogies->index + arg) % MEM_SIZE].com = g_bogies->regs[treg] >> 24;
-		g_arena->list[(g_bogies->index + arg) % MEM_SIZE].color = g_bogies->color;
-		g_arena->list[(1 + g_bogies->index + arg) % MEM_SIZE].com = (g_bogies->regs[treg] << 8) >> 24;
-		g_arena->list[(1 + g_bogies->index + arg) % MEM_SIZE].color = g_bogies->color;
-		g_arena->list[(2 + g_bogies->index + arg) % MEM_SIZE].com = (g_bogies->regs[treg] << 16) >> 24;
-		g_arena->list[(2 + g_bogies->index + arg) % MEM_SIZE].color = g_bogies->color;
-		g_arena->list[(3 + g_bogies->index + arg) % MEM_SIZE].com = (g_bogies->regs[treg] << 24) >> 24;
-		g_arena->list[(3 + g_bogies->index + arg) % MEM_SIZE].color = g_bogies->color;
+		arg = get_tdir_small_size(g_bogies->index + 3);
+		arg %= IDX_MOD;
+		print_4bytes(arg, 0, treg, 1);
 		if (g_flags->v == 1 || g_flags->v == 30)
-			ft_printf("P %4d | st r%d %d\n", g_bogies->num, treg, g_bogies->regs[treg]);
-		g_bogies->aim = 1 + IND_SIZE;
+			ft_printf("P %4d | st r%d %d\n", g_bogies->num, treg + 1, arg);
+		g_bogies->aim = 2 + IND_SIZE;
 	}
+	// else if (IS_T_REG(arg_byte, SECOND_ARG))
+
 	else
 	{
 		skip_bytes(ST_OP);
