@@ -34,6 +34,7 @@ COREWAR_SRCS =	error_work.c \
 				visualisator.c \
 				init_windows.c \
 				visualisator_searching_funs.c \
+				introduce.c \
 
 COREWAR_OBJF = $(addprefix $(COREWAR_DIR_O)/, $(patsubst %.c,%.o,$(COREWAR_SRCS)))
 

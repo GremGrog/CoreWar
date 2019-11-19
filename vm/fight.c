@@ -119,11 +119,11 @@ void	fight(void)
 		wins = init_w();
 	while (g_arena->all_bogies > 0)
 	{
-		g_bogies = g_arena->bogie_head;
 		if (g_flags->v == 2)
 			ft_printf("It is now cycle %d", g_arena->round);
 			if (g_arena->doomsday_clock == g_arena->cycle_to_die)
 		 		lives_check();
+		g_bogies = g_arena->bogie_head;
 		while (g_bogies)
 		{
 			if (g_arena->round == 0)

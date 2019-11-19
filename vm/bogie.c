@@ -5,7 +5,7 @@ void		copy_bogie(t_bogie *new, t_bogie *bogie)
 	size_t	i;
 
 	i = 0;
-	new->num = bogie->num + 1;
+	new->num = g_arena->all_bogies;
 	new->carry = bogie->carry;
 	new->champ = bogie->champ;
 	new->last_breath = bogie->last_breath;
@@ -45,32 +45,38 @@ t_bogie		*create_bogie(size_t c)
 	return (bogie);
 }
 
+void		free_bogie(t_bogie *tmp)
+{
+	free(tmp->regs);
+	free(tmp);
+}
+
 t_bogie		*delete_bogie(t_bogie *bogie)
 {
-	t_bogie *tmp;
+	t_bogie	*tmp;
 	t_bogie	*prev;
-	t_bogie *next;
+	t_bogie	*next;
 
 	tmp = g_arena->bogie_head;
-	if (tmp->next == NULL)
+	prev = tmp;
+	if (tmp->next == NULL || tmp->num == bogie->num)
 	{
-		free(tmp->regs);
-		free(tmp);
-		return (NULL);
+		g_arena->bogie_head = tmp->next;
+		next = tmp->next;
+		free_bogie(tmp);
+		g_arena->all_bogies--;
+		return (next);
 	}
-	while (tmp->next && tmp->num != bogie->num)
+	while (tmp && tmp->num != bogie->num)
 	{
 		prev = tmp;
 		tmp = tmp->next;
 	}
-	if (tmp->next != NULL)
-		next = tmp->next;
-	else
-		next = NULL;
-	prev->next = tmp->next;
-	free(tmp->regs);
-	free(tmp);
-	return (prev->next);
+	next = tmp->next;
+	prev->next = next;
+	free_bogie(tmp);
+	g_arena->all_bogies--;
+	return (next);
 }
 
 void	add_bogies_on_arena(void)

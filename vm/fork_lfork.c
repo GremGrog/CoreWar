@@ -9,6 +9,7 @@ void	long_fork(void)
 	if (g_flags->v == 1 || g_flags->v == 30)
 		ft_printf("P %d | lfork %d \n", g_bogies->num, arg);
 	new = create_bogie(g_bogies->champ->index);
+	g_arena->all_bogies++;
 	copy_bogie(new, g_bogies);
 	g_arena->list[(g_bogies->index + arg) % MEM_SIZE].bogie = 1;
 	new->index = (g_bogies->index + arg) % MEM_SIZE;
@@ -18,7 +19,6 @@ void	long_fork(void)
 	new->next = g_arena->bogie_head;
 	g_arena->bogie_head = new;
 	g_bogies->aim = 2;
-	g_arena->all_bogies++;
 	move_caret(g_bogies->aim);
 }
 
@@ -32,6 +32,7 @@ void	ft_fork(void)
 		ft_printf("P %d | fork %d (%d)\n", g_bogies->num, arg, (g_bogies->index + arg) % MEM_SIZE);
 	arg %= IDX_MOD;
 	new = create_bogie(g_bogies->champ->index);
+	g_arena->all_bogies++;
 	copy_bogie(new, g_bogies);
 	g_arena->list[(g_bogies->index + arg) % MEM_SIZE].bogie = 1;
 	new->index = (g_bogies->index + arg) % MEM_SIZE;
@@ -40,7 +41,5 @@ void	ft_fork(void)
 	new->next = g_arena->bogie_head;
 	g_arena->bogie_head = new;
 	g_bogies->aim = 2;
-	g_arena->all_bogies++;
-
 	move_caret(g_bogies->aim);
 }

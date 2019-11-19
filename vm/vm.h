@@ -131,6 +131,8 @@ int							parse_bytecode(t_champ *champ, char *file);
 int							add_champion(char *file, int index, t_champ **champs);
 int							count_champs(t_champ *champs);
 void						delete_champs(t_champ *head);
+void						introduce_champs(void);
+void						introduce_winner(void);
 
 int							ft_errno(int x);
 size_t						scip_null_border(size_t i);
@@ -181,4 +183,5 @@ void						control_input(t_windows *wins);
 int							search_live_in_bogie(int champ_index);
 int							search_last_breath(int champ_index);
 
+void						delete_arena(void);
 #endif

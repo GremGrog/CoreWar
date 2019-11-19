@@ -41,6 +41,7 @@ void	init_battlefield(t_champ *warriors, int num)
 	g_arena->round = 0;
 	g_arena->mortal_flip = 0;
 	g_arena->doomsday_clock = 0;
+	g_arena->death_gaze = 0;
 	g_arena->cycle_to_die = CYCLE_TO_DIE;
 	g_arena->champs = warriors;
 	c = MEM_SIZE / num;
@@ -82,4 +83,10 @@ void	init_battlefield(t_champ *warriors, int num)
 		g_arena->list[MEM_SIZE - 1].champ = 0;
 		g_arena->list[MEM_SIZE - 1].color = 'e';
 	}
+}
+
+
+void	delete_arena(void)
+{
+	free(g_arena);
 }

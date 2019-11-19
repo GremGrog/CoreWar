@@ -18,7 +18,10 @@ int		main(int c, char **a)
 		champs_num = count_champs(tmp);
 		init_battlefield(champs, champs_num);
 		add_bogies_on_arena();
+		introduce_champs();
 		fight();
+		introduce_winner();
+		delete_arena();
 		delete_champs(champs);
 	}
 	free(g_flags);
