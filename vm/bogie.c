@@ -48,6 +48,7 @@ t_bogie		*create_bogie(size_t c)
 t_bogie		*delete_bogie(t_bogie *bogie)
 {
 	t_bogie *tmp;
+	t_bogie	*prev;
 	t_bogie *next;
 
 	tmp = g_arena->bogie_head;
@@ -57,17 +58,19 @@ t_bogie		*delete_bogie(t_bogie *bogie)
 		free(tmp);
 		return (NULL);
 	}
-	while (tmp->next && tmp->next->num != bogie->num)
+	while (tmp->next && tmp->num != bogie->num)
+	{
+		prev = tmp;
 		tmp = tmp->next;
+	}
 	if (tmp->next != NULL)
-		next = tmp->next->next;
+		next = tmp->next;
 	else
 		next = NULL;
-	bogie = tmp->next;
-	tmp->next = next;
-	free(bogie->regs);
-	free(bogie);
-	return (next);
+	prev->next = tmp->next;
+	free(tmp->regs);
+	free(tmp);
+	return (prev->next);
 }
 
 void	add_bogies_on_arena(void)
