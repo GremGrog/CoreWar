@@ -91,7 +91,11 @@ unsigned char	*read_bytecode(t_champ *champ, char *file)
 			buf[i] = byte;
 		if (i >= FILE_SIZE)
 		{
-			ft_printf("%s\n", "error, too much code");
+			i = 0;
+			while ((ret = read(fd, &byte, 1)) > 0)
+				i++;
+			ft_printf("Error: File %s has too large a code (%d > %d bytes)\n",
+				 file, i + CHAMP_MAX_SIZE, CHAMP_MAX_SIZE);
 			free(buf);
 			break ;
 		}
