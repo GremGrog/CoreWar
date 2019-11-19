@@ -84,13 +84,12 @@ void ldi(void)
 	}
 	arg_1 = all_three(arg_byte, FIRST_ARG);
 	arg_2 = reg_dir(arg_byte, SECOND_ARG);
-	arg_3 = get_tdir_small_size(g_bogies->index + g_bogies->aim);
+	arg_3 = get_treg(g_bogies->aim);
 	if (g_flags->v == 1 || g_flags->v == 30)
-		ft_printf("P %d | ldi %x %x %x\n -> store to %d + %d = %d (with pc and mod %d) \n", g_bogies->num, arg_1,
-				arg_2, arg_3, arg_1, arg_2, arg_1 + arg_2, g_bogies->index + ((arg_1 + arg_2) % IDX_MOD));
-	g_bogies->aim++;
-	print_4bytes(arg_1, arg_2, arg_3, 0);
-	move_caret(g_bogies->aim - 1);
+		ft_printf("P %d | ldi %x %x %x\n   |-> load from %d + %d = %d (with pc and mod %d) \n", g_bogies->num,
+				arg_1, arg_2, arg_3, arg_1, arg_2, arg_1 + arg_2, g_bogies->index + ((arg_1 + arg_2) % IDX_MOD));
+	g_bogies->regs[arg_3] = get_tdir_big_size(g_bogies->index + ((arg_1 + arg_2) % IDX_MOD));
+	move_caret(g_bogies->aim);
 	g_bogies->aim = 0;
 }
 
@@ -138,11 +137,10 @@ void lldi(void)
 	}
 	arg_1 = all_three(arg_byte, FIRST_ARG);
 	arg_2 = reg_dir(arg_byte, SECOND_ARG);
-	arg_3 = get_tdir_small_size(g_bogies->index + g_bogies->aim);
-	ft_printf("P %d | lldi r%d %d %d\n -> store to %d + %d = %d (with pc %d) \n", g_bogies->num, arg_1, arg_2,
-			arg_3, arg_1, arg_2, arg_1 + arg_2, g_bogies->index + arg_1 + arg_2);
-	g_bogies->aim++;
-	print_4bytes(arg_1, arg_2, arg_3, 1);
-	move_caret(g_bogies->aim - 1);
+	arg_3 = get_treg(g_bogies->aim);
+	ft_printf("P %d | lldi %x %x %x\n   |-> load from %d + %d = %d (with pc and mod %d) \n", g_bogies->num,
+			  arg_1, arg_2, arg_3, arg_1, arg_2, arg_1 + arg_2, g_bogies->index + ((arg_1 + arg_2) % IDX_MOD));
+	g_bogies->regs[arg_3] = get_tdir_big_size(g_bogies->index + ((arg_1 + arg_2) % IDX_MOD));
+	move_caret(g_bogies->aim);
 	g_bogies->aim = 0;
 }
