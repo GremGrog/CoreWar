@@ -1,31 +1,10 @@
 Introducing contestants...
-* Player 1, weighting 234, "Lapsang Souchong Crocodile", ("Tea Time") !
-P 1 | ld -107 r8
-P 1 | live 0
-P 1 | sti r1 209 1
-    |-> store to 209 + 1 = 210 (with pc and mod 222) 
-P 1 | sti r8 -7 0
-    |-> store to -7 + 0 = -7 (with pc and mod 12) 
-P 1 | fork 60 (86)
-P 2 | fork 60 (146)
-P 1 | fork 168 (197)
-P 4 | ldi c 18 402
- -> store to 12 + 24 = 36 (with pc and mod 233) 
-P 3 | ldi 8 4b 402
- -> store to 8 + 75 = 83 (with pc and mod 229) 
-P 2 | ldi 4 84 402
- -> store to 4 + 132 = 136 (with pc and mod 225) 
-P 1 | ldi 0 bd 402
- -> store to 0 + 189 = 189 (with pc and mod 221) 
-P 4 | ld 12 r9
-P 3 | ld 8 r9
-P 2 | ld 4 r9
-P 1 | ld 0 r9
-P 4 | ld 0 r2
-P 3 | ld 0 r2
-P 2 | ld 0 r2
-P 1 | ld 0 r2
-P 4 | zjmp 3 OK
-P 3 | zjmp 54 OK
-P 2 | zjmp 111 OK
-P 1 | zjmp 168 OK
+* Player 1, weighing 677 bytes, "katchup" ("Do you like ketchup?") !
+P    1 | live 252645135
+P    1 | ld 478 r2
+P    1 | ld 21 r3
+P    1 | ld 0 r16
+P    1 | zjmp 229 OK
+P    1 | fork 96 (351)
+P    2 | st r1 254
+P    1 | st r1 254

@@ -89,7 +89,7 @@ void	get_data_for_bogie(int current)
 	{
 		g_arena->cycle_to_die -= CYCLE_DELTA;
 		if (g_flags->v == 2)
-			ft_printf("Cycle to die is now %d", g_arena->cycle_to_die);
+			ft_printf("Cycle to die is now %d\n", g_arena->cycle_to_die);
 		g_arena->death_gaze = 0;
 	}
  	else
@@ -98,7 +98,7 @@ void	get_data_for_bogie(int current)
 	{
 		g_arena->cycle_to_die -= CYCLE_DELTA;
 		if (g_flags->v == 2)
-			ft_printf("Cycle to die is now %d", g_arena->cycle_to_die);
+			ft_printf("Cycle to die is now %d\n", g_arena->cycle_to_die);
 		g_arena->death_gaze = 0;
 	}
 	g_arena->mortal_flip = 0;
@@ -119,10 +119,8 @@ void	fight(void)
 		wins = init_w();
 	while (g_arena->all_bogies > 0)
 	{
-		if (g_flags->v == 2)
-			ft_printf("It is now cycle %d", g_arena->round);
-			if (g_arena->doomsday_clock == g_arena->cycle_to_die)
-		 		lives_check();
+		if (g_flags->v == 2 && g_arena->round > 0)
+			ft_printf("It is now cycle %d\n", g_arena->round);
 		g_bogies = g_arena->bogie_head;
 		while (g_bogies)
 		{
@@ -135,6 +133,8 @@ void	fight(void)
 			}
 			g_bogies = g_bogies->next;
 		}
+		if (g_arena->doomsday_clock == g_arena->cycle_to_die)
+			lives_check();
 		if (g_flags->i == 1)
 			print_wins(wins);
 		g_arena->round++;

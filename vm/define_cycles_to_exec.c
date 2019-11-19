@@ -22,6 +22,8 @@ int		define_cycles_to_exec(unsigned char com)
 		return (1000);
 	if (com == 0x10)
 		return (2);
+	if (com == 0x0)
+		return (1);
 	else
-		return (-1);
+		return (0);
 }
