@@ -6,8 +6,8 @@ void	subtraction(void)
 	int				reg;
 
 	arg_byte = g_arena->list[(g_bogies->index + 1) % MEM_SIZE].com;
-	if (IS_T_REG(arg_byte, FIRST_ARG) && IS_T_REG(arg_byte, SECOND_ARG) &&
-		IS_T_REG(arg_byte, THIRD_ARG))
+	if (is_treg(arg_byte, FIRST_ARG) && is_treg(arg_byte, SECOND_ARG) &&
+		is_treg(arg_byte, THIRD_ARG))
 	{
 		reg = arg_byte + 2;
 		if (reg >= 16)

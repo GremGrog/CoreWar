@@ -4,12 +4,12 @@ int	all_three(unsigned char	arg_byte, int num)
 {
 	int arg;
 
-	if (IS_T_REG(arg_byte, num))
+	if (is_treg(arg_byte, num))
 	{
 		arg = g_bogies->regs[get_treg(g_bogies->aim)];
 		g_bogies->aim++;
 	}
-	else if (IS_T_DIR(arg_byte, num))
+	else if (is_tdir(arg_byte, num))
 	{
 		arg = get_tdir_small_size(g_bogies->index + g_bogies->aim);
 		g_bogies->aim += 2;
@@ -26,7 +26,7 @@ int reg_dir(unsigned char arg_byte, int num)
 {
 	int arg;
 
-	if (IS_T_REG(arg_byte, num))
+	if (is_treg(arg_byte, num))
 	{
 		arg = g_bogies->regs[get_treg(g_bogies->aim)];
 		g_bogies->aim++;
@@ -77,7 +77,7 @@ void ldi(void)
 		return ;
 	arg_byte = g_arena->list[(g_bogies->index + 1) % MEM_SIZE].com;
 	g_bogies->aim = 2;
-	if (IS_T_IND(arg_byte, SECOND_ARG) || IS_T_IND(arg_byte, THIRD_ARG) || IS_T_DIR(arg_byte, THIRD_ARG))
+	if (is_tind(arg_byte, SECOND_ARG) || is_tind(arg_byte, THIRD_ARG) || is_tdir(arg_byte, THIRD_ARG))
 	{
 		skip_bytes(LDI_OP);
 		return ;
@@ -100,7 +100,7 @@ void sti(void)
 	int				arg_3 = 0;
 	unsigned char	arg_byte = 0;
 
-	if (IS_T_IND(arg_byte, THIRD_ARG) || IS_T_IND(arg_byte, FIRST_ARG) || IS_T_DIR(arg_byte, FIRST_ARG))
+	if (is_tind(arg_byte, THIRD_ARG) || is_tind(arg_byte, FIRST_ARG) || is_tdir(arg_byte, FIRST_ARG))
 	{
 		skip_bytes(STI_OP);
 		return ;
@@ -130,7 +130,7 @@ void lldi(void)
 	arg_1 = 0;
 	arg_2 = 0;
 	g_bogies->aim = 2;
-	if (IS_T_IND(arg_byte, SECOND_ARG) || IS_T_IND(arg_byte, THIRD_ARG) || IS_T_DIR(arg_byte, THIRD_ARG))
+	if (is_tind(arg_byte, SECOND_ARG) || is_tind(arg_byte, THIRD_ARG) || is_tdir(arg_byte, THIRD_ARG))
 	{
 		skip_bytes(LLDI_OP);
 		return ;

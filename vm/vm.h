@@ -49,9 +49,9 @@
 # define IS_T_DIR(val, pos) (((val >> pos) & DIR_CODE) == DIR_CODE) ? 1 : 0
 # define IS_T_IND(val, pos) (((val >> pos) & IND_CODE) == IND_CODE) ? 1 : 0
 
-# define FIRST_ARG	6
-# define SECOND_ARG	4
-# define THIRD_ARG	2
+# define FIRST_ARG	1
+# define SECOND_ARG	2
+# define THIRD_ARG	3
 
 typedef struct				s_champ
 {

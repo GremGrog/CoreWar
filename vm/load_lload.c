@@ -9,12 +9,12 @@ void	long_load(void)
 	arg_byte = g_arena->list[(g_bogies->index + 1) % MEM_SIZE].com;
 	arg = 0;
 	treg = 0;
-	if (IS_T_DIR(arg_byte, FIRST_ARG) && IS_T_REG(arg_byte, SECOND_ARG))
+	if (is_tdir(arg_byte, FIRST_ARG) && is_treg(arg_byte, SECOND_ARG))
 	{
 		arg = get_tdir_big_size(g_bogies->index + 2);
 		treg = get_treg(DIR_SIZE + 2);
 	}
-	else if (IS_T_IND(arg_byte, FIRST_ARG) && IS_T_REG(arg_byte, SECOND_ARG))
+	else if (is_tind(arg_byte, FIRST_ARG) && is_treg(arg_byte, SECOND_ARG))
 	{
 		arg = get_tdir_big_size(g_bogies->index + 2);
 		treg = get_treg(g_bogies->index + arg);
@@ -46,13 +46,13 @@ void	load(void)
 	arg_byte = g_arena->list[(g_bogies->index + 1) % MEM_SIZE].com;
 	arg = 0;
 	treg = 0;
-	if (IS_T_IND(arg_byte, FIRST_ARG) && IS_T_REG(arg_byte, SECOND_ARG))
+	if (is_tind(arg_byte, FIRST_ARG) && is_treg(arg_byte, SECOND_ARG))
 	{
 		arg = get_tind(1, 2);
 		treg = get_treg(IND_SIZE + 2);
 		g_bogies->aim = IND_SIZE + 2;
 	}
-	else if (IS_T_DIR(arg_byte, FIRST_ARG) && IS_T_REG(arg_byte, SECOND_ARG))
+	else if (is_tdir(arg_byte, FIRST_ARG) && is_treg(arg_byte, SECOND_ARG))
 	{
 		arg = get_tdir_big_size(g_bogies->index + 2);
 		treg = get_treg(DIR_SIZE + 2);

@@ -2,7 +2,7 @@
 
 int		get_arg(int *arg, int position, unsigned char arg_byte)
 {
-	if (IS_T_REG(arg_byte, position))
+	if (is_treg(arg_byte, position))
 	{
 		if ((*arg = g_bogies->regs[arg_byte + 2]) < 16)
 			return (1);
@@ -12,12 +12,12 @@ int		get_arg(int *arg, int position, unsigned char arg_byte)
 			return (0);
 		}
 	}
-	if (IS_T_DIR(arg_byte, position))
+	if (is_tdir(arg_byte, position))
 	{
 		*arg = get_tdir_big_size(g_bogies->index + 1);
 		return (1 + DIR_SIZE);
 	}
-	if (IS_T_IND(arg_byte, position))
+	if (is_tind(arg_byte, position))
 	{
 		*arg = get_tind(1, DIR_SIZE + 1);
 		return (DIR_SIZE + 1);
