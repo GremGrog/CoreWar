@@ -19,35 +19,35 @@ void	exec_function(void)
 {
 	if (g_bogies->commmand == g_op[0].code)
 		live();
-	if (g_bogies->commmand == g_op[1].code)
+	else if (g_bogies->commmand == g_op[1].code)
 		load();
-	if (g_bogies->commmand == g_op[2].code)
+	else if (g_bogies->commmand == g_op[2].code)
 		store();
-	if (g_bogies->commmand == g_op[3].code)
+	else if (g_bogies->commmand == g_op[3].code)
 		addition();
-	if (g_bogies->commmand == g_op[4].code)
+	else if (g_bogies->commmand == g_op[4].code)
 		subtraction();
-	if (g_bogies->commmand == g_op[5].code)
+	else if (g_bogies->commmand == g_op[5].code)
 		bitwise_and();
-	if (g_bogies->commmand == g_op[6].code)
+	else if (g_bogies->commmand == g_op[6].code)
 		bitwise_or();
-	if (g_bogies->commmand == g_op[7].code)
+	else if (g_bogies->commmand == g_op[7].code)
 		bitwise_xor();
-	if (g_bogies->commmand == g_op[8].code)
+	else if (g_bogies->commmand == g_op[8].code)
 		zjump();
-	if (g_bogies->commmand == g_op[9].code)
+	else if (g_bogies->commmand == g_op[9].code)
 		ldi();
-	if (g_bogies->commmand == g_op[10].code)
+	else if (g_bogies->commmand == g_op[10].code)
 		sti();
-	if (g_bogies->commmand == g_op[11].code)
+	else if (g_bogies->commmand == g_op[11].code)
 		ft_fork();
-	if (g_bogies->commmand == g_op[12].code)
+	else if (g_bogies->commmand == g_op[12].code)
 		long_load();
-	if (g_bogies->commmand == g_op[13].code)
+	else if (g_bogies->commmand == g_op[13].code)
 		lldi();
-	if (g_bogies->commmand == g_op[14].code)
+	else if (g_bogies->commmand == g_op[14].code)
 		long_fork();
-	if (g_bogies->commmand == g_op[15].code)
+	else if (g_bogies->commmand == g_op[15].code)
 		aff();
 	else
 		move_caret(1);
@@ -119,7 +119,7 @@ void	fight(void)
 		wins = init_w();
 	while (g_arena->all_bogies > 0)
 	{
-		if (g_flags->v == 2 && g_arena->round > 0)
+		if ((g_flags->v == 2 || g_flags->v == 30) && g_arena->round > 0)
 			ft_printf("It is now cycle %d\n", g_arena->round);
 		g_bogies = g_arena->bogie_head;
 		while (g_bogies)

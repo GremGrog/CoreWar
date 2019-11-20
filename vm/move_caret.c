@@ -5,12 +5,13 @@ void	move_caret(int steps)
 	int i;
 
 	i = 0;
-	if (g_flags->v == 5 || g_flags->v == 30)
+	++steps;
+	if ((g_flags->v == 5 || g_flags->v == 30) && g_bogies->commmand != g_op[8].code)
 	{
-		ft_printf("ADV %d (%#04x -> %#04x) ", steps, g_bogies->index, g_bogies->index + steps);
+		ft_printf("ADV %d (%#0.4x -> %#0.4x) ", steps, g_bogies->index, g_bogies->index + steps);
 		while (i < steps)
 		{
-			ft_printf("%02x ", g_bogies->index + i);
+			ft_printf("%02x ", g_arena->list[g_bogies->index + i].com);
 			i++;
 		}
 		ft_printf("\n");

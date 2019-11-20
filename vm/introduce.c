@@ -5,7 +5,7 @@ void	introduce_champs(void)
 	t_champ	*champs;
 
 	champs = g_arena->champs;
-	ft_printf("Introducing contestants...\n");
+	ft_printf("Introducing contestants\n");
 	while (champs)
 	{
 		ft_printf("* Player %d, weighing %d bytes, \"%s\" (\"%s\") !\n", champs->index, champs->code_size, champs->name, champs->comment);
