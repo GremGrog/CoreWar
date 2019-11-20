@@ -37,6 +37,7 @@ void	long_load(void)
 	move_caret(g_bogies->aim);
 }
 
+//vova ne nado tak
 void	load(void)
 {
 	unsigned int	arg;
