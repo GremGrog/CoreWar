@@ -18,9 +18,8 @@ t_champ		*create_champ(t_champ **head, char *file)
 	{
 		(*head) = (t_champ*)malloc(sizeof(t_champ));
 		init_champ(head);
-		if ((parse_bytecode(*head, file)) == -1)
+		if ((parse_bytecode(*head, file)) == -2)
 		{
-			ft_errno(3);
 			free(*head);
 			return (NULL);
 		}
@@ -32,7 +31,6 @@ t_champ		*create_champ(t_champ **head, char *file)
 		init_champ(&champ);
 		if ((parse_bytecode(*head, file)) == -2)
 		{
-			ft_errno(3);
 			free(champ);
 			delete_champs(*head);
 			return (NULL);
