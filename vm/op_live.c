@@ -14,7 +14,7 @@ void live(void)
 	if (g_flags->v == 1 || g_flags->v == 30)
 		ft_printf("P %4d | live %d\n", g_bogies->num, arg);
 	if (arg >= g_arena->champ_num * -1  && arg <= -1)
-		g_arena->last_stand = arg;
+		g_arena->last_stand = arg * -1;
 	g_arena->mortal_flip++;
 	move_caret(DIR_SIZE);
 }

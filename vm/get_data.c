@@ -43,7 +43,9 @@ int		get_treg(int scip_size)
 
 	i = g_bogies->index + scip_size;
 	treg = g_arena->list[i % MEM_SIZE].com;
-	return (--treg);
+	if (treg > 0)
+		treg -= 1;
+	return (treg);
 }
 
 int		get_tind(int size_flag, int scip_size)

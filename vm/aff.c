@@ -12,7 +12,7 @@ void	aff(void)
         reg = get_treg(g_bogies->index + 2);
 		if (reg >= 16)
 		{
-			skip_bytes(AFF_OP);
+			skip_bytes(arg_byte);
 			return ;
 		}
 		sym = (char)g_bogies->regs[reg];
@@ -22,7 +22,7 @@ void	aff(void)
     }
 	else
 	{
-		skip_bytes(AFF_OP);
+		skip_bytes(arg_byte);
 		return ;
 	}
 }

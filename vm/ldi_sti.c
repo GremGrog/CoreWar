@@ -25,10 +25,12 @@ int	all_three(unsigned char	arg_byte, int num)
 int reg_dir(unsigned char arg_byte, int num)
 {
 	int arg;
+	int	reg;
 
 	if (is_treg(arg_byte, num))
 	{
-		arg = g_bogies->regs[get_treg(g_bogies->aim)];
+		reg = get_treg(g_bogies->aim);
+		arg = g_bogies->regs[reg];
 		g_bogies->aim++;
 	}
 	else
@@ -79,7 +81,7 @@ void ldi(void)
 	g_bogies->aim = 2;
 	if (is_tind(arg_byte, SECOND_ARG) || is_tind(arg_byte, THIRD_ARG) || is_tdir(arg_byte, THIRD_ARG))
 	{
-		skip_bytes(LDI_OP);
+		skip_bytes(arg_byte);
 		return ;
 	}
 	arg_1 = all_three(arg_byte, FIRST_ARG);
@@ -132,7 +134,7 @@ void lldi(void)
 	g_bogies->aim = 2;
 	if (is_tind(arg_byte, SECOND_ARG) || is_tind(arg_byte, THIRD_ARG) || is_tdir(arg_byte, THIRD_ARG))
 	{
-		skip_bytes(LLDI_OP);
+		skip_bytes(arg_byte);
 		return ;
 	}
 	arg_1 = all_three(arg_byte, FIRST_ARG);

@@ -78,7 +78,11 @@ void	get_data_for_bogie(int current)
  	while (tmp_bogie)
 	{
  		if (g_arena->round - tmp_bogie->last_breath >= g_arena->cycle_to_die)
+		 {
+			 if (g_flags->v == 30)
+			 	ft_printf("Process %d hasn't lived for %d cycles (CTD %d)\n", tmp_bogie->num, g_arena->round - tmp_bogie->last_breath, g_arena->cycle_to_die);
 			tmp_bogie = delete_bogie(tmp_bogie);
+		 }
  		else
 		{
 			tmp_bogie->live_op = 0;
@@ -128,8 +132,13 @@ void	fight(void)
 				get_data_for_bogie(g_arena->round);
 			if (g_bogies->its_a_highnoon == g_arena->round)
 			{
-				exec_function();
-				get_data_for_bogie(g_arena->round);
+				if (g_bogies->commmand != g_arena->list[g_bogies->index].com)
+					get_data_for_bogie(g_arena->round - 1);
+				else
+				{
+					exec_function();
+					get_data_for_bogie(g_arena->round);
+				}
 			}
 			g_bogies = g_bogies->next;
 		}

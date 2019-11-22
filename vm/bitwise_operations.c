@@ -1,108 +1,113 @@
 #include "vm.h"
 
-int		get_arg(int *arg, int position, unsigned char arg_byte)
+void	get_arg(int *arg, int position, unsigned char arg_byte)
 {
+	int	reg;
+
 	if (is_treg(arg_byte, position))
 	{
-		if ((*arg = g_bogies->regs[arg_byte + 2]) < 16)
-			return (1);
-		else
+		reg = 0;
+		if ((reg = get_treg(g_bogies->aim)) < 16)
 		{
-			*arg = -1;
-			return (0);
+			g_bogies->aim++;
+			*arg = g_bogies->regs[reg];
+			return ;
 		}
+		else
+			*arg = -1;
 	}
-	if (is_tdir(arg_byte, position))
+	else if (is_tdir(arg_byte, position))
 	{
-		*arg = get_tdir_big_size(g_bogies->index + 1);
-		return (1 + DIR_SIZE);
+		*arg = get_tdir_big_size(g_bogies->aim);
+		g_bogies->aim += 4;
 	}
-	if (is_tind(arg_byte, position))
+	else if (is_tind(arg_byte, position))
 	{
-		*arg = get_tind(1, DIR_SIZE + 1);
-		return (DIR_SIZE + 1);
+		*arg = get_tind(1, g_bogies->aim);
+		g_bogies->aim += 2;
 	}
-	*arg = -1;
-	return (0);
 }
 
 void	bitwise_and(void)
 {
 	unsigned char	arg_byte;
-	int				jump_i;
 	int				arg1;
 	int				arg2;
+	int				reg;
 
 	arg1 = 0;
 	arg2 = 0;
 	arg_byte = g_arena->list[(g_bogies->index + 1) % MEM_SIZE].com;
-	jump_i = get_arg(&arg1, FIRST_ARG, arg_byte);
-	jump_i += get_arg(&arg2, SECOND_ARG, arg_byte);
-	if (arg1 == -1 || arg2 == -1 || jump_i + 1 >= 16)
+	g_bogies->aim = 2;
+	get_arg(&arg1, FIRST_ARG, arg_byte);
+	get_arg(&arg2, SECOND_ARG, arg_byte);
+	reg = get_treg(g_bogies->aim);
+	if (arg1 == -1 || arg2 == -1 || reg >= 16)
 	{
-		skip_bytes(AND_OP);
+		skip_bytes(arg_byte);
 		return ;
 	}
-	if ((g_bogies->regs[++jump_i] = arg1 & arg2) == 0)
+	if ((g_bogies->regs[reg] = arg1 & arg2) == 0)
 		g_bogies->carry = 1;
 	else
 		g_bogies->carry = 0;
 	if (g_flags->v == 1 || g_flags->v == 30)
-		ft_printf("P %4d | and r%d %d %d %d\n", g_bogies->num, jump_i, arg1, arg2, \
-			g_bogies->regs[jump_i]);
-	move_caret(jump_i);
+		ft_printf("P %4d | and %d %d r%d\n", g_bogies->num, arg1, arg2, reg + 1);
+	move_caret(g_bogies->aim);
 }
 
 void	bitwise_or(void)
 {
 	unsigned char	arg_byte;
-	int				jump_i;
 	int				arg1;
 	int				arg2;
+	int				reg;
 
 	arg1 = 0;
 	arg2 = 0;
 	arg_byte = g_arena->list[(g_bogies->index + 1) % MEM_SIZE].com;
-	jump_i = get_arg(&arg1, FIRST_ARG, arg_byte);
-	jump_i += get_arg(&arg2, SECOND_ARG, arg_byte);
-	if (arg1 == -1 || arg2 == -1 || jump_i + 1 >= 16)
+	g_bogies->aim = 2;
+	get_arg(&arg1, FIRST_ARG, arg_byte);
+	get_arg(&arg2, SECOND_ARG, arg_byte);
+	reg = get_treg(g_bogies->aim);
+	if (arg1 == -1 || arg2 == -1 || reg >= 16)
 	{
-		skip_bytes(OR_OP);
+		skip_bytes(arg_byte);
 		return ;
 	}
-	if ((g_bogies->regs[++jump_i] = arg1 | arg2) == 0)
+	if ((g_bogies->regs[reg] = arg1 | arg2) == 0)
 		g_bogies->carry = 1;
 	else
 		g_bogies->carry = 0;
 	if (g_flags->v == 1 || g_flags->v == 30)
-		ft_printf("P %4d | or r%d %d %d %d\n", g_bogies->num, jump_i, arg1, arg2, \
-			g_bogies->regs[jump_i]);
-	move_caret(jump_i);
+		ft_printf("P %4d | or %d %d r%d\n", g_bogies->num, arg1, arg2, reg + 1);
+	move_caret(g_bogies->aim);
 }
 
 void	bitwise_xor(void)
 {
 	unsigned char	arg_byte;
-	int				jump_i;
 	int				arg1;
 	int				arg2;
+	int				reg;
 
 	arg1 = 0;
 	arg2 = 0;
 	arg_byte = g_arena->list[(g_bogies->index + 1) % MEM_SIZE].com;
-	jump_i = get_arg(&arg1, FIRST_ARG, arg_byte);
-	jump_i += get_arg(&arg2, SECOND_ARG, arg_byte);
-	if (arg1 == -1 || arg2 == -1 || jump_i + 1 >= 16)
+	g_bogies->aim = 2;
+	get_arg(&arg1, FIRST_ARG, arg_byte);
+	get_arg(&arg2, SECOND_ARG, arg_byte);
+	reg = get_treg(g_bogies->aim);
+	if (arg1 == -1 || arg2 == -1 || reg >= 16)
 	{
-		skip_bytes(XOR_OP);
+		skip_bytes(arg_byte);
 		return ;
 	}
-	if ((g_bogies->regs[++jump_i] = arg1 ^ arg2) == 0)
+	if ((g_bogies->regs[reg] = arg1 ^ arg2) == 0)
 		g_bogies->carry = 1;
 	else
 		g_bogies->carry = 0;
 	if (g_flags->v == 1 || g_flags->v == 30)
-		ft_printf("P %4d | xor r%d %d %d %d\n", g_bogies->num, jump_i, arg1, arg2, \
-			g_bogies->regs[jump_i]);
-	move_caret(jump_i);
+		ft_printf("P %4d | xor %d %d r%d\n", g_bogies->num, arg1, arg2, reg + 1);
+	move_caret(g_bogies->aim);
 }
