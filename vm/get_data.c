@@ -55,9 +55,6 @@ int		get_tind(int size_flag, int scip_size)
 
 	tind = get_tdir_small_size(g_bogies->index + scip_size);
 	tind %= IDX_MOD;
-	if (size_flag == 1)
-		temp = get_tdir_big_size(g_bogies->index + tind);
-	else
-		temp = get_tdir_small_size(g_bogies->index + tind);
+	temp = get_tdir_big_size(g_bogies->index + tind);
 	return (temp);
 }

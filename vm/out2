@@ -1,19 +1,17 @@
 Introducing contestants...
-* Player 1, weighing 12 bytes, "tester" ("test st") !
+* Player 1, weighing 14 bytes, "tester" ("test sti") !
 It is now cycle 1
 It is now cycle 2
 It is now cycle 3
 It is now cycle 4
 It is now cycle 5
-P    1 | ld 105906177 r2
-ADV 7 (0x0000 -> 0x0007) 02 90 06 50 00 01 02 
+P    1 | ld 100 r3
+ADV 7 (0x0000 -> 0x0007) 02 90 00 00 00 64 03 
 It is now cycle 6
 It is now cycle 7
 It is now cycle 8
 It is now cycle 9
 It is now cycle 10
-P    1 | st r2 58
-ADV 5 (0x0007 -> 0x000c) 03 70 02 00 3a 
 It is now cycle 11
 It is now cycle 12
 It is now cycle 13
@@ -34,6 +32,9 @@ It is now cycle 27
 It is now cycle 28
 It is now cycle 29
 It is now cycle 30
+P    1 | sti r3 17665 53
+       | -> store to 17665 + 53 = 17718 (with pc and mod 317)
+ADV 7 (0x0007 -> 0x000e) 0b 68 03 45 01 00 35 
 It is now cycle 31
 It is now cycle 32
 It is now cycle 33
@@ -73,7 +74,6 @@ It is now cycle 66
 It is now cycle 67
 It is now cycle 68
 It is now cycle 69
-ADV 4 (0x0041 -> 0x0045) 06 50 00 01 
 It is now cycle 70
 It is now cycle 71
 It is now cycle 72

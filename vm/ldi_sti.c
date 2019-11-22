@@ -18,7 +18,7 @@ int	all_three(unsigned char	arg_byte, int num, int *s)
 	}
 	else
 	{
-		arg = get_tind(0, g_bogies->index + g_bogies->aim);
+		arg = get_tind(1, g_bogies->aim);
 		g_bogies->aim += 2;
 	}
 	return (arg);
@@ -73,7 +73,7 @@ void ldi(void)
 	int 			*s;
 	unsigned char	arg_byte;
 
-	*s = 0;
+	s = 0;
 	if (g_bogies->its_a_highnoon != g_arena->round)
 		return ;
 	arg_byte = g_arena->list[(g_bogies->index + 1) % MEM_SIZE].com;
@@ -135,6 +135,7 @@ void lldi(void)
 	int 			*s;
 	unsigned char	arg_byte;
 
+	s = 0;
 	if (g_bogies->its_a_highnoon != g_arena->round)
 		return ;
 	arg_byte = g_arena->list[(g_bogies->index + 1) % MEM_SIZE].com;
@@ -146,14 +147,14 @@ void lldi(void)
 		skip_bytes(arg_byte);
 		return ;
 	}
-	arg_1 = all_three(arg_byte, FIRST_ARG);
-	arg_2 = reg_dir(arg_byte, SECOND_ARG);
+	arg_1 = all_three(arg_byte, FIRST_ARG, s);
+	arg_2 = reg_dir(arg_byte, SECOND_ARG, s);
 	arg_3 = get_treg(g_bogies->aim);
 	if (arg_3 >= 16)
 		*s = 1;
-	ft_printf("P %4d | lldi %d %d r%d\n       | -> load from %d + %d = %d (with pc and mod %d)\n", g_bogies->num,
+	ft_printf("P %4d | lldi %d %d r%d\n       | -> load from %d + %d = %d (with pc %d)\n", g_bogies->num,
 			  arg_1, arg_2, arg_3 + 1, arg_1, arg_2, arg_1 + arg_2, g_bogies->index + ((arg_1 + arg_2) % IDX_MOD));
-	g_bogies->regs[arg_3] = get_tdir_big_size(g_bogies->index + ((arg_1 + arg_2) % IDX_MOD));
+	g_bogies->regs[arg_3] = get_tdir_big_size(g_bogies->index + ((arg_1 + arg_2)));
 	if (s)
 		skip_bytes(LDI_OP);
 	move_caret(g_bogies->aim);

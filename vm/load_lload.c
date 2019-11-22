@@ -13,11 +13,13 @@ void	long_load(void)
 	{
 		arg = get_tdir_big_size(g_bogies->index + 2);
 		treg = get_treg(DIR_SIZE + 2);
+		g_bogies->aim = 1 + 4 + 1;
 	}
 	else if (is_tind(arg_byte, FIRST_ARG) && is_treg(arg_byte, SECOND_ARG))
 	{
-		arg = get_tdir_big_size(g_bogies->index + 2);
-		treg = get_treg(g_bogies->index + arg);
+		arg = get_tind(1, 2);
+		treg = get_treg(4);
+		g_bogies->aim = 1 + 2 + 1;
 	}
 	else
 	{
@@ -31,7 +33,6 @@ void	long_load(void)
 	}
 	if (g_flags->v == 1 || g_flags->v == 30)
 		ft_printf("P %4d | lld %d r%d\n", g_bogies->num, arg, treg + 1);
-	g_bogies->aim = DIR_SIZE + 3;
 	g_bogies->regs[treg] = arg;
 	g_bogies->carry = ((arg == 0) ? 1 : 0);
 	move_caret(g_bogies->aim);
