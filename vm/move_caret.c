@@ -27,16 +27,16 @@ void	move_caret(int steps)
 
 void	count_first_args_len(int op_code, unsigned char arg_byte, int position)
 {
-	if (IS_T_DIR(arg_byte, position))
+	if (is_tdir(arg_byte, position))
 	{
 		if (g_op[op_code].t_dir_size == 4)
 			g_bogies->aim += DIR_SIZE;
 		else
 			g_bogies->aim += 2;
 	}
-	if (IS_T_REG(arg_byte, position))
+	if (is_treg(arg_byte, position))
 		g_bogies->aim += 1;
-	if (IS_T_IND(arg_byte, position))
+	if (is_tind(arg_byte, position))
 		g_bogies->aim += 2;
 }
 

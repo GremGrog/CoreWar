@@ -44,7 +44,7 @@ void	bitwise_and(void)
 	reg = get_treg(g_bogies->aim);
 	if (arg1 == -1 || arg2 == -1 || reg >= 16)
 	{
-		skip_bytes(arg_byte);
+		skip_bytes(AND_OP);
 		return ;
 	}
 	if ((g_bogies->regs[reg] = arg1 & arg2) == 0)
@@ -72,7 +72,7 @@ void	bitwise_or(void)
 	reg = get_treg(g_bogies->aim);
 	if (arg1 == -1 || arg2 == -1 || reg >= 16)
 	{
-		skip_bytes(arg_byte);
+		skip_bytes(OR_OP);
 		return ;
 	}
 	if ((g_bogies->regs[reg] = arg1 | arg2) == 0)
@@ -100,7 +100,7 @@ void	bitwise_xor(void)
 	reg = get_treg(g_bogies->aim);
 	if (arg1 == -1 || arg2 == -1 || reg >= 16)
 	{
-		skip_bytes(arg_byte);
+		skip_bytes(XOR_OP);
 		return ;
 	}
 	if ((g_bogies->regs[reg] = arg1 ^ arg2) == 0)

@@ -45,10 +45,6 @@
 # define LFORK_OP	14
 # define AFF_OP		15
 
-# define IS_T_REG(val, pos) (((val >> pos) & REG_CODE) == REG_CODE) ? 1 : 0
-# define IS_T_DIR(val, pos) (((val >> pos) & DIR_CODE) == DIR_CODE) ? 1 : 0
-# define IS_T_IND(val, pos) (((val >> pos) & IND_CODE) == IND_CODE) ? 1 : 0
-
 # define FIRST_ARG	1
 # define SECOND_ARG	2
 # define THIRD_ARG	3

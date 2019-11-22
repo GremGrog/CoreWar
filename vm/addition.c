@@ -16,7 +16,7 @@ void	addition(void)
 		reg3 = get_treg(4);
 		if (reg1 >= 16 || reg2 >= 16 || reg3 >= 16)
 		{
-			skip_bytes(arg_byte);
+			skip_bytes(ADD_OP);
 			return ;
 		}
 		g_bogies->regs[reg3] = g_bogies->regs[reg1] + \
@@ -32,7 +32,7 @@ void	addition(void)
 	}
 	else
 	{
-		skip_bytes(arg_byte);
+		skip_bytes(ADD_OP);
 		return ;
 	}
 }
