@@ -53,7 +53,7 @@ void	bitwise_and(void)
 		g_bogies->carry = 0;
 	if (g_flags->v == 1 || g_flags->v == 30)
 		ft_printf("P %4d | and %d %d r%d\n", g_bogies->num, arg1, arg2, reg + 1);
-	move_caret(g_bogies->aim);
+	move_caret(g_bogies->aim + 1);
 }
 
 void	bitwise_or(void)
@@ -81,7 +81,7 @@ void	bitwise_or(void)
 		g_bogies->carry = 0;
 	if (g_flags->v == 1 || g_flags->v == 30)
 		ft_printf("P %4d | or %d %d r%d\n", g_bogies->num, arg1, arg2, reg + 1);
-	move_caret(g_bogies->aim);
+	move_caret(g_bogies->aim + 1);
 }
 
 void	bitwise_xor(void)
@@ -109,5 +109,5 @@ void	bitwise_xor(void)
 		g_bogies->carry = 0;
 	if (g_flags->v == 1 || g_flags->v == 30)
 		ft_printf("P %4d | xor %d %d r%d\n", g_bogies->num, arg1, arg2, reg + 1);
-	move_caret(g_bogies->aim);
+	move_caret(g_bogies->aim + 1);
 }

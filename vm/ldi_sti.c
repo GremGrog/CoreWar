@@ -57,12 +57,16 @@ void	print_4bytes(int a1, int a2, int a3, int flag_l)
 	c = (g_bogies->index + c) % MEM_SIZE;
 	g_arena->list[c].com = a3 >> 24;
 	g_arena->list[c].color = g_bogies->color;
+	g_arena->list[c].champ = g_bogies->num * (-1);
 	g_arena->list[(1 + c) % MEM_SIZE].com = (a3 << 8) >> 24;
 	g_arena->list[(1 + c) % MEM_SIZE].color = g_bogies->color;
+	g_arena->list[(1 + c) % MEM_SIZE].champ = g_bogies->num * (-1);
 	g_arena->list[(2 + c) % MEM_SIZE].com = (a3 << 16) >> 24;
 	g_arena->list[(2 + c) % MEM_SIZE].color = g_bogies->color;
+	g_arena->list[(2 + c) % MEM_SIZE].champ = g_bogies->num * (-1);
 	g_arena->list[(3 + c) % MEM_SIZE].com = (a3 << 24) >> 24;
 	g_arena->list[(3 + c) % MEM_SIZE].color = g_bogies->color;
+	g_arena->list[(3 + c) % MEM_SIZE].champ = g_bogies->num * (-1);
 }
 
 void ldi(void)
@@ -94,7 +98,7 @@ void ldi(void)
 	g_bogies->regs[arg_3] = get_tdir_big_size(g_bogies->index + ((arg_1 + arg_2) % IDX_MOD));
 	if (s)
 		skip_bytes(LDI_OP);
-	move_caret(g_bogies->aim);
+	move_caret(g_bogies->aim + 1);
 }
 
 void sti(void)
@@ -124,7 +128,7 @@ void sti(void)
 	print_4bytes(arg_2, arg_3, arg_1, 0);
 	if (s)
 		skip_bytes(LDI_OP);
-	move_caret(g_bogies->aim - 1);
+	move_caret(g_bogies->aim);
 }
 
 void lldi(void)
@@ -150,12 +154,15 @@ void lldi(void)
 	arg_1 = all_three(arg_byte, FIRST_ARG, s);
 	arg_2 = reg_dir(arg_byte, SECOND_ARG, s);
 	arg_3 = get_treg(g_bogies->aim);
+	if (!(is_treg(arg_1, FIRST_ARG)))
+		g_bogies->carry = ((arg_1 == 0) ? 1 : 0);
 	if (arg_3 >= 16)
 		*s = 1;
-	ft_printf("P %4d | lldi %d %d r%d\n       | -> load from %d + %d = %d (with pc %d)\n", g_bogies->num,
+	if (g_flags->v == 1 || g_flags->v == 30)
+		ft_printf("P %4d | lldi %d %d r%d\n       | -> load from %d + %d = %d (with pc %d)\n", g_bogies->num,
 			  arg_1, arg_2, arg_3 + 1, arg_1, arg_2, arg_1 + arg_2, g_bogies->index + ((arg_1 + arg_2) % IDX_MOD));
 	g_bogies->regs[arg_3] = get_tdir_big_size(g_bogies->index + ((arg_1 + arg_2)));
 	if (s)
 		skip_bytes(LDI_OP);
-	move_caret(g_bogies->aim);
+	move_caret(g_bogies->aim + 1);
 }

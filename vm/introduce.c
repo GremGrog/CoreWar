@@ -20,7 +20,7 @@ void	introduce_winner(void)
 	champs = g_arena->champs;
 	if (g_arena->last_stand != 0)
 	{
-		while (champs && champs->index * (-1) != g_arena->last_stand)
+		while (champs && champs->index != g_arena->last_stand)
 			champs = champs->next;
 	}
 	ft_printf("Contestant %d, \"%s\", has won !\n", champs->index, champs->name);

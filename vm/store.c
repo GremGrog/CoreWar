@@ -11,9 +11,14 @@ void	store(void)
 	arg = 0;
 	treg = 0;
 	tmp_index = g_bogies->index;
-	// if (IS_T_REG(arg_byte, FIRST_ARG))
 	if ((is_treg(arg_byte, FIRST_ARG)) == 1)
-		treg = get_treg(2);
+	{
+		if ((treg = get_treg(2)) >= 16)
+		{
+			skip_bytes(ST_OP);
+			return ;
+		}
+	}
 	else
 	{
 		skip_bytes(ST_OP);
@@ -43,5 +48,5 @@ void	store(void)
 		skip_bytes(ST_OP);
 		return ;
 	}
-	move_caret(g_bogies->aim);
+	move_caret(g_bogies->aim + 1);
 }

@@ -5,8 +5,8 @@ void	move_caret(int steps)
 	int i;
 
 	i = 0;
-	if (steps != 1)
-		++steps;
+	// if (steps != 1)
+	// 	++steps;
 	if ((g_flags->v == 5 || g_flags->v == 30) && steps != 1 && 
 		(!(g_bogies->commmand == g_op[8].code && g_bogies->carry == 1)))
 	{
@@ -43,9 +43,7 @@ void	count_first_args_len(int op_code, unsigned char arg_byte, int position)
 void	skip_bytes(int op_code)
 {
 	unsigned char	arg_byte;
-	size_t			steps;
 
-	steps = 0;
 	arg_byte = g_arena->list[g_bogies->index + 1].com;
 	g_bogies->aim = 1;
 	count_first_args_len(op_code, arg_byte, FIRST_ARG);
@@ -53,5 +51,5 @@ void	skip_bytes(int op_code)
 		count_first_args_len(op_code, arg_byte, SECOND_ARG);
 	if (g_op[op_code].args_num == 3)
 		count_first_args_len(op_code, arg_byte, THIRD_ARG);
-	move_caret(g_bogies->aim);
+	move_caret(g_bogies->aim + 1);
 }

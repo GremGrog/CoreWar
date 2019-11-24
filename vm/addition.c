@@ -28,7 +28,7 @@ void	addition(void)
 		g_bogies->aim = 4;
 		if (g_flags->v == 1 || g_flags->v == 30)
 			ft_printf("P %4d | add r%d r%d r%d\n", g_bogies->num, reg1 + 1, reg2 + 1, reg3 + 1);
-		move_caret(g_bogies->aim);
+		move_caret(g_bogies->aim + 1);
 	}
 	else
 	{

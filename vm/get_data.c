@@ -25,14 +25,10 @@ short	get_tdir_small_size(int i)
 
 	c = 0;
 	tdir = 0;
-	// while (c < 2)
-	// {
-		tdir |= g_arena->list[i % MEM_SIZE].com;
-		tdir <<= 8;
-		i++;
-		tdir |= g_arena->list[i % MEM_SIZE].com;
-		// c++;
-	// }
+	tdir |= g_arena->list[i % MEM_SIZE].com;
+	tdir <<= 8;
+	i++;
+	tdir |= g_arena->list[i % MEM_SIZE].com;
 	return (tdir);
 }
 
@@ -42,6 +38,8 @@ int		get_treg(int scip_size)
 	size_t	i;
 
 	i = g_bogies->index + scip_size;
+	if (g_arena->list[i % MEM_SIZE].champ == 0)
+		return (16);
 	treg = g_arena->list[i % MEM_SIZE].com;
 	if (treg > 0)
 		treg -= 1;

@@ -35,7 +35,7 @@ void	long_load(void)
 		ft_printf("P %4d | lld %d r%d\n", g_bogies->num, arg, treg + 1);
 	g_bogies->regs[treg] = arg;
 	g_bogies->carry = ((arg == 0) ? 1 : 0);
-	move_caret(g_bogies->aim);
+	move_caret(g_bogies->aim + 1);
 }
 
 void	load(void)
@@ -64,7 +64,7 @@ void	load(void)
 		skip_bytes(LD_OP);
 		return ;
 	}
-	if (treg >= 16)
+	if (treg >= 16 || treg == -2)
 	{
 		skip_bytes(LD_OP);
 		return ;
@@ -73,5 +73,5 @@ void	load(void)
 		ft_printf("P %4d | ld %d r%d\n", g_bogies->num, arg, treg + 1);
 	g_bogies->regs[treg] = arg;
 	g_bogies->carry = ((arg == 0) ? 1 : 0);
-	move_caret(g_bogies->aim);
+	move_caret(g_bogies->aim + 1);
 }

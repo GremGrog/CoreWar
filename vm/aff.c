@@ -9,14 +9,16 @@ void	aff(void)
 	arg_byte = g_arena->list[g_bogies->index + 1].com;
     if (is_treg(arg_byte, FIRST_ARG))
     {
-        reg = get_treg(g_bogies->index + 2);
+        reg = g_arena->list[(g_bogies->index + 2) % MEM_SIZE].com;
+		reg--;
 		if (reg >= 16)
 		{
 			skip_bytes(AFF_OP);
 			return ;
 		}
-		sym = (char)g_bogies->regs[reg];
-        ft_printf("%c", (char)reg);
+		sym = g_bogies->regs[reg];
+		if (g_flags->v == 30)
+        	ft_printf("Aff: %c\n", sym);
 		g_bogies->aim = 3;
 		move_caret(g_bogies->aim);
     }
