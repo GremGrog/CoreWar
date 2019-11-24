@@ -1,6 +1,6 @@
 #include "vm.h"
 
-void	get_arg(int *arg, int position, unsigned char arg_byte)
+int	get_arg(int *arg, int position, unsigned char arg_byte)
 {
 	int	reg;
 
@@ -11,21 +11,24 @@ void	get_arg(int *arg, int position, unsigned char arg_byte)
 		{
 			g_bogies->aim++;
 			*arg = g_bogies->regs[reg];
-			return ;
+			return (1);
 		}
 		else
-			*arg = -1;
+			return (-1);
 	}
 	else if (is_tdir(arg_byte, position))
 	{
-		*arg = get_tdir_big_size(g_bogies->aim);
+		*arg = get_tdir_big_size(g_bogies->index + g_bogies->aim);
 		g_bogies->aim += 4;
+		return (1);
 	}
 	else if (is_tind(arg_byte, position))
 	{
 		*arg = get_tind(1, g_bogies->aim);
 		g_bogies->aim += 2;
+		return (1);
 	}
+	return (-1);
 }
 
 void	bitwise_and(void)
@@ -39,10 +42,8 @@ void	bitwise_and(void)
 	arg2 = 0;
 	arg_byte = g_arena->list[(g_bogies->index + 1) % MEM_SIZE].com;
 	g_bogies->aim = 2;
-	get_arg(&arg1, FIRST_ARG, arg_byte);
-	get_arg(&arg2, SECOND_ARG, arg_byte);
-	reg = get_treg(g_bogies->aim);
-	if (arg1 == -1 || arg2 == -1 || reg >= 16)
+	if ((get_arg(&arg1, FIRST_ARG, arg_byte)) == -1 || (get_arg(&arg2, SECOND_ARG, arg_byte)) == -1
+	 || (!(is_treg(arg_byte, THIRD_ARG))) || (reg = get_treg(g_bogies->aim)) >= 16)
 	{
 		skip_bytes(AND_OP);
 		return ;
@@ -67,10 +68,8 @@ void	bitwise_or(void)
 	arg2 = 0;
 	arg_byte = g_arena->list[(g_bogies->index + 1) % MEM_SIZE].com;
 	g_bogies->aim = 2;
-	get_arg(&arg1, FIRST_ARG, arg_byte);
-	get_arg(&arg2, SECOND_ARG, arg_byte);
-	reg = get_treg(g_bogies->aim);
-	if (arg1 == -1 || arg2 == -1 || reg >= 16)
+	if ((get_arg(&arg1, FIRST_ARG, arg_byte)) == -1 || (get_arg(&arg2, SECOND_ARG, arg_byte)) == -1
+	 || (!(is_treg(arg_byte, THIRD_ARG))) || (reg = get_treg(g_bogies->aim)) >= 16)
 	{
 		skip_bytes(OR_OP);
 		return ;
@@ -95,10 +94,8 @@ void	bitwise_xor(void)
 	arg2 = 0;
 	arg_byte = g_arena->list[(g_bogies->index + 1) % MEM_SIZE].com;
 	g_bogies->aim = 2;
-	get_arg(&arg1, FIRST_ARG, arg_byte);
-	get_arg(&arg2, SECOND_ARG, arg_byte);
-	reg = get_treg(g_bogies->aim);
-	if (arg1 == -1 || arg2 == -1 || reg >= 16)
+	if ((get_arg(&arg1, FIRST_ARG, arg_byte)) == -1 || (get_arg(&arg2, SECOND_ARG, arg_byte)) == -1
+	 || (!(is_treg(arg_byte, THIRD_ARG))) || (reg = get_treg(g_bogies->aim)) >= 16)
 	{
 		skip_bytes(XOR_OP);
 		return ;
