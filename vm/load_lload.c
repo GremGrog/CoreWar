@@ -44,6 +44,7 @@ void	load(void)
 	int				treg;
 	unsigned char	arg_byte;
 
+
 	arg_byte = g_arena->list[(g_bogies->index + 1) % MEM_SIZE].com;
 	arg = 0;
 	treg = 0;

@@ -21,9 +21,7 @@ int		get_tdir_big_size(int i)
 short	get_tdir_small_size(int i)
 {
 	short	tdir;
-	size_t	c;
 
-	c = 0;
 	tdir = 0;
 	tdir |= g_arena->list[i % MEM_SIZE].com;
 	tdir <<= 8;

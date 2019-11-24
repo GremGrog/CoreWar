@@ -5,12 +5,10 @@ void	store(void)
 	short			arg;
 	int				treg;
 	unsigned char	arg_byte;
-	int				tmp_index;
 
 	arg_byte = g_arena->list[(g_bogies->index + 1) % MEM_SIZE].com;
 	arg = 0;
 	treg = 0;
-	tmp_index = g_bogies->index;
 	if ((is_treg(arg_byte, FIRST_ARG)) == 1)
 	{
 		if ((treg = get_treg(2)) >= 16)
@@ -21,15 +19,18 @@ void	store(void)
 	}
 	else
 	{
-		skip_bytes(ST_OP);
-		return ;
+			skip_bytes(ST_OP);
+			return ;
 	}
 	if (is_treg(arg_byte, SECOND_ARG))
 	{
 		arg = get_treg(3);
 		if (arg >= 16)
+		{
 			skip_bytes(ST_OP);
-		g_bogies->regs[treg] = g_bogies->regs[arg];
+			return ;
+		}
+		g_bogies->regs[arg] = g_bogies->regs[treg];
 		if (g_flags->v == 1 || g_flags->v == 30)
 			ft_printf("P %4d | st r%d %d\n", g_bogies->num, treg + 1, arg + 1);
 		g_bogies->aim = 3;

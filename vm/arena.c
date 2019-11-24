@@ -13,13 +13,14 @@ void	battlefield_print(void)
 		{
 			if (g_arena->list[i].color == 'g')
 				ft_printf(" %{green}02x", g_arena->list[i].com);
-			if (g_arena->list[i].color == 'r')
-				ft_printf(" %{red}02x", g_arena->list[i].com);
-			if (g_arena->list[i].color == 'y')
-				ft_printf(" %{yellow}02x", g_arena->list[i].com);
-			if (g_arena->list[i].color == 'b')
-				ft_printf(" %{blue}02x", g_arena->list[i].com);
-			if (g_arena->list[i].color == 'e')
+			else
+			// if (g_arena->list[i].color == 'r')
+			// 	ft_printf(" %{red}02x", g_arena->list[i].com);
+			// if (g_arena->list[i].color == 'y')
+			// 	ft_printf(" %{yellow}02x", g_arena->list[i].com);
+			// if (g_arena->list[i].color == 'b')
+			// 	ft_printf(" %{blue}02x", g_arena->list[i].com);
+			// if (g_arena->list[i].color == 'e')
 				ft_printf(" %{grey}02x", g_arena->list[i].com);
 				// ft_printf(" %02x", field->list[i].com);
 		}

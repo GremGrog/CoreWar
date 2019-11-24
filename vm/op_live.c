@@ -26,9 +26,9 @@ void zjump(void)
 	if (g_bogies->its_a_highnoon != g_arena->round)
 		return;
 	arg = get_tdir_small_size(g_bogies->index + 1);
-	arg %= IDX_MOD;
 	if (g_flags->v == 1 || g_flags->v == 30)
 		ft_printf("P %4d | zjmp %d %s\n", g_bogies->num, arg, g_bogies->carry ? "OK" : "FAILED");
+	arg %= IDX_MOD;
 	if (g_bogies->carry)
 		move_caret(arg);
 	else

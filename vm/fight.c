@@ -92,7 +92,7 @@ void	get_data_for_bogie(int current)
  	if (g_arena->mortal_flip >= NBR_LIVE)
 	{
 		g_arena->cycle_to_die -= CYCLE_DELTA;
-		if (g_flags->v == 2)
+		if (g_flags->v == 2 || g_flags->v == 30)
 			ft_printf("Cycle to die is now %d\n", g_arena->cycle_to_die);
 		g_arena->death_gaze = 0;
 	}
@@ -101,7 +101,7 @@ void	get_data_for_bogie(int current)
 	if (g_arena->death_gaze >= MAX_CHECKS)
 	{
 		g_arena->cycle_to_die -= CYCLE_DELTA;
-		if (g_flags->v == 2)
+		if (g_flags->v == 2 || g_flags->v == 30)
 			ft_printf("Cycle to die is now %d\n", g_arena->cycle_to_die);
 		g_arena->death_gaze = 0;
 	}
@@ -128,6 +128,19 @@ void	fight(void)
 		g_bogies = g_arena->bogie_head;
 		while (g_bogies)
 		{
+			// if (g_arena->round >= 1645 && g_arena->round <= 1856)
+			// {
+			// 	if (g_bogies->num == 1)
+			// 	{
+			// 		ft_printf("%d\n", g_arena->round);
+			// 		for (int i = 0; i < 16; i++) {
+			// 			ft_printf("%d ", g_bogies->regs[i]);
+			// 		}
+			// 		ft_printf("\n");
+			// 	}
+			// }
+			if (g_bogies->commmand != g_arena->list[g_bogies->index].com)
+					get_data_for_bogie(g_arena->round - 1);
 			if (g_arena->round == 0)
 				get_data_for_bogie(g_arena->round);
 			if (g_bogies->its_a_highnoon == g_arena->round)
