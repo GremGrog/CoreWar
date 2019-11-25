@@ -130,8 +130,6 @@ void ldi(void)
 	unsigned char	arg_byte;
 	int				res;
 
-	if (g_bogies->its_a_highnoon != g_arena->round)
-		return ;
 	arg_byte = g_arena->list[(g_bogies->index + 1) % MEM_SIZE].com;
 	g_bogies->aim = 2;
 	arg_1 = 0;
@@ -159,8 +157,6 @@ void lldi(void)
 	int				arg_3;
 	unsigned char	arg_byte;
 
-	if (g_bogies->its_a_highnoon != g_arena->round)
-		return ;
 	arg_byte = g_arena->list[(g_bogies->index + 1) % MEM_SIZE].com;
 	g_bogies->aim = 2;
 	arg_1 = 0;

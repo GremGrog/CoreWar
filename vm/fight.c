@@ -56,7 +56,7 @@ void	exec_function(void)
 void	get_data_for_bogie(int current)
 {
 	g_bogies->commmand = g_arena->list[g_bogies->index].com;
-	g_bogies->its_a_highnoon = define_cycles_to_exec(g_bogies->commmand) + current;
+	g_bogies->its_a_highnoon = define_cycles_to_exec(g_bogies->commmand);
 	g_bogies->color =  g_arena->list[g_bogies->index].color;
 }
 
@@ -114,11 +114,11 @@ void	fight(void)
 	g_arena->cycle_to_die = CYCLE_TO_DIE;
 	if (g_flags->i == 1)
 		wins = init_w();
-	while (g_bogies)
-	{
-		get_data_for_bogie(0);
-		g_bogies = g_bogies->next;
-	}
+	// while (g_bogies)
+	// {
+	// 	get_data_for_bogie(0);
+	// 	g_bogies = g_bogies->next;
+	// }
 	while (g_arena->all_bogies > 0)
 	{
 		if ((g_flags->v == 2 || g_flags->v == 30) && g_arena->round > 0)
@@ -126,12 +126,19 @@ void	fight(void)
 		g_bogies = g_arena->bogie_head;
 		while (g_bogies)
 		{
-			if (g_bogies->commmand != g_arena->list[g_bogies->index].com)
-				get_data_for_bogie(g_arena->round - 1);
-			if (g_bogies->its_a_highnoon == g_arena->round)
+			// if (g_bogies->commmand != g_arena->list[g_bogies->index].com)
+			// 	get_data_for_bogie(g_arena->round - 1);
+			// if (g_bogies->its_a_highnoon == 0 || g_bogies->commmand != g_arena->list[g_bogies->index].com)
+				// get_data_for_bogie(0);
+			if (g_bogies->its_a_highnoon == 0)
+				get_data_for_bogie(0);
+			if (g_bogies->its_a_highnoon > 0 && g_arena->round > 0)
+				g_bogies->its_a_highnoon--;
+			if (g_bogies->its_a_highnoon == 0)
 			{
 				exec_function();
-				get_data_for_bogie(g_arena->round);
+				g_bogies->its_a_highnoon = 0;
+				// get_data_for_bogie(g_arena->round);
 			}
 			g_bogies = g_bogies->next;
 		}
