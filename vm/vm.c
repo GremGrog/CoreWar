@@ -20,9 +20,13 @@ int		main(int c, char **a)
 		add_bogies_on_arena();
 		introduce_champs();
 		fight();
-		introduce_winner();
+		if (g_flags->dump == 0)
+			introduce_winner();
 		delete_arena();
 		delete_champs(champs);
 	}
 	free(g_flags);
+	if (champs == NULL)
+		return (-1);
+	return (0);
 }

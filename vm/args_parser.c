@@ -54,6 +54,12 @@ int			parse_flags(char **a, int i)
 			g_flags->i = 1;
 			break ;
 		}
+		else if (ft_strcmp(a[i], "-dump") == 0)
+		{
+			i++;
+			g_flags->dump = ft_atoi(a[i]);
+			break ;
+		}
 		else
 			break ;
 	}

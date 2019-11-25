@@ -29,7 +29,7 @@ t_champ		*create_champ(t_champ **head, char *file)
 	{
 		champ = (t_champ*)malloc(sizeof(t_champ));
 		init_champ(&champ);
-		if ((parse_bytecode(*head, file)) == -2)
+		if ((parse_bytecode(champ, file)) == -2)
 		{
 			free(champ);
 			delete_champs(*head);

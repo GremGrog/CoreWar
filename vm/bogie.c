@@ -5,7 +5,6 @@ void		copy_bogie(t_bogie *new, t_bogie *bogie)
 	size_t	i;
 
 	i = 0;
-	new->num = g_arena->all_bogies;
 	new->carry = bogie->carry;
 	new->champ = bogie->champ;
 	new->last_breath = bogie->last_breath;

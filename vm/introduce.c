@@ -23,5 +23,10 @@ void	introduce_winner(void)
 		while (champs && champs->index != g_arena->last_stand)
 			champs = champs->next;
 	}
+	else
+	{
+		while (champs->next != NULL)
+			champs = champs->next;
+	}
 	ft_printf("Contestant %d, \"%s\", has won !\n", champs->index, champs->name);
 }

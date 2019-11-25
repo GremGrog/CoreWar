@@ -2,18 +2,22 @@
 
 void	battlefield_print(void)
 {
-	size_t i;
+	size_t	i;
+	size_t	r;
 
 	i = 0;
+	r = 0;
+	ft_printf("0x%04x : ", r);
 	while (i < MEM_SIZE)
 	{
-		if (g_arena->list[i].bogie == 1)
-			ft_printf(" \x1b[46m%{black}02x", g_arena->list[i].com);
-		else
-		{
-			if (g_arena->list[i].color == 'g')
-				ft_printf(" %{green}02x", g_arena->list[i].com);
-			else
+		ft_printf("%02x ", g_arena->list[i].com);
+		// if (g_arena->list[i].bogie == 1)
+		// 	ft_printf(" \x1b[46m%{black}02x", g_arena->list[i].com);
+		// else
+		// {
+			// if (g_arena->list[i].color == 'g')
+				// ft_printf(" %{green}02x", g_arena->list[i].com);
+			// else
 			// if (g_arena->list[i].color == 'r')
 			// 	ft_printf(" %{red}02x", g_arena->list[i].com);
 			// if (g_arena->list[i].color == 'y')
@@ -21,11 +25,16 @@ void	battlefield_print(void)
 			// if (g_arena->list[i].color == 'b')
 			// 	ft_printf(" %{blue}02x", g_arena->list[i].com);
 			// if (g_arena->list[i].color == 'e')
-				ft_printf(" %{grey}02x", g_arena->list[i].com);
+				// ft_printf(" %{grey}02x", g_arena->list[i].com);
 				// ft_printf(" %02x", field->list[i].com);
-		}
+		// }
 		if (i % 64 == 63)
+		{
 			write(1, "\n", 1);
+			r += 64;
+			if (r < MEM_SIZE)
+				ft_printf("0x%04x : ", r);
+		}
 		i++;
 	}
 }
@@ -46,6 +55,8 @@ void	init_battlefield(t_champ *warriors, int num)
 	g_arena->cycle_to_die = CYCLE_TO_DIE;
 	g_arena->champs = warriors;
 	g_arena->last_stand = 0;
+	g_arena->all_bogies = 0;
+	g_arena->max_bogie_num = 0;
 	c = MEM_SIZE / num;
 	while (i < num)
 	{

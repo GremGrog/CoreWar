@@ -39,8 +39,9 @@ int		get_treg(int scip_size)
 	if (g_arena->list[i % MEM_SIZE].champ == 0)
 		return (16);
 	treg = g_arena->list[i % MEM_SIZE].com;
-	if (treg > 0)
-		treg -= 1;
+	if (treg == 0)
+		return (16);
+	treg -= 1;
 	return (treg);
 }
 

@@ -97,6 +97,7 @@ typedef  struct 			s_coliseum // arena
 	int						cycle_to_die;
 	int						last_stand;
 	int						all_bogies;
+	int						max_bogie_num;
 	t_bogie					*bogie_head;
 	t_champ					*champs;
 }							t_coliseum;

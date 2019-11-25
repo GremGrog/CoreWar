@@ -91,11 +91,18 @@ unsigned char	*read_bytecode(t_champ *champ, char *file)
 			buf[i] = byte;
 		i++;
 	}
-	if (i >= FILE_SIZE)
+	if (i > FILE_SIZE)
 	{
 		i -= FILE_SIZE;
-		ft_printf("Error: File %s has too large a code (%d > %d bytes)\n",
-			 file, i + CHAMP_MAX_SIZE, CHAMP_MAX_SIZE);
+		ft_putstr_fd("Error: File ", 2);
+		ft_putstr_fd(file, 2);
+		ft_putstr_fd(" has too large a code (", 2); 
+		ft_putnbr_fd(i + CHAMP_MAX_SIZE, 2);
+		ft_putstr_fd(" bytes > ", 2);
+		ft_putnbr_fd(CHAMP_MAX_SIZE, 2);
+		ft_putstr_fd(" bytes)\n", 2);
+		// ft_printf("Error: File %s has too large a code (%d bytes > %d bytes)\n",
+		// 	 file, i + CHAMP_MAX_SIZE, CHAMP_MAX_SIZE);
 		free(buf);
 		return (NULL);
 	}
@@ -109,7 +116,11 @@ int		parse_bytecode(t_champ *champ, char *file)
 	if ((bytecode = read_bytecode(champ, file)) == NULL)
 		return (-2);
 	if (check_magic_header(bytecode) == -1)
-		ft_errno(3);
+	{
+		ft_printf("Error: File %s has an invalid header\n", file);
+		free(bytecode);
+		return (-2);
+	}
 	get_name_comment_exec_code(champ, bytecode);
 	free(bytecode);
 	return (1);

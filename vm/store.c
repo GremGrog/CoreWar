@@ -38,10 +38,10 @@ void	store(void)
 	else if (is_tind(arg_byte, SECOND_ARG))
 	{
 		arg = get_tdir_small_size(g_bogies->index + 3);
-		arg %= IDX_MOD;
-		print_4bytes(arg, 0, treg, 1);
 		if (g_flags->v == 1 || g_flags->v == 30)
 			ft_printf("P %4d | st r%d %d\n", g_bogies->num, treg + 1, arg);
+		arg %= IDX_MOD;
+		print_4bytes(arg, 0, treg, 1);
 		g_bogies->aim = 2 + IND_SIZE;
 	}
 	else
