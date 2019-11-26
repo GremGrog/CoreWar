@@ -1,6 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   tools.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: kbethany <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/11/26 16:10:46 by kbethany          #+#    #+#             */
+/*   Updated: 2019/11/26 16:12:12 by kbethany         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "vm.h"
 
-size_t			scip_null_border(size_t i)
+size_t		scip_null_border(size_t i)
 {
 	size_t	c;
 
@@ -12,8 +24,8 @@ size_t			scip_null_border(size_t i)
 
 int			ft_rstrcmp(const char *str, const char *substr)
 {
-	size_t  strlen;
-	size_t  sublen;
+	size_t	strlen;
+	size_t	sublen;
 
 	if (!str || !substr)
 		return (-1);
