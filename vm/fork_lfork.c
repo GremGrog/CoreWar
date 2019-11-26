@@ -5,7 +5,7 @@ void	long_fork(void)
 	short			arg;
 	t_bogie			*new;
 
-	arg = get_tdir_small_size(g_bogies->index + 1);
+	arg = get_tdir_small_size((g_bogies->index + 1) % MEM_SIZE);
 	if (g_flags->v == 1 || g_flags->v == 30)
 		ft_printf("P %4d | lfork %d (%d)\n", g_bogies->num, arg, g_bogies->index + arg);
 	new = create_bogie(g_bogies->champ->index);
@@ -28,7 +28,7 @@ void	ft_fork(void)
 	short			arg;
 	t_bogie			*new;
 
-	arg = get_tdir_small_size(g_bogies->index + 1);
+	arg = get_tdir_small_size((g_bogies->index + 1) % MEM_SIZE);
 		if (g_flags->v == 1 || g_flags->v == 30)
 		ft_printf("P %4d | fork %d (%d)\n", g_bogies->num, arg, (g_bogies->index + arg % IDX_MOD));
 	arg %= IDX_MOD;

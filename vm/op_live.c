@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   op_live.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kbethany <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: fmasha-h <fmasha-h@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/26 17:10:26 by kbethany          #+#    #+#             */
-/*   Updated: 2019/11/26 17:12:46 by kbethany         ###   ########.fr       */
+/*   Updated: 2019/11/26 17:44:09 by fmasha-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void		live(void)
 	if (g_flags->v == 3)
 		ft_printf("Player %d (%s) is said to be alive\n",
 			g_bogies->champ->index, g_bogies->champ->name);
-	arg = get_tdir_big_size(g_bogies->index + 1);
+	arg = get_tdir_big_size((g_bogies->index + 1) % MEM_SIZE);
 	g_bogies->last_breath = g_arena->round;
 	g_bogies->live_op++;
 	if (g_flags->v == 1 || g_flags->v == 30)
@@ -34,7 +34,7 @@ void		zjump(void)
 {
 	short	arg;
 
-	arg = get_tdir_small_size(g_bogies->index + 1);
+	arg = get_tdir_small_size((g_bogies->index + 1) % MEM_SIZE);
 	if (g_flags->v == 1 || g_flags->v == 30)
 		ft_printf("P %4d | zjmp %d %s\n",
 			g_bogies->num, arg, g_bogies->carry ? "OK" : "FAILED");

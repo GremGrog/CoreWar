@@ -38,8 +38,10 @@ void	print_info(WINDOW *win)
 	mvwprintw(win, 4, 30, "GAME INFO");
 	mvwprintw(win, 7, 6, "Cycle: %d", g_arena->round);
 	mvwprintw(win, 10, 6, "Cycles To Die: %d", g_arena->cycle_to_die);
+	mvwprintw(win, 13, 6, "Process: %d", g_arena->all_bogies);
 	i = 1;
-	y = 13;
+	i = 1;
+	y = 16;
 	info_printing_cycle(win, y, i);
 	wcolor_set(win, 6, NULL);
 
@@ -49,20 +51,20 @@ void	print_info(WINDOW *win)
 	j = 17;
 	k = 0;
 	tmp = g_arena->bogie_head;
-	while (tmp)
-	{
-		mvwprintw(win, j, 6, "Bogie index %d \n", tmp->num);
-		k = 0;
-		j += 2;
-		while (k < 16)
-		{
-			mvwprintw(win, j, 6, "Regnum %-10d %d\n", k + 1, tmp->regs[k]);
-			j++;
-			k++;
-		}
-		j += 3;
-		tmp = tmp->next;
-	}
+	// while (tmp)
+	// {
+	// 	mvwprintw(win, j, 6, "Bogie index %d \n", tmp->num);
+	// 	k = 0;
+	// 	j += 2;
+	// 	// while (k < 16)
+	// 	// {
+	// 	// 	mvwprintw(win, j, 6, "Regnum %-10d %d\n", k + 1, tmp->regs[k]);
+	// 	// 	j++;
+	// 	// 	k++;
+	// 	// }
+	// 	j += 3;
+	// 	tmp = tmp->next;
+	// }
 	wattroff(win, A_BOLD);
 	wrefresh(win);
 }

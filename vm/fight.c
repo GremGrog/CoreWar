@@ -65,7 +65,7 @@ void	game_cycle(t_windows *wins)
 		g_bogies = g_arena->bogie_head;
 		while (g_bogies)
 		{
-			get_data_for_bogie(0);	
+			get_data_for_bogie(0);
 			if (g_bogies->its_a_highnoon == 0)
 				exec_function();
 			g_bogies = g_bogies->next;

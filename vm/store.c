@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   store.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kbethany <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: fmasha-h <fmasha-h@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/26 17:06:31 by kbethany          #+#    #+#             */
-/*   Updated: 2019/11/26 17:09:05 by kbethany         ###   ########.fr       */
+/*   Updated: 2019/11/26 17:40:19 by fmasha-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ void				store(void)
 	}
 	else if (is_tind(arg_byte, SECOND_ARG))
 	{
-		arg = get_tdir_small_size(g_bogies->index + 3);
+		arg = get_tdir_small_size((g_bogies->index + 3) % MEM_SIZE);
 		if (g_flags->v == 1 || g_flags->v == 30)
 			ft_printf("P %4d | st r%d %d\n", g_bogies->num, treg + 1, arg);
 		arg %= IDX_MOD;

@@ -34,12 +34,14 @@ void lldi(void)
 	int				arg_2;
 	int				arg_3;
 	unsigned char	arg_byte;
+	int				res;
 
 	arg_byte = g_arena->list[(g_bogies->index + 1) % MEM_SIZE].com;
 	g_bogies->aim = 2;
 	arg_1 = 0;
 	arg_2 = 0;
 	arg_3 = 0;
+	res = 0;
 	if ((get_small_arg(&arg_1, FIRST_ARG, arg_byte)) == -1 || (reg_or_dir(&arg_2, arg_byte, SECOND_ARG) == -1) ||
 		((!(is_treg(arg_byte, THIRD_ARG))) || (arg_3 = get_treg(g_bogies->aim)) >= 16))
 		{
@@ -49,9 +51,9 @@ void lldi(void)
 	if (g_flags->v == 1 || g_flags->v == 30)
 		ft_printf("P %4d | lldi %d %d r%d\n       | -> load from %d + %d = %d (with pc %d)\n", g_bogies->num,
 			  arg_1, arg_2, arg_3 + 1, arg_1, arg_2, arg_1 + arg_2, g_bogies->index + (arg_1 + arg_2));
-	g_bogies->regs[arg_3] = get_tdir_big_size((g_bogies->index + (arg_1 + arg_2)) % MEM_SIZE);
-	if (!(is_treg(arg_1, FIRST_ARG)))
-		g_bogies->carry = ((arg_1 == 0) ? 1 : 0);
+	res = (arg_1 + arg_2);
+	g_bogies->regs[arg_3] = get_tdir_big_size((g_bogies->index + res) % MEM_SIZE);
+	g_bogies->carry = ((g_bogies->regs[arg_3] == 0) ? 1 : 0);
 	move_caret(g_bogies->aim + 1);
 }
 

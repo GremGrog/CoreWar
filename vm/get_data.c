@@ -1,15 +1,3 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   get_data.c                                         :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: kbethany <marvin@42.fr>                    +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/11/26 19:15:41 by kbethany          #+#    #+#             */
-/*   Updated: 2019/11/26 19:15:44 by kbethany         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include "vm.h"
 
 int		get_tdir_big_size(int i)
@@ -47,7 +35,7 @@ int		get_treg(int scip_size)
 	int		treg;
 	size_t	i;
 
-	i = g_bogies->index + scip_size;
+	i = (g_bogies->index + scip_size) % MEM_SIZE;
 	if (g_arena->list[i % MEM_SIZE].champ == 0)
 		return (16);
 	treg = g_arena->list[i % MEM_SIZE].com;

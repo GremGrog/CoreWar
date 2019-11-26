@@ -18,7 +18,7 @@ int	get_arg(int *arg, int position, unsigned char arg_byte)
 	}
 	else if (is_tdir(arg_byte, position))
 	{
-		*arg = get_tdir_big_size(g_bogies->index + g_bogies->aim);
+		*arg = get_tdir_big_size((g_bogies->index + g_bogies->aim) % MEM_SIZE);
 		g_bogies->aim += 4;
 		return (1);
 	}
