@@ -1,6 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   init_windows.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: kbethany <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/11/26 19:05:54 by kbethany          #+#    #+#             */
+/*   Updated: 2019/11/26 19:14:18 by kbethany         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "vm.h"
 
-void	init_colors(WINDOW *win)
+void				init_colors(WINDOW *win)
 {
 	start_color();
 	init_pair(1, COLOR_GREEN, COLOR_BLACK);
@@ -14,9 +26,10 @@ void	init_colors(WINDOW *win)
 	if (can_change_color())
 		init_color(COLOR_MAGENTA, 444, 444, 444);
 }
-void		draw_borders(t_windows *wins)
+
+void				draw_borders(t_windows *wins)
 {
-	size_t	i;
+	size_t			i;
 
 	i = -1;
 	while (++i < 300)
@@ -33,9 +46,9 @@ void		draw_borders(t_windows *wins)
 	}
 }
 
-t_windows	*init_w(void)
+t_windows			*init_w(void)
 {
-	t_windows	*wins;
+	t_windows		*wins;
 
 	if (!initscr())
 	{
@@ -61,7 +74,7 @@ t_windows	*init_w(void)
 	return (wins);
 }
 
-void	control_input(t_windows *wins)
+void				control_input(t_windows *wins)
 {
 	char			ch;
 	static int		delay;
@@ -90,7 +103,7 @@ void	control_input(t_windows *wins)
 	}
 }
 
-void	delete_windows(t_windows *wins)
+void				delete_windows(t_windows *wins)
 {
 	delwin(wins->arena);
 	delwin(wins->infowin);
