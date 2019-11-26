@@ -189,6 +189,8 @@ void					ldi(void);
 void					sti(void);
 void					lldi(void);
 void					print_4bytes(int a1, int a2, int a3, int flag_l);
+int						reg_or_dir(int *arg, unsigned char arg_byte, int num);
+int						get_small_arg(int *arg, int position, unsigned char arg_byte);
 void					get_data_for_bogie(int current);
 
 t_windows				*init_w(void);

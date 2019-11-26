@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   load_lload.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: kbethany <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/11/26 17:00:33 by kbethany          #+#    #+#             */
+/*   Updated: 2019/11/26 17:00:55 by kbethany         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "vm.h"
 
 void	long_load(void)
@@ -43,7 +55,6 @@ void	load(void)
 	unsigned int	arg;
 	int				treg;
 	unsigned char	arg_byte;
-
 
 	arg_byte = g_arena->list[(g_bogies->index + 1) % MEM_SIZE].com;
 	arg = 0;

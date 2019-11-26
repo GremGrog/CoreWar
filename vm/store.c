@@ -1,6 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   store.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: kbethany <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/11/26 17:06:31 by kbethany          #+#    #+#             */
+/*   Updated: 2019/11/26 17:09:05 by kbethany         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "vm.h"
 
-void	store(void)
+void				store(void)
 {
 	short			arg;
 	int				treg;
@@ -19,8 +31,8 @@ void	store(void)
 	}
 	else
 	{
-			skip_bytes(ST_OP);
-			return ;
+		skip_bytes(ST_OP);
+		return ;
 	}
 	if (is_treg(arg_byte, SECOND_ARG))
 	{
