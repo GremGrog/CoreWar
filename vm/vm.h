@@ -147,6 +147,9 @@ void						copy_bogie(t_bogie *new, t_bogie *bogie);
 t_bogie						*delete_bogie(t_bogie *bogie);
 
 void						fight(void);
+void						lives_check(void);
+
+size_t						count_bogies(void);
 
 int							is_treg(unsigned char arg_byte, int position);
 int							is_tdir(unsigned char arg_byte, int position);
