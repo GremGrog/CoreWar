@@ -73,6 +73,7 @@ void		init_flags_struct(void)
 	g_flags->n = 0;
 	g_flags->i = 0;
 	g_flags->v = 0;
+	g_flags->a = 0;
 }
 
 t_champ		*parse_args(int c, char **a)

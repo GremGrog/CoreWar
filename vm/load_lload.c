@@ -48,6 +48,9 @@ void	load(void)
 	arg_byte = g_arena->list[(g_bogies->index + 1) % MEM_SIZE].com;
 	arg = 0;
 	treg = 0;
+	if (g_arena->round == 1690) {
+
+	}
 	if (is_tind(arg_byte, FIRST_ARG) && is_treg(arg_byte, SECOND_ARG))
 	{
 		arg = get_tind(1, 2);
@@ -65,7 +68,7 @@ void	load(void)
 		skip_bytes(LD_OP);
 		return ;
 	}
-	if (treg >= 16 || treg == -2)
+	if (treg >= 16)
 	{
 		skip_bytes(LD_OP);
 		return ;

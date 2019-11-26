@@ -55,9 +55,14 @@ void	exec_function(void)
 
 void	get_data_for_bogie(int current)
 {
-	g_bogies->commmand = g_arena->list[g_bogies->index].com;
-	g_bogies->its_a_highnoon = define_cycles_to_exec(g_bogies->commmand);
-	g_bogies->color =  g_arena->list[g_bogies->index].color;
+	if (g_bogies->its_a_highnoon == 0)
+	{
+		g_bogies->commmand = g_arena->list[g_bogies->index].com;
+		g_bogies->its_a_highnoon = define_cycles_to_exec(g_bogies->commmand);
+		g_bogies->color =  g_arena->list[g_bogies->index].color;
+	}
+	if (g_bogies->its_a_highnoon > 0 && g_arena->round > 0)
+		g_bogies->its_a_highnoon--;
 }
 
  void	lives_check(void)
@@ -69,7 +74,7 @@ void	get_data_for_bogie(int current)
  	tmp_bogie = g_arena->bogie_head;
  	while (tmp_bogie)
 	{
- 		if (g_arena->round - tmp_bogie->last_breath >= g_arena->cycle_to_die)
+ 		if (g_arena->round - tmp_bogie->last_breath >= g_arena->cycle_to_die || g_arena->cycle_to_die <= 0)
 		 {
 			 if (g_flags->v == 30)
 			 	ft_printf("Process %d hasn't lived for %d cycles (CTD %d)\n", tmp_bogie->num, g_arena->round - tmp_bogie->last_breath, g_arena->cycle_to_die);
@@ -83,7 +88,7 @@ void	get_data_for_bogie(int current)
 	}
  	if (g_arena->mortal_flip >= NBR_LIVE)
 	{
-		g_arena->cycle_to_die -= CYCLE_DELTA;
+			g_arena->cycle_to_die -= CYCLE_DELTA;
 		if (g_flags->v == 2 || g_flags->v == 30)
 			ft_printf("Cycle to die is now %d\n", g_arena->cycle_to_die);
 		g_arena->death_gaze = 0;
@@ -114,11 +119,6 @@ void	fight(void)
 	g_arena->cycle_to_die = CYCLE_TO_DIE;
 	if (g_flags->i == 1)
 		wins = init_w();
-	// while (g_bogies)
-	// {
-	// 	get_data_for_bogie(0);
-	// 	g_bogies = g_bogies->next;
-	// }
 	while (g_arena->all_bogies > 0)
 	{
 		if ((g_flags->v == 2 || g_flags->v == 30) && g_arena->round > 0)
@@ -126,23 +126,12 @@ void	fight(void)
 		g_bogies = g_arena->bogie_head;
 		while (g_bogies)
 		{
-			// if (g_bogies->commmand != g_arena->list[g_bogies->index].com)
-			// 	get_data_for_bogie(g_arena->round - 1);
-			// if (g_bogies->its_a_highnoon == 0 || g_bogies->commmand != g_arena->list[g_bogies->index].com)
-				// get_data_for_bogie(0);
+			get_data_for_bogie(0);	
 			if (g_bogies->its_a_highnoon == 0)
-				get_data_for_bogie(0);
-			if (g_bogies->its_a_highnoon > 0 && g_arena->round > 0)
-				g_bogies->its_a_highnoon--;
-			if (g_bogies->its_a_highnoon == 0)
-			{
 				exec_function();
-				g_bogies->its_a_highnoon = 0;
-				// get_data_for_bogie(g_arena->round);
-			}
 			g_bogies = g_bogies->next;
 		}
-		if (g_arena->doomsday_clock == g_arena->cycle_to_die)
+		if (g_arena->doomsday_clock == g_arena->cycle_to_die || g_arena->cycle_to_die <= 0)
 			lives_check();
 		if (g_flags->i == 1)
 			print_wins(wins);

@@ -42,7 +42,7 @@ void	skip_bytes(int op_code)
 {
 	unsigned char	arg_byte;
 
-	arg_byte = g_arena->list[g_bogies->index + 1].com;
+	arg_byte = g_arena->list[(g_bogies->index + 1) % MEM_SIZE].com;
 	g_bogies->aim = 1;
 	count_first_args_len(op_code, arg_byte, FIRST_ARG);
 	if (g_op[op_code].args_num > 1)

@@ -50,8 +50,8 @@ int		get_tind(int size_flag, int scip_size)
 	short			tind;
 	int				temp;
 
-	tind = get_tdir_small_size(g_bogies->index + scip_size);
+	tind = get_tdir_small_size((g_bogies->index + scip_size) % MEM_SIZE);
 	tind %= IDX_MOD;
-	temp = get_tdir_big_size(g_bogies->index + tind);
+	temp = get_tdir_big_size((g_bogies->index + tind) % MEM_SIZE);
 	return (temp);
 }

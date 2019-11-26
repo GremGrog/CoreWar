@@ -16,8 +16,7 @@ void	long_fork(void)
 	new->index = (g_bogies->index + arg) % MEM_SIZE;
 	new->num = g_arena->max_bogie_num;
 	new->next = g_bogies->next;
-	new->commmand = g_arena->list[new->index].com;
-	new->its_a_highnoon = define_cycles_to_exec(new->commmand);
+	new->its_a_highnoon = 0;
 	new->next = g_arena->bogie_head;
 	g_arena->bogie_head = new;
 	g_bogies->aim = 2;
@@ -40,8 +39,7 @@ void	ft_fork(void)
 	g_arena->list[(g_bogies->index + arg) % MEM_SIZE].bogie = 1;
 	new->num = g_arena->max_bogie_num;
 	new->index = (g_bogies->index + arg) % MEM_SIZE;
-	new->commmand = g_arena->list[new->index].com;
-	new->its_a_highnoon = define_cycles_to_exec(new->commmand);
+	new->its_a_highnoon = 0;
 	new->next = g_arena->bogie_head;
 	g_arena->bogie_head = new;
 	g_bogies->aim = 2;

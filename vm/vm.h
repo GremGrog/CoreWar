@@ -118,6 +118,7 @@ typedef struct				s_flags
 	int						dump;
 	int						n;
 	int						v;
+	int						a;
 }							t_flags;
 
 t_flags						*g_flags;
