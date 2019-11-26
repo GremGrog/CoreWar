@@ -20,7 +20,7 @@ int		main(int c, char **a)
 		add_bogies_on_arena();
 		introduce_champs();
 		fight();
-		if (g_flags->dump == 0)
+		if (g_flags->dump == 0 || g_arena->round < g_flags->dump)
 			introduce_winner();
 		delete_arena();
 		delete_champs(champs);

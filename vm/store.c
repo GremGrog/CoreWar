@@ -9,9 +9,6 @@ void	store(void)
 	arg_byte = g_arena->list[(g_bogies->index + 1) % MEM_SIZE].com;
 	arg = 0;
 	treg = 0;
-	if (g_arena->round == 14542) {
-		
-	}
 	if ((is_treg(arg_byte, FIRST_ARG)) == 1)
 	{
 		if ((treg = get_treg(2)) >= 16)

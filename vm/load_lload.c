@@ -11,7 +11,7 @@ void	long_load(void)
 	treg = 0;
 	if (is_tdir(arg_byte, FIRST_ARG) && is_treg(arg_byte, SECOND_ARG))
 	{
-		arg = get_tdir_big_size(g_bogies->index + 2);
+		arg = get_tdir_big_size((g_bogies->index + 2) % MEM_SIZE);
 		treg = get_treg(DIR_SIZE + 2);
 		g_bogies->aim = 1 + 4 + 1;
 	}
@@ -56,7 +56,7 @@ void	load(void)
 	}
 	else if (is_tdir(arg_byte, FIRST_ARG) && is_treg(arg_byte, SECOND_ARG))
 	{
-		arg = get_tdir_big_size(g_bogies->index + 2);
+		arg = get_tdir_big_size((g_bogies->index + 2) % MEM_SIZE);
 		treg = get_treg(DIR_SIZE + 2);
 		g_bogies->aim = DIR_SIZE + 2;
 	}

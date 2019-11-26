@@ -84,7 +84,7 @@ int reg_or_dir(int *arg, unsigned char arg_byte, int num)
 	}
 	else if (is_tdir(arg_byte, num))
 	{
-		*arg = get_tdir_small_size(g_bogies->index + g_bogies->aim);
+		*arg = get_tdir_small_size((g_bogies->index + g_bogies->aim) % MEM_SIZE);
 		g_bogies->aim += 2;
 		return (1);
 	}
@@ -109,7 +109,7 @@ int	get_small_arg(int *arg, int position, unsigned char arg_byte)
 	}
 	else if (is_tdir(arg_byte, position))
 	{
-		*arg = get_tdir_small_size(g_bogies->index + g_bogies->aim);
+		*arg = get_tdir_small_size((g_bogies->index + g_bogies->aim) % MEM_SIZE);
 		g_bogies->aim += 2;
 		return (1);
 	}
@@ -171,7 +171,7 @@ void lldi(void)
 	if (g_flags->v == 1 || g_flags->v == 30)
 		ft_printf("P %4d | lldi %d %d r%d\n       | -> load from %d + %d = %d (with pc %d)\n", g_bogies->num,
 			  arg_1, arg_2, arg_3 + 1, arg_1, arg_2, arg_1 + arg_2, g_bogies->index + (arg_1 + arg_2));
-	g_bogies->regs[arg_3] = get_tdir_big_size(g_bogies->index + (arg_1 + arg_2));
+	g_bogies->regs[arg_3] = get_tdir_big_size((g_bogies->index + (arg_1 + arg_2)) % MEM_SIZE);
 	if (!(is_treg(arg_1, FIRST_ARG)))
 		g_bogies->carry = ((arg_1 == 0) ? 1 : 0);
 	move_caret(g_bogies->aim + 1);

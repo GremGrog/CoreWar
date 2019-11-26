@@ -16,7 +16,7 @@ void	introduce_champs(void)
 void	introduce_winner(void)
 {
 	t_champ	*champs;
-
+	
 	champs = g_arena->champs;
 	if (g_arena->last_stand != 0)
 	{
