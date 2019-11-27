@@ -6,7 +6,7 @@
 /*   By: fmasha-h <fmasha-h@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/17 18:02:49 by qmebble           #+#    #+#             */
-/*   Updated: 2019/11/06 18:02:49 by fmasha-h         ###   ########.fr       */
+/*   Updated: 2019/11/27 16:18:48 by fmasha-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,7 @@ typedef struct			s_pf
 	int					precision;
 	char				type;
 	short				base;
+	int					fd;
 	long				return_value;
 	char				*str_before;
 	char				*str_middle;
@@ -137,6 +138,7 @@ void					round_ipart(t_pf *data);
 */
 
 int						ft_printf(const char *format, ...);
+int						ft_fprintf(int fd, const char *format, ...);
 void					ft_set_to_null(t_pf *data);
 int						num_len(long long int num);
 void					ft_strrev(void);

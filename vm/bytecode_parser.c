@@ -1,6 +1,6 @@
 #include "vm.h"
 
-int			check_magic_header(unsigned char *bytecode)
+int			check_magic_header(unsigned char *bytecode, t_champ *champ)
 {
 	int				magic;
 	size_t			i;
@@ -18,27 +18,31 @@ int			check_magic_header(unsigned char *bytecode)
 	return (0);
 }
 
-int			check_bytecode_size(unsigned char *bytecode, int i, t_champ *champ)
+int			get_bytecode_size(unsigned char *bytecode, int i, t_champ *champ)
 {
 	int		code_size;
 	size_t	c;
 
 	c = 0;
 	code_size = 0x0;
-	while (c < MAGIC_NUM_B)
+	while (c < 4)
 	{
 		code_size <<= 8;
 		code_size |= bytecode[i];
 		i++;
 		c++;
 	}
-	if (code_size > CHAMP_MAX_SIZE)
-	{
-		//free all !!!!!!!!!!!!!!!!!!!!!!!!!
-		ft_errno(4);
-		return (-1);
-	}
 	champ->code_size = code_size;
+	return (i);
+}
+
+int			copy_name()
+{
+	size_t	j;
+
+	j = 0;
+	while (j < PROG_NAME_LENGTH)
+		champ->name[j++] = bytecode[i++];
 	return (i);
 }
 
@@ -47,25 +51,35 @@ int			get_name_comment_exec_code(t_champ *champ, unsigned char *bytecode)
 	size_t	i;
 	size_t	j;
 	size_t	code_size;
+	size_t	tmp;
 
 	i = MAGIC_NUM_B;
+	code_size = 0;
 	champ->name = ft_memalloc((size_t)PROG_NAME_LENGTH + 1);
 	champ->comment = ft_memalloc((size_t)COMMENT_LENGTH + 1);
 	j = 0;
-	while (j < PROG_NAME_LENGTH)
-		champ->name[j++] = bytecode[i++];
+	
 	champ->name[j] = '\0';
 	j = 0;
 	i = scip_null_border(i);
-	if ((i = check_bytecode_size(bytecode, i, champ)) == -1)
-		return (-1);
+	i = get_bytecode_size(bytecode, i, champ);
 	while (j < COMMENT_LENGTH)
 		champ->comment[j++] = bytecode[i++];
 	champ->comment[j] = '\0';
 	i = scip_null_border(i);
 	champ->code = (unsigned char*)malloc(sizeof(unsigned char) \
 												* champ->code_size + 1);
+	tmp = i;
+	while (tmp < FILE_SIZE)
+	{
+		tmp++;
+		code_size++;
+	}
+	ft_printf("%d\n", code_size - 1);
+	if (code_size - 1 != champ->code_size)
+		return (-2);
 	j = 0;
+	i = tmp;
 	while (j < champ->code_size && i < FILE_SIZE)
 		champ->code[j++] = bytecode[i++];
 	champ->code[j] = '\0';
@@ -94,15 +108,8 @@ unsigned char	*read_bytecode(t_champ *champ, char *file)
 	if (i > FILE_SIZE)
 	{
 		i -= FILE_SIZE;
-		ft_putstr_fd("Error: File ", 2);
-		ft_putstr_fd(file, 2);
-		ft_putstr_fd(" has too large a code (", 2); 
-		ft_putnbr_fd(i + CHAMP_MAX_SIZE, 2);
-		ft_putstr_fd(" bytes > ", 2);
-		ft_putnbr_fd(CHAMP_MAX_SIZE, 2);
-		ft_putstr_fd(" bytes)\n", 2);
-		// ft_printf("Error: File %s has too large a code (%d bytes > %d bytes)\n",
-		// 	 file, i + CHAMP_MAX_SIZE, CHAMP_MAX_SIZE);
+		ft_fprintf(2, "Error: File %s has too large a code (%d bytes > %d bytes)\n",
+			 file, i + CHAMP_MAX_SIZE, CHAMP_MAX_SIZE);
 		free(buf);
 		return (NULL);
 	}
@@ -112,16 +119,23 @@ unsigned char	*read_bytecode(t_champ *champ, char *file)
 int		parse_bytecode(t_champ *champ, char *file)
 {
 	unsigned char	*bytecode;
+	int				err;
 
 	if ((bytecode = read_bytecode(champ, file)) == NULL)
 		return (-2);
-	if (check_magic_header(bytecode) == -1)
+	err = 0;
+	err = get_name_comment_exec_code(champ, bytecode);
+	if (err == -2)
 	{
-		ft_printf("Error: File %s has an invalid header\n", file);
+		ft_fprintf(2, "Error: file %s has a code size that differ from what its header says\n", file);
 		free(bytecode);
 		return (-2);
 	}
-	get_name_comment_exec_code(champ, bytecode);
+	err = check_magic_header(bytecode, champ);
 	free(bytecode);
+	if (err == -1)
+		ft_fprintf(2, "Error: file %s has an invalid header\n", file);
+	if (err != 0)
+		return (-2);
 	return (1);
 }

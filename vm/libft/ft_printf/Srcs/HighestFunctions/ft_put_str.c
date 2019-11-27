@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_put_str.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: qmebble <qmebble@student.42.fr>            +#+  +:+       +#+        */
+/*   By: fmasha-h <fmasha-h@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/17 18:01:16 by qmebble           #+#    #+#             */
-/*   Updated: 2019/05/17 18:01:16 by qmebble          ###   ########.fr       */
+/*   Updated: 2019/11/27 16:17:43 by fmasha-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,6 @@ void	ft_put_str(t_pf *data)
 	if (data->str_after)
 		z = ft_put_after(data->str_after, final, x, y);
 	final[x + y + z] = '\0';
-	write(1, final, x + y + z);
+	write(data->fd, final, x + y + z);
 	free(final);
 }

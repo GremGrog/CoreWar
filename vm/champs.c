@@ -20,7 +20,7 @@ t_champ		*create_champ(t_champ **head, char *file)
 		init_champ(head);
 		if ((parse_bytecode(*head, file)) == -2)
 		{
-			free(*head);
+			delete_champ(*head);
 			return (NULL);
 		}
 		return (*head);
@@ -31,7 +31,7 @@ t_champ		*create_champ(t_champ **head, char *file)
 		init_champ(&champ);
 		if ((parse_bytecode(champ, file)) == -2)
 		{
-			free(champ);
+			delete_champ(champ);
 			delete_champs(*head);
 			return (NULL);
 		}

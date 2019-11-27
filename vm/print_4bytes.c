@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   print_4bytes.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kbethany <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: fmasha-h <fmasha-h@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/26 17:25:15 by kbethany          #+#    #+#             */
-/*   Updated: 2019/11/26 17:32:55 by kbethany         ###   ########.fr       */
+/*   Updated: 2019/11/27 12:31:21 by fmasha-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,7 @@ int		get_small_arg(int *arg, int position, unsigned char arg_byte)
 	}
 	else if (is_tind(arg_byte, position))
 	{
-		*arg = get_tind(1, g_bogies->aim);
+		*arg = get_tind(0, g_bogies->aim);
 		g_bogies->aim += 2;
 		return (1);
 	}

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   vm.h                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kbethany <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: fmasha-h <fmasha-h@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/26 16:01:46 by kbethany          #+#    #+#             */
-/*   Updated: 2019/11/26 16:02:14 by kbethany         ###   ########.fr       */
+/*   Updated: 2019/11/27 16:49:43 by fmasha-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -144,6 +144,7 @@ void					introduce_champs(void);
 void					introduce_winner(void);
 
 int						ft_errno(int x);
+void					delete_champ(t_champ *tmp);
 size_t					scip_null_border(size_t i);
 int						ft_rstrcmp(const char *str1, const char *str2);
 

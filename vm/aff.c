@@ -9,8 +9,7 @@ void	aff(void)
 	arg_byte = g_arena->list[(g_bogies->index + 1) % MEM_SIZE].com;
     if (is_treg(arg_byte, FIRST_ARG))
     {
-        reg = g_arena->list[(g_bogies->index + 2) % MEM_SIZE].com;
-		reg--;
+        reg = get_treg(2);
 		if (reg >= 16)
 		{
 			skip_bytes(AFF_OP);
