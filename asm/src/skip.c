@@ -1,27 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_in_line_symbols_only.c                          :+:      :+:    :+:   */
+/*   skip.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vsanta <vsanta@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/09/26 15:44:19 by vsanta            #+#    #+#             */
-/*   Updated: 2019/11/10 18:22:18 by vsanta           ###   ########.fr       */
+/*   Created: 2019/11/05 18:15:55 by vsanta            #+#    #+#             */
+/*   Updated: 2019/11/21 19:52:44 by vsanta           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "asm.h"
 
-int	ft_in_line_symbols_only(char *line, int n, char *symbols_only)
+int	skip_space(char **line)
 {
-	int i;
+	int	skip_chars;
 
-	i = 0;
-	while (line[i] && i < n)
-	{
-		if (ft_strchr(symbols_only, line[i]) == NULL)
-			return (0);
-		i++;
-	}
+	skip_chars = ft_skip_chars_i(*line, SPACE_CHARS);
+	*line = &((*line)[skip_chars]);
+	return (skip_chars);
+}
+
+int	skip_space_and_sep(char **line)
+{
+	skip_space(line);
+	if ((*line)[0] != SEPARATOR_CHAR)
+		return (0);
+	*line = &((*line)[1]);
+	skip_space(line);
 	return (1);
 }

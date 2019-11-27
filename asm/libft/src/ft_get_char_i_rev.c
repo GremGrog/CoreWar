@@ -1,27 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_in_line_symbols_only.c                          :+:      :+:    :+:   */
+/*   ft_get_char_i_rev.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vsanta <vsanta@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/09/26 15:44:19 by vsanta            #+#    #+#             */
-/*   Updated: 2019/11/10 18:22:18 by vsanta           ###   ########.fr       */
+/*   Created: 2019/11/27 16:53:23 by vsanta            #+#    #+#             */
+/*   Updated: 2019/11/27 17:00:18 by vsanta           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int	ft_in_line_symbols_only(char *line, int n, char *symbols_only)
+int	ft_get_char_i_rev(char *str, char c)
 {
 	int i;
 
-	i = 0;
-	while (line[i] && i < n)
+	i = ft_strlen(str) - 1;
+	while (i >= 0)
 	{
-		if (ft_strchr(symbols_only, line[i]) == NULL)
-			return (0);
-		i++;
+		if (str[i] == c)
+			return (i);
+		i--;
 	}
-	return (1);
+	return (-1);
 }
