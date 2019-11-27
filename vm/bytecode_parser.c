@@ -16,7 +16,10 @@ int			check_magic_header(unsigned char *bytecode, t_champ *champ)
 		i++;
 	}
 	if (magic != COREWAR_EXEC_MAGIC)
+	{
+		free(bytecode);
 		return (-1);
+	}
 	return (0);
 }
 
@@ -62,18 +65,22 @@ int			get_name_comment_exec_code(t_champ *champ, unsigned char *bytecode)
 	i = scip_null_border(i);
 	champ->code = (unsigned char*)malloc(sizeof(unsigned char) \
 												* champ->code_size + 1);
-	// tmp = i;
-	// while (tmp < all_bytes)
-	// {
-	// 	tmp++;
-	// 	code_size++;
-	// }
-	// if (code_size != champ->code_size)
-	// 	return (-2);
+	tmp = i;
+	while (tmp < all_bytes)
+	{
+		tmp++;
+		code_size++;
+	}
+	if (code_size != champ->code_size)
+	{
+		free(bytecode);
+		return (-1);
+	}
 	j = 0;
-	while (j < champ->code_size && i < FILE_SIZE)
+	while (j < champ->code_size && i < all_bytes)
 		champ->code[j++] = bytecode[i++];
 	champ->code[j] = '\0';
+	all_bytes = 0;
 	return (0);
 }
 
@@ -118,18 +125,16 @@ int		parse_bytecode(t_champ *champ, char *file)
 	if ((bytecode = read_bytecode(champ, file)) == NULL)
 		return (-2);
 	err = 0;
-	err = get_name_comment_exec_code(champ, bytecode);
-	// if (err == -2)
-	// {
-	// 	ft_fprintf(2, "Error: file %s has a code size that differ from what its header says\n", file);
-	// 	free(bytecode);
-	// 	return (-2);
-	// }
-	err = check_magic_header(bytecode, champ);
+	if ((err = check_magic_header(bytecode, champ)) == -1)
+	{
+		ft_fprintf(2, "Error: file %s has an invalid header\n", file);
+		return (-2);
+	}
+	if ((err = get_name_comment_exec_code(champ, bytecode)) == -1)
+	{
+		ft_fprintf(2, "Error: file %s has a code size that differ from what its header says\n", file);
+		return (-2);
+	}
 	free(bytecode);
-	// if (err == -1)
-		// ft_fprintf(2, "Error: file %s has an invalid header\n", file);
-	// if (err != 0)
-		// return (-2);
 	return (1);
 }
