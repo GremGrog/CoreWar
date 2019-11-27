@@ -1,5 +1,7 @@
 #include "vm.h"
 
+static	int	all_bytes = 0;
+
 int			check_magic_header(unsigned char *bytecode, t_champ *champ)
 {
 	int				magic;
@@ -36,16 +38,6 @@ int			get_bytecode_size(unsigned char *bytecode, int i, t_champ *champ)
 	return (i);
 }
 
-int			copy_name()
-{
-	size_t	j;
-
-	j = 0;
-	while (j < PROG_NAME_LENGTH)
-		champ->name[j++] = bytecode[i++];
-	return (i);
-}
-
 int			get_name_comment_exec_code(t_champ *champ, unsigned char *bytecode)
 {
 	size_t	i;
@@ -58,7 +50,8 @@ int			get_name_comment_exec_code(t_champ *champ, unsigned char *bytecode)
 	champ->name = ft_memalloc((size_t)PROG_NAME_LENGTH + 1);
 	champ->comment = ft_memalloc((size_t)COMMENT_LENGTH + 1);
 	j = 0;
-	
+	while (j < PROG_NAME_LENGTH)
+		champ->name[j++] = bytecode[i++];
 	champ->name[j] = '\0';
 	j = 0;
 	i = scip_null_border(i);
@@ -69,17 +62,15 @@ int			get_name_comment_exec_code(t_champ *champ, unsigned char *bytecode)
 	i = scip_null_border(i);
 	champ->code = (unsigned char*)malloc(sizeof(unsigned char) \
 												* champ->code_size + 1);
-	tmp = i;
-	while (tmp < FILE_SIZE)
-	{
-		tmp++;
-		code_size++;
-	}
-	ft_printf("%d\n", code_size - 1);
-	if (code_size - 1 != champ->code_size)
-		return (-2);
+	// tmp = i;
+	// while (tmp < all_bytes)
+	// {
+	// 	tmp++;
+	// 	code_size++;
+	// }
+	// if (code_size != champ->code_size)
+	// 	return (-2);
 	j = 0;
-	i = tmp;
 	while (j < champ->code_size && i < FILE_SIZE)
 		champ->code[j++] = bytecode[i++];
 	champ->code[j] = '\0';
@@ -102,7 +93,10 @@ unsigned char	*read_bytecode(t_champ *champ, char *file)
 	while ((ret = read(fd, &byte, 1)) > 0)
 	{
 		if (i < FILE_SIZE)
+		{
 			buf[i] = byte;
+			all_bytes++;
+		}
 		i++;
 	}
 	if (i > FILE_SIZE)
@@ -125,17 +119,17 @@ int		parse_bytecode(t_champ *champ, char *file)
 		return (-2);
 	err = 0;
 	err = get_name_comment_exec_code(champ, bytecode);
-	if (err == -2)
-	{
-		ft_fprintf(2, "Error: file %s has a code size that differ from what its header says\n", file);
-		free(bytecode);
-		return (-2);
-	}
+	// if (err == -2)
+	// {
+	// 	ft_fprintf(2, "Error: file %s has a code size that differ from what its header says\n", file);
+	// 	free(bytecode);
+	// 	return (-2);
+	// }
 	err = check_magic_header(bytecode, champ);
 	free(bytecode);
-	if (err == -1)
-		ft_fprintf(2, "Error: file %s has an invalid header\n", file);
-	if (err != 0)
-		return (-2);
+	// if (err == -1)
+		// ft_fprintf(2, "Error: file %s has an invalid header\n", file);
+	// if (err != 0)
+		// return (-2);
 	return (1);
 }

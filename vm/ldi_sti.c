@@ -42,9 +42,6 @@ void lldi(void)
 	arg_2 = 0;
 	arg_3 = 0;
 	res = 0;
-	if (g_arena->round == 4680) {
-
-	}
 	if ((get_small_arg(&arg_1, FIRST_ARG, arg_byte)) == -1 || (reg_or_dir(&arg_2, arg_byte, SECOND_ARG) == -1) ||
 		((!(is_treg(arg_byte, THIRD_ARG))) || (arg_3 = get_treg(g_bogies->aim)) >= 16))
 		{
