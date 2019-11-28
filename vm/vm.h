@@ -6,7 +6,7 @@
 /*   By: fmasha-h <fmasha-h@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/26 16:01:46 by kbethany          #+#    #+#             */
-/*   Updated: 2019/11/27 16:49:43 by fmasha-h         ###   ########.fr       */
+/*   Updated: 2019/11/28 15:32:54 by fmasha-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@
 
 typedef struct			s_champ
 {
-	size_t				index;
+	int					index;
 	char				*name;
 	char				*comment;
 	unsigned char		*code;
@@ -125,11 +125,11 @@ typedef struct			s_windows
 
 typedef struct			s_flags
 {
-	int					i;
-	int					dump;
-	int					n;
-	int					v;
-	int					a;
+	size_t				i;
+	size_t				dump;
+	size_t				n;
+	size_t				v;
+	size_t				a;
 }						t_flags;
 
 t_flags					*g_flags;
@@ -137,18 +137,25 @@ t_flags					*g_flags;
 t_champ					*parse_args(int c, char **a);
 int						parse_bytecode(t_champ *champ, char *file);
 
-int						add_champion(char *file, int index, t_champ **champs);
+int						add_champion(char *file, t_champ **champs);
 int						count_champs(t_champ *champs);
 void					delete_champs(t_champ *head);
 void					introduce_champs(void);
 void					introduce_winner(void);
+void					init_flags_struct(void);
 
 int						ft_errno(int x);
 void					delete_champ(t_champ *tmp);
 size_t					scip_null_border(size_t i);
 int						ft_rstrcmp(const char *str1, const char *str2);
+int						check_file_size(size_t i, char *file, \
+														unsigned char *buf);
+int						check_magic_header(unsigned char *bytecode);
+int						get_bytecode_size(unsigned char *bytecode, \
+														int i, t_champ *champ);
+t_champ					*create_champ(t_champ **head, char *file);
 
-void					init_battlefield(t_champ *warriors, int num);
+void					init_battlefield(t_champ *warriors, size_t num);
 void					battlefield_print(void);
 
 int						define_cycles_to_exec(unsigned char com);
@@ -169,7 +176,7 @@ int						is_tind(unsigned char arg_byte, int position);
 int						get_tdir_big_size(int i);
 short					get_tdir_small_size(int i);
 int						get_treg(int scip_size);
-int						get_tind(int size_flag, int scip_size);
+int						get_tind(int scip_size);
 void					move_caret(int steps);
 void					skip_bytes(int op_code);
 
@@ -187,12 +194,16 @@ void					ft_fork(void);
 void					long_fork(void);
 void					aff(void);
 void					ldi(void);
+void					print_ldi(int arg_1, int arg_2, int arg_3);
 void					sti(void);
+void					print_sti(int arg_1, int arg_2, int arg_3);
 void					lldi(void);
+void					print_lldi(int arg_1, int arg_2, int arg_3);
 void					print_4bytes(int a1, int a2, int a3, int flag_l);
 int						reg_or_dir(int *arg, unsigned char arg_byte, int num);
-int						get_small_arg(int *arg, int position, unsigned char arg_byte);
-void					get_data_for_bogie(int current);
+int						get_small_arg(int *arg, int position, \
+													unsigned char arg_byte);
+void					get_data_for_bogie(void);
 
 t_windows				*init_w(void);
 void					print_wins(t_windows *wins);

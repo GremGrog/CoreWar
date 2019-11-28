@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   get_data.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: fmasha-h <fmasha-h@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/11/28 13:16:48 by fmasha-h          #+#    #+#             */
+/*   Updated: 2019/11/28 15:16:29 by fmasha-h         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "vm.h"
 
 int		get_tdir_big_size(int i)
@@ -45,7 +57,7 @@ int		get_treg(int scip_size)
 	return (treg);
 }
 
-int		get_tind(int size_flag, int scip_size)
+int		get_tind(int scip_size)
 {
 	short	tind;
 	int		temp;

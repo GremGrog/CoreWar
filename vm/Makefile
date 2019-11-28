@@ -37,8 +37,12 @@ COREWAR_SRCS =	error_work.c \
 				introduce.c \
 				what_is_it.c \
 				lives_check.c \
-				help_functions.c \
 				print_4bytes.c \
+				add_bogies.c \
+				add_champs.c \
+				champs_tools.c \
+				print_ldi_sti.c \
+				init_flags.c \
 
 COREWAR_OBJF = $(addprefix $(COREWAR_DIR_O)/, $(patsubst %.c,%.o,$(COREWAR_SRCS)))
 
@@ -54,7 +58,7 @@ $(COREWAR): $(COREWAR_DIR_O) $(COREWAR_OBJF) $(LIB)
 	@gcc $(FLAGS) $(COREWAR_OBJF) $(LIBFT) -o $(COREWAR) -lncurses
 
 $(COREWAR_DIR_O)/%.o: %.c
-	@gcc -g -lncurses -I $(INCLUDES) -o $@ -c $<
+	@gcc $(FLAGS) -g -I $(INCLUDES) -o $@ -c $<
 
 clean:
 	@rm -rf $(COREWAR_DIR_O)

@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   bogie.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: fmasha-h <fmasha-h@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/11/28 12:31:35 by fmasha-h          #+#    #+#             */
+/*   Updated: 2019/11/28 15:25:08 by fmasha-h         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "vm.h"
 
 void		copy_bogie(t_bogie *new, t_bogie *bogie)
@@ -35,7 +47,7 @@ t_bogie		*create_bogie(size_t c)
 	bogie->regs = (unsigned int*)malloc(sizeof(unsigned int) * REG_NUMBER);
 	bogie->next = NULL;
 	tmp = g_arena->champs;
-	while (tmp->index != c)
+	while (tmp->index != (int)c)
 		tmp = tmp->next;
 	bogie->champ = tmp;
 	i = 0;
@@ -78,33 +90,17 @@ t_bogie		*delete_bogie(t_bogie *bogie)
 	return (next);
 }
 
-void	add_bogies_on_arena(void)
+size_t		count_bogies(void)
 {
-	size_t	index;
-	t_bogie	*new;
+	t_bogie	*tmp;
 	size_t	c;
-	size_t	step;
 
-	c = 1;
-	index = 0;
-	g_bogies = NULL;
-	step = MEM_SIZE / g_arena->champ_num;
-	while (c <= g_arena->champ_num)
+	c = 0;
+	tmp = g_bogies;
+	while (tmp)
 	{
-		new = create_bogie(c);
-		new->num = c;
-		new->index = index;
-		new->last_breath = 0;
-		new->regs[0] = c * (-1);
-		if (g_bogies == NULL)
-			g_bogies = new;
-		else if (g_bogies != NULL)
-		{
-			new->next = g_bogies;
-			g_bogies = new;
-		}
-		g_arena->list[index].bogie = 1;
-		index += step; 
+		tmp = tmp->next;
 		c++;
 	}
+	return (c);
 }
