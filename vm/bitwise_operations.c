@@ -1,20 +1,27 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   bitwise_operations.c                               :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: fmasha-h <fmasha-h@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/11/28 12:23:14 by fmasha-h          #+#    #+#             */
+/*   Updated: 2019/11/28 12:29:44 by fmasha-h         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "vm.h"
 
-int	get_arg(int *arg, int position, unsigned char arg_byte)
+int		get_arg(int *arg, int position, unsigned char arg_byte)
 {
 	int	reg;
 
-	if (is_treg(arg_byte, position))
+	reg = 0;
+	if ((is_treg(arg_byte, position)) && (reg = get_treg(g_bogies->aim)) < 16)
 	{
-		reg = 0;
-		if ((reg = get_treg(g_bogies->aim)) < 16)
-		{
-			g_bogies->aim++;
-			*arg = g_bogies->regs[reg];
-			return (1);
-		}
-		else
-			return (-1);
+		g_bogies->aim++;
+		*arg = g_bogies->regs[reg];
+		return (1);
 	}
 	else if (is_tdir(arg_byte, position))
 	{
@@ -42,8 +49,10 @@ void	bitwise_and(void)
 	arg2 = 0;
 	arg_byte = g_arena->list[(g_bogies->index + 1) % MEM_SIZE].com;
 	g_bogies->aim = 2;
-	if ((get_arg(&arg1, FIRST_ARG, arg_byte)) == -1 || (get_arg(&arg2, SECOND_ARG, arg_byte)) == -1
-	 || (!(is_treg(arg_byte, THIRD_ARG))) || (reg = get_treg(g_bogies->aim)) >= 16)
+	if ((get_arg(&arg1, FIRST_ARG, arg_byte)) == -1
+	|| (get_arg(&arg2, SECOND_ARG, arg_byte)) == -1
+	|| (!(is_treg(arg_byte, THIRD_ARG)))
+	|| (reg = get_treg(g_bogies->aim)) >= 16)
 	{
 		skip_bytes(AND_OP);
 		return ;
@@ -53,7 +62,8 @@ void	bitwise_and(void)
 	else
 		g_bogies->carry = 0;
 	if (g_flags->v == 1 || g_flags->v == 30)
-		ft_printf("P %4d | and %d %d r%d\n", g_bogies->num, arg1, arg2, reg + 1);
+		ft_printf("P %4d | and %d %d r%d\n",\
+							g_bogies->num, arg1, arg2, reg + 1);
 	move_caret(g_bogies->aim + 1);
 }
 
@@ -68,8 +78,10 @@ void	bitwise_or(void)
 	arg2 = 0;
 	arg_byte = g_arena->list[(g_bogies->index + 1) % MEM_SIZE].com;
 	g_bogies->aim = 2;
-	if ((get_arg(&arg1, FIRST_ARG, arg_byte)) == -1 || (get_arg(&arg2, SECOND_ARG, arg_byte)) == -1
-	 || (!(is_treg(arg_byte, THIRD_ARG))) || (reg = get_treg(g_bogies->aim)) >= 16)
+	if ((get_arg(&arg1, FIRST_ARG, arg_byte)) == -1
+	|| (get_arg(&arg2, SECOND_ARG, arg_byte)) == -1
+	|| (!(is_treg(arg_byte, THIRD_ARG)))
+	|| (reg = get_treg(g_bogies->aim)) >= 16)
 	{
 		skip_bytes(OR_OP);
 		return ;
@@ -79,7 +91,8 @@ void	bitwise_or(void)
 	else
 		g_bogies->carry = 0;
 	if (g_flags->v == 1 || g_flags->v == 30)
-		ft_printf("P %4d | or %d %d r%d\n", g_bogies->num, arg1, arg2, reg + 1);
+		ft_printf("P %4d | or %d %d r%d\n", \
+						g_bogies->num, arg1, arg2, reg + 1);
 	move_caret(g_bogies->aim + 1);
 }
 
@@ -94,8 +107,10 @@ void	bitwise_xor(void)
 	arg2 = 0;
 	arg_byte = g_arena->list[(g_bogies->index + 1) % MEM_SIZE].com;
 	g_bogies->aim = 2;
-	if ((get_arg(&arg1, FIRST_ARG, arg_byte)) == -1 || (get_arg(&arg2, SECOND_ARG, arg_byte)) == -1
-	 || (!(is_treg(arg_byte, THIRD_ARG))) || (reg = get_treg(g_bogies->aim)) >= 16)
+	if ((get_arg(&arg1, FIRST_ARG, arg_byte)) == -1
+	|| (get_arg(&arg2, SECOND_ARG, arg_byte)) == -1
+	|| (!(is_treg(arg_byte, THIRD_ARG)))
+	|| (reg = get_treg(g_bogies->aim)) >= 16)
 	{
 		skip_bytes(XOR_OP);
 		return ;
@@ -105,6 +120,7 @@ void	bitwise_xor(void)
 	else
 		g_bogies->carry = 0;
 	if (g_flags->v == 1 || g_flags->v == 30)
-		ft_printf("P %4d | xor %d %d r%d\n", g_bogies->num, arg1, arg2, reg + 1);
+		ft_printf("P %4d | xor %d %d r%d\n", \
+								g_bogies->num, arg1, arg2, reg + 1);
 	move_caret(g_bogies->aim + 1);
 }
