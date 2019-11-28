@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tools.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kbethany <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: vsanta <vsanta@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/26 16:10:46 by kbethany          #+#    #+#             */
-/*   Updated: 2019/11/26 16:12:12 by kbethany         ###   ########.fr       */
+/*   Updated: 2019/11/27 19:24:59 by vsanta           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ size_t		scip_null_border(size_t i)
 	while (c++ < NULL_B)
 		i++;
 	return (i);
-}
+}	
 
 int			ft_rstrcmp(const char *str, const char *substr)
 {
