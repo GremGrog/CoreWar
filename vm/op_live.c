@@ -6,7 +6,7 @@
 /*   By: fmasha-h <fmasha-h@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/26 17:10:26 by kbethany          #+#    #+#             */
-/*   Updated: 2019/11/26 17:44:09 by fmasha-h         ###   ########.fr       */
+/*   Updated: 2019/11/28 15:18:31 by fmasha-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void		live(void)
 	g_bogies->live_op++;
 	if (g_flags->v == 1 || g_flags->v == 30)
 		ft_printf("P %4d | live %d\n", g_bogies->num, arg);
-	if (arg >= g_arena->champ_num * -1 && arg <= -1)
+	if (arg >= (int)g_arena->champ_num * -1 && arg <= -1)
 		g_arena->last_stand = arg * -1;
 	g_arena->mortal_flip++;
 	move_caret(DIR_SIZE + 1);

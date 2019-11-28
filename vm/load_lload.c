@@ -6,7 +6,7 @@
 /*   By: fmasha-h <fmasha-h@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/26 17:00:33 by kbethany          #+#    #+#             */
-/*   Updated: 2019/11/28 14:00:32 by fmasha-h         ###   ########.fr       */
+/*   Updated: 2019/11/28 15:16:47 by fmasha-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int		get_args(unsigned char arg_byte, int *arg, int *treg)
 	}
 	else if (is_tind(arg_byte, FIRST_ARG) && is_treg(arg_byte, SECOND_ARG))
 	{
-		*arg = get_tind(1, 2);
+		*arg = get_tind(2);
 		*treg = get_treg(4);
 		if (*treg >= 16)
 			return (-1);

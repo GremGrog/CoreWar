@@ -6,7 +6,7 @@
 /*   By: fmasha-h <fmasha-h@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/26 16:10:46 by kbethany          #+#    #+#             */
-/*   Updated: 2019/11/28 13:00:43 by fmasha-h         ###   ########.fr       */
+/*   Updated: 2019/11/28 15:13:48 by fmasha-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ int			check_file_size(size_t i, char *file, unsigned char *buf)
 	return (0);
 }
 
-int			check_magic_header(unsigned char *bytecode, t_champ *champ)
+int			check_magic_header(unsigned char *bytecode)
 {
 	int				magic;
 	size_t			i;

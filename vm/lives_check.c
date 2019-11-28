@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lives_check.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kbethany <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: fmasha-h <fmasha-h@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/26 17:14:27 by kbethany          #+#    #+#             */
-/*   Updated: 2019/11/26 17:19:22 by kbethany         ###   ########.fr       */
+/*   Updated: 2019/11/28 15:23:54 by fmasha-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,8 @@ void		check_bogies(void)
 	tmp_bogie = g_arena->bogie_head;
 	while (tmp_bogie)
 	{
-		if (g_arena->round - tmp_bogie->last_breath >= g_arena->cycle_to_die
+		if ((int)(g_arena->round - tmp_bogie->last_breath)
+		>= g_arena->cycle_to_die
 			|| g_arena->cycle_to_die <= 0)
 		{
 			if (g_flags->v == 30)

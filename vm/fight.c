@@ -6,7 +6,7 @@
 /*   By: fmasha-h <fmasha-h@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/28 13:13:20 by fmasha-h          #+#    #+#             */
-/*   Updated: 2019/11/28 13:14:04 by fmasha-h         ###   ########.fr       */
+/*   Updated: 2019/11/28 15:27:32 by fmasha-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ void	exec_function(void)
 		exec_function_p2();
 }
 
-void	get_data_for_bogie(int current)
+void	get_data_for_bogie(void)
 {
 	if (g_bogies->its_a_highnoon == 0)
 	{
@@ -77,7 +77,7 @@ void	game_cycle(t_windows *wins)
 		g_bogies = g_arena->bogie_head;
 		while (g_bogies)
 		{
-			get_data_for_bogie(0);
+			get_data_for_bogie();
 			if (g_bogies->its_a_highnoon == 0)
 				exec_function();
 			g_bogies = g_bogies->next;
@@ -99,7 +99,6 @@ void	game_cycle(t_windows *wins)
 
 void	fight(void)
 {
-	t_bogie		*tmp_bogie;
 	t_windows	*wins;
 
 	g_arena->all_bogies = count_bogies();

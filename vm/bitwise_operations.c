@@ -6,7 +6,7 @@
 /*   By: fmasha-h <fmasha-h@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/28 12:23:14 by fmasha-h          #+#    #+#             */
-/*   Updated: 2019/11/28 12:29:44 by fmasha-h         ###   ########.fr       */
+/*   Updated: 2019/11/28 15:17:14 by fmasha-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ int		get_arg(int *arg, int position, unsigned char arg_byte)
 	}
 	else if (is_tind(arg_byte, position))
 	{
-		*arg = get_tind(1, g_bogies->aim);
+		*arg = get_tind(g_bogies->aim);
 		g_bogies->aim += 2;
 		return (1);
 	}

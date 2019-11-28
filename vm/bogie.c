@@ -6,7 +6,7 @@
 /*   By: fmasha-h <fmasha-h@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/28 12:31:35 by fmasha-h          #+#    #+#             */
-/*   Updated: 2019/11/28 12:44:45 by fmasha-h         ###   ########.fr       */
+/*   Updated: 2019/11/28 15:25:08 by fmasha-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ t_bogie		*create_bogie(size_t c)
 	bogie->regs = (unsigned int*)malloc(sizeof(unsigned int) * REG_NUMBER);
 	bogie->next = NULL;
 	tmp = g_arena->champs;
-	while (tmp->index != c)
+	while (tmp->index != (int)c)
 		tmp = tmp->next;
 	bogie->champ = tmp;
 	i = 0;
@@ -88,4 +88,19 @@ t_bogie		*delete_bogie(t_bogie *bogie)
 	free_bogie(tmp);
 	g_arena->all_bogies--;
 	return (next);
+}
+
+size_t		count_bogies(void)
+{
+	t_bogie	*tmp;
+	size_t	c;
+
+	c = 0;
+	tmp = g_bogies;
+	while (tmp)
+	{
+		tmp = tmp->next;
+		c++;
+	}
+	return (c);
 }

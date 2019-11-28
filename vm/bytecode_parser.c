@@ -6,13 +6,13 @@
 /*   By: fmasha-h <fmasha-h@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/28 12:47:22 by fmasha-h          #+#    #+#             */
-/*   Updated: 2019/11/28 12:59:53 by fmasha-h         ###   ########.fr       */
+/*   Updated: 2019/11/28 15:14:54 by fmasha-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "vm.h"
 
-static	int	g_all_bytes = 0;
+static	size_t	g_all_bytes = 0;
 
 int				get_exec_code(size_t i, t_champ *champ, unsigned char *bytecode)
 {
@@ -67,7 +67,7 @@ int				get_name_comment_exec_code(t_champ *champ, \
 	return (0);
 }
 
-unsigned char	*read_bytecode(t_champ *champ, char *file)
+unsigned char	*read_bytecode(char *file)
 {
 	int					fd;
 	unsigned char		byte;
@@ -99,10 +99,10 @@ int				parse_bytecode(t_champ *champ, char *file)
 	unsigned char	*bytecode;
 	int				err;
 
-	if ((bytecode = read_bytecode(champ, file)) == NULL)
+	if ((bytecode = read_bytecode(file)) == NULL)
 		return (-2);
 	err = 0;
-	if ((err = check_magic_header(bytecode, champ)) == -1)
+	if ((err = check_magic_header(bytecode)) == -1)
 	{
 		ft_fprintf(2, "Error: file %s has an invalid header\n", file);
 		return (-2);
