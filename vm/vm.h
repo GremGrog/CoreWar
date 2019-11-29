@@ -6,7 +6,7 @@
 /*   By: fmasha-h <fmasha-h@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/26 16:01:46 by kbethany          #+#    #+#             */
-/*   Updated: 2019/11/29 15:06:11 by fmasha-h         ###   ########.fr       */
+/*   Updated: 2019/11/29 17:35:59 by kbethany         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -145,6 +145,7 @@ void					introduce_winner(void);
 void					init_flags_struct(void);
 
 int						ft_errno(int x);
+void					usage_print(void);
 void					delete_champ(t_champ *tmp);
 size_t					scip_null_border(size_t i);
 int						ft_rstrcmp(const char *str1, const char *str2);
