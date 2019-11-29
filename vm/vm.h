@@ -6,7 +6,7 @@
 /*   By: fmasha-h <fmasha-h@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/26 16:01:46 by kbethany          #+#    #+#             */
-/*   Updated: 2019/11/28 15:32:54 by fmasha-h         ###   ########.fr       */
+/*   Updated: 2019/11/29 15:06:11 by fmasha-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -154,7 +154,8 @@ int						check_magic_header(unsigned char *bytecode);
 int						get_bytecode_size(unsigned char *bytecode, \
 														int i, t_champ *champ);
 t_champ					*create_champ(t_champ **head, char *file);
-
+int						search_unique_num(t_champ **head);
+t_champ					*check_indexes(t_champ *champs);
 void					init_battlefield(t_champ *warriors, size_t num);
 void					battlefield_print(void);
 

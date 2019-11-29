@@ -6,7 +6,7 @@
 /*   By: fmasha-h <fmasha-h@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/28 11:54:50 by fmasha-h          #+#    #+#             */
-/*   Updated: 2019/11/28 11:56:06 by fmasha-h         ###   ########.fr       */
+/*   Updated: 2019/11/29 15:11:51 by fmasha-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	aff(void)
 	char			sym;
 
 	arg_byte = g_arena->list[(g_bogies->index + 1) % MEM_SIZE].com;
-	if (is_treg(arg_byte, FIRST_ARG) && (reg = get_treg(2)) < 16)
+	if (is_treg(arg_byte, FIRST_ARG) && (reg = get_treg(2)) < REG_NUMBER)
 	{
 		sym = g_bogies->regs[reg];
 		if (g_flags->a != 0 || g_flags->v == 30)

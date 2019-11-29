@@ -6,7 +6,7 @@
 /*   By: fmasha-h <fmasha-h@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/26 17:06:31 by kbethany          #+#    #+#             */
-/*   Updated: 2019/11/28 14:13:28 by fmasha-h         ###   ########.fr       */
+/*   Updated: 2019/11/29 15:14:16 by fmasha-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,12 +39,12 @@ void		store(void)
 	arg_byte = g_arena->list[(g_bogies->index + 1) % MEM_SIZE].com;
 	arg = 0;
 	treg = 0;
-	if (!(is_treg(arg_byte, FIRST_ARG)) || (treg = get_treg(2)) >= 16)
+	if (!(is_treg(arg_byte, FIRST_ARG)) || (treg = get_treg(2)) >= REG_NUMBER)
 	{
 		skip_bytes(ST_OP);
 		return ;
 	}
-	if (is_treg(arg_byte, SECOND_ARG) && (arg = get_treg(3)) < 16)
+	if (is_treg(arg_byte, SECOND_ARG) && (arg = get_treg(3)) < REG_NUMBER)
 		store_treg(arg, treg);
 	else if (is_tind(arg_byte, SECOND_ARG))
 		store_tind(arg, treg);

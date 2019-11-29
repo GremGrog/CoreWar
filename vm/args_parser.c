@@ -6,7 +6,7 @@
 /*   By: fmasha-h <fmasha-h@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/28 12:16:38 by fmasha-h          #+#    #+#             */
-/*   Updated: 2019/11/28 15:28:01 by fmasha-h         ###   ########.fr       */
+/*   Updated: 2019/11/29 12:55:42 by fmasha-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ int			parse_flags_v2(char **a, int i)
 		g_flags->dump = ft_atoi(a[i]);
 	}
 	else if (ft_strcmp(a[i], "-n") == 0
-	&& (a[i + 1][j] >= '0' && a[i + 1][j] <= '9'))
+	&& (a[i + 1][j] >= '1' && a[i + 1][j] <= '9'))
 	{
 		i++;
 		g_flags->n = ft_atoi(a[i]);

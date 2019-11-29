@@ -6,7 +6,7 @@
 /*   By: fmasha-h <fmasha-h@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/28 13:20:05 by fmasha-h          #+#    #+#             */
-/*   Updated: 2019/11/28 13:42:57 by fmasha-h         ###   ########.fr       */
+/*   Updated: 2019/11/29 15:17:49 by fmasha-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	ldi(void)
 	if ((get_small_arg(&arg_1, FIRST_ARG, arg_byte)) == -1
 	|| (reg_or_dir(&arg_2, arg_byte, SECOND_ARG) == -1)
 	|| ((!(is_treg(arg_byte, THIRD_ARG)))
-	|| (arg_3 = get_treg(g_bogies->aim)) >= 16))
+	|| (arg_3 = get_treg(g_bogies->aim)) >= REG_NUMBER))
 	{
 		skip_bytes(LDI_OP);
 		return ;
@@ -53,7 +53,7 @@ void	lldi(void)
 	if ((get_small_arg(&arg_1, FIRST_ARG, arg_byte)) == -1
 	|| (reg_or_dir(&arg_2, arg_byte, SECOND_ARG) == -1)
 	|| ((!(is_treg(arg_byte, THIRD_ARG)))
-	|| (arg_3 = get_treg(g_bogies->aim)) >= 16))
+	|| (arg_3 = get_treg(g_bogies->aim)) >= REG_NUMBER))
 	{
 		skip_bytes(LLDI_OP);
 		return ;
@@ -77,7 +77,7 @@ void	sti(void)
 	arg_byte = g_arena->list[(g_bogies->index + 1) % MEM_SIZE].com;
 	g_bogies->aim = 2;
 	if ((!(is_treg(arg_byte, FIRST_ARG)))
-	|| (arg_1 = get_treg(g_bogies->aim++)) >= 16
+	|| (arg_1 = get_treg(g_bogies->aim++)) >= REG_NUMBER
 	|| ((get_small_arg(&arg_2, SECOND_ARG, arg_byte)) == -1
 	|| (reg_or_dir(&arg_3, arg_byte, THIRD_ARG) == -1)))
 	{

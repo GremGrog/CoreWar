@@ -58,7 +58,7 @@ $(COREWAR): $(COREWAR_DIR_O) $(COREWAR_OBJF) $(LIB)
 	@gcc $(FLAGS) $(COREWAR_OBJF) $(LIBFT) -o $(COREWAR) -lncurses
 
 $(COREWAR_DIR_O)/%.o: %.c
-	@gcc $(FLAGS) -g -I $(INCLUDES) -o $@ -c $<
+	@gcc $(FLAGS) -I $(INCLUDES) -o $@ -c $<
 
 clean:
 	@rm -rf $(COREWAR_DIR_O)

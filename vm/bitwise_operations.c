@@ -6,7 +6,7 @@
 /*   By: fmasha-h <fmasha-h@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/28 12:23:14 by fmasha-h          #+#    #+#             */
-/*   Updated: 2019/11/28 15:17:14 by fmasha-h         ###   ########.fr       */
+/*   Updated: 2019/11/29 15:15:15 by fmasha-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,8 @@ int		get_arg(int *arg, int position, unsigned char arg_byte)
 	int	reg;
 
 	reg = 0;
-	if ((is_treg(arg_byte, position)) && (reg = get_treg(g_bogies->aim)) < 16)
+	if ((is_treg(arg_byte, position))
+	&& (reg = get_treg(g_bogies->aim)) < REG_NUMBER)
 	{
 		g_bogies->aim++;
 		*arg = g_bogies->regs[reg];
@@ -52,7 +53,7 @@ void	bitwise_and(void)
 	if ((get_arg(&arg1, FIRST_ARG, arg_byte)) == -1
 	|| (get_arg(&arg2, SECOND_ARG, arg_byte)) == -1
 	|| (!(is_treg(arg_byte, THIRD_ARG)))
-	|| (reg = get_treg(g_bogies->aim)) >= 16)
+	|| (reg = get_treg(g_bogies->aim)) >= REG_NUMBER)
 	{
 		skip_bytes(AND_OP);
 		return ;
@@ -81,7 +82,7 @@ void	bitwise_or(void)
 	if ((get_arg(&arg1, FIRST_ARG, arg_byte)) == -1
 	|| (get_arg(&arg2, SECOND_ARG, arg_byte)) == -1
 	|| (!(is_treg(arg_byte, THIRD_ARG)))
-	|| (reg = get_treg(g_bogies->aim)) >= 16)
+	|| (reg = get_treg(g_bogies->aim)) >= REG_NUMBER)
 	{
 		skip_bytes(OR_OP);
 		return ;
@@ -110,7 +111,7 @@ void	bitwise_xor(void)
 	if ((get_arg(&arg1, FIRST_ARG, arg_byte)) == -1
 	|| (get_arg(&arg2, SECOND_ARG, arg_byte)) == -1
 	|| (!(is_treg(arg_byte, THIRD_ARG)))
-	|| (reg = get_treg(g_bogies->aim)) >= 16)
+	|| (reg = get_treg(g_bogies->aim)) >= REG_NUMBER)
 	{
 		skip_bytes(XOR_OP);
 		return ;

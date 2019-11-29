@@ -6,7 +6,7 @@
 /*   By: fmasha-h <fmasha-h@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/26 17:25:15 by kbethany          #+#    #+#             */
-/*   Updated: 2019/11/28 15:24:11 by fmasha-h         ###   ########.fr       */
+/*   Updated: 2019/11/29 15:14:04 by fmasha-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ int		reg_or_dir(int *arg, unsigned char arg_byte, int num)
 
 	if (is_treg(arg_byte, num))
 	{
-		if ((reg = get_treg(g_bogies->aim)) < 16)
+		if ((reg = get_treg(g_bogies->aim)) < REG_NUMBER)
 		{
 			g_bogies->aim++;
 			*arg = g_bogies->regs[reg];
@@ -66,7 +66,7 @@ int		get_small_arg(int *arg, int position, unsigned char arg_byte)
 	if (is_treg(arg_byte, position))
 	{
 		reg = 0;
-		if ((reg = get_treg(g_bogies->aim)) >= 16)
+		if ((reg = get_treg(g_bogies->aim)) >= REG_NUMBER)
 			return (-1);
 		*arg = g_bogies->regs[reg];
 		g_bogies->aim++;

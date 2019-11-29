@@ -6,7 +6,7 @@
 /*   By: fmasha-h <fmasha-h@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/26 17:00:33 by kbethany          #+#    #+#             */
-/*   Updated: 2019/11/28 15:16:47 by fmasha-h         ###   ########.fr       */
+/*   Updated: 2019/11/29 15:13:46 by fmasha-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int		get_args(unsigned char arg_byte, int *arg, int *treg)
 	{
 		*arg = get_tdir_big_size((g_bogies->index + 2) % MEM_SIZE);
 		*treg = get_treg(DIR_SIZE + 2);
-		if (*treg >= 16)
+		if (*treg >= REG_NUMBER)
 			return (-1);
 		g_bogies->aim = DIR_SIZE + 2;
 		return (1);
@@ -27,7 +27,7 @@ int		get_args(unsigned char arg_byte, int *arg, int *treg)
 	{
 		*arg = get_tind(2);
 		*treg = get_treg(4);
-		if (*treg >= 16)
+		if (*treg >= REG_NUMBER)
 			return (-1);
 		g_bogies->aim = IND_SIZE + 2;
 		return (1);

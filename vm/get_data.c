@@ -6,7 +6,7 @@
 /*   By: fmasha-h <fmasha-h@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/28 13:16:48 by fmasha-h          #+#    #+#             */
-/*   Updated: 2019/11/28 15:16:29 by fmasha-h         ###   ########.fr       */
+/*   Updated: 2019/11/29 15:12:49 by fmasha-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,10 +49,10 @@ int		get_treg(int scip_size)
 
 	i = (g_bogies->index + scip_size) % MEM_SIZE;
 	if (g_arena->list[i % MEM_SIZE].champ == 0)
-		return (16);
+		return (REG_NUMBER);
 	treg = g_arena->list[i % MEM_SIZE].com;
 	if (treg == 0)
-		return (16);
+		return (REG_NUMBER);
 	treg -= 1;
 	return (treg);
 }

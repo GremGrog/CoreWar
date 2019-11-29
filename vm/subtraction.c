@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   subtraction.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kbethany <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: fmasha-h <fmasha-h@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/26 16:16:36 by kbethany          #+#    #+#             */
-/*   Updated: 2019/11/26 16:41:23 by kbethany         ###   ########.fr       */
+/*   Updated: 2019/11/29 15:14:27 by fmasha-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ void	subtraction(void)
 		reg1 = get_treg(2);
 		reg2 = get_treg(3);
 		reg3 = get_treg(4);
-		if (reg1 >= 16 || reg2 >= 16 || reg3 >= 16)
+		if (reg1 >= REG_NUMBER || reg2 >= REG_NUMBER || reg3 >= REG_NUMBER)
 		{
 			skip_bytes(SUB_OP);
 			return ;

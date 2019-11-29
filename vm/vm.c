@@ -6,7 +6,7 @@
 /*   By: fmasha-h <fmasha-h@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/28 14:15:43 by fmasha-h          #+#    #+#             */
-/*   Updated: 2019/11/28 15:16:00 by fmasha-h         ###   ########.fr       */
+/*   Updated: 2019/11/29 15:07:27 by fmasha-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,13 +22,15 @@ int		main(int c, char **a)
 		return (ft_errno(0));
 	champs = NULL;
 	champs = parse_args(c, a);
+	champs = check_indexes(champs);
 	if (champs != NULL)
 	{
 		tmp = champs;
 		champs_num = count_champs(tmp);
 		init_battlefield(champs, champs_num);
 		add_bogies_on_arena();
-		introduce_champs();
+		if (g_flags->i == 0)
+			introduce_champs();
 		fight();
 		if (g_flags->dump == 0 || g_arena->round < g_flags->dump)
 			introduce_winner();
