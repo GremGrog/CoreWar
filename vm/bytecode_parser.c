@@ -6,7 +6,7 @@
 /*   By: fmasha-h <fmasha-h@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/28 12:47:22 by fmasha-h          #+#    #+#             */
-/*   Updated: 2019/11/28 15:14:54 by fmasha-h         ###   ########.fr       */
+/*   Updated: 2019/11/29 15:39:15 by fmasha-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,24 +14,37 @@
 
 static	size_t	g_all_bytes = 0;
 
-int				get_exec_code(size_t i, t_champ *champ, unsigned char *bytecode)
+int				check_code_size(size_t i, t_champ *champ)
 {
 	size_t	tmp;
 	size_t	code_size;
-	size_t	j;
 
 	tmp = i;
 	code_size = 0;
-	j = 0;
 	while (tmp < g_all_bytes)
 	{
 		tmp++;
 		code_size++;
 	}
 	if (code_size != champ->code_size)
+		return (-1);
+	else if (code_size == 0)
+		return (-2);
+	return (0);
+}
+
+int				get_exec_code(size_t i, t_champ *champ, unsigned char *bytecode)
+{
+	size_t	j;
+	int		err;
+
+	j = 0;
+	err = 0;
+	err = check_code_size(i, champ);
+	if (err != 0)
 	{
 		free(bytecode);
-		return (-1);
+		return (err);
 	}
 	while (j < champ->code_size && i < g_all_bytes)
 		champ->code[j++] = bytecode[i++];
@@ -44,6 +57,7 @@ int				get_name_comment_exec_code(t_champ *champ, \
 {
 	size_t	i;
 	size_t	j;
+	int		err;
 
 	i = MAGIC_NUM_B;
 	champ->name = ft_memalloc((size_t)PROG_NAME_LENGTH + 1);
@@ -61,10 +75,9 @@ int				get_name_comment_exec_code(t_champ *champ, \
 	i = scip_null_border(i);
 	champ->code = (unsigned char*)malloc(sizeof(unsigned char) \
 												* champ->code_size + 1);
-	if ((get_exec_code(i, champ, bytecode)) == -1)
-		return (-1);
+	err = get_exec_code(i, champ, bytecode);
 	g_all_bytes = 0;
-	return (0);
+	return (err);
 }
 
 unsigned char	*read_bytecode(char *file)
@@ -111,6 +124,11 @@ int				parse_bytecode(t_champ *champ, char *file)
 	{
 		ft_fprintf(2, "Error: \
 		file %s has a code size that differ from what its header says\n", file);
+		return (-2);
+	}
+	if (err == -2)
+	{
+		ft_fprintf(2, "Error: file %s too small to be a champion\n", file);
 		return (-2);
 	}
 	free(bytecode);
