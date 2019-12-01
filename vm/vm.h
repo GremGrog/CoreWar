@@ -6,7 +6,7 @@
 /*   By: fmasha-h <fmasha-h@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/26 16:01:46 by kbethany          #+#    #+#             */
-/*   Updated: 2019/11/29 17:35:59 by kbethany         ###   ########.fr       */
+/*   Updated: 2019/12/01 14:39:12 by fmasha-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -143,12 +143,13 @@ void					delete_champs(t_champ *head);
 void					introduce_champs(void);
 void					introduce_winner(void);
 void					init_flags_struct(void);
-
+int						get_file_name(char *file_name, char *ext);
 int						ft_errno(int x);
 void					usage_print(void);
 void					delete_champ(t_champ *tmp);
 size_t					scip_null_border(size_t i);
-int						ft_rstrcmp(const char *str1, const char *str2);
+int						check_fd(char *file);
+
 int						check_file_size(size_t i, char *file, \
 														unsigned char *buf);
 int						check_magic_header(unsigned char *bytecode);

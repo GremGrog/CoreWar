@@ -6,7 +6,7 @@
 /*   By: fmasha-h <fmasha-h@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/26 16:10:46 by kbethany          #+#    #+#             */
-/*   Updated: 2019/11/29 15:40:13 by fmasha-h         ###   ########.fr       */
+/*   Updated: 2019/12/01 14:39:46 by fmasha-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,30 +22,17 @@ size_t		scip_null_border(size_t i)
 	return (i);
 }
 
-int			ft_rstrcmp(const char *str, const char *substr)
+int			check_fd(char *file)
 {
-	size_t	strlen;
-	size_t	sublen;
+	int	fd;
 
-	if (!str || !substr)
-		return (-1);
-	strlen = ft_strlen(str) - 1;
-	sublen = ft_strlen(substr) - 1;
-	if (str[strlen] == substr[sublen] && strlen == 0 && sublen == 0)
-		return (1);
-	while (strlen > 0 && sublen > 0)
+	fd = 0;
+	if ((fd = open(file, O_RDONLY)) == -1)
 	{
-		if (str[strlen] == substr[sublen])
-		{
-			strlen--;
-			sublen--;
-		}
-		if (str[strlen] != substr[sublen] && sublen == 0)
-			return (1);
-		if (str[strlen] != substr[sublen] && sublen != 0)
-			return (0);
+		ft_errno(3);
+		return (-1);
 	}
-	return (1);
+	return (fd);
 }
 
 int			check_file_size(size_t i, char *file, unsigned char *buf)

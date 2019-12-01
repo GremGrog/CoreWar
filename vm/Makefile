@@ -43,6 +43,7 @@ COREWAR_SRCS =	error_work.c \
 				champs_tools.c \
 				print_ldi_sti.c \
 				init_flags.c \
+				check_file_name.c \
 
 COREWAR_OBJF = $(addprefix $(COREWAR_DIR_O)/, $(patsubst %.c,%.o,$(COREWAR_SRCS)))
 
@@ -56,6 +57,7 @@ $(LIB):
 
 $(COREWAR): $(COREWAR_DIR_O) $(COREWAR_OBJF) $(LIB)
 	@gcc $(FLAGS) $(COREWAR_OBJF) $(LIBFT) -o $(COREWAR) -lncurses
+	@echo "------------------COREWAR IS COMPILED------------------------"
 
 $(COREWAR_DIR_O)/%.o: %.c
 	@gcc $(FLAGS) -I $(INCLUDES) -o $@ -c $<

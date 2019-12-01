@@ -1,0 +1,14 @@
+{
+    "tasks": [
+        {
+            "type": "shell",
+            "label": "gcc build active file",
+            "command": "make",
+            "args": [],
+            "options": {
+                "cwd": "/Users/fmasha-h/Corewar/vm/"
+            }
+        }
+    ],
+    "version": "2.0.0"
+}

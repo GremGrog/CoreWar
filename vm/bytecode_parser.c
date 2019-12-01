@@ -6,7 +6,7 @@
 /*   By: fmasha-h <fmasha-h@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/28 12:47:22 by fmasha-h          #+#    #+#             */
-/*   Updated: 2019/11/29 15:39:15 by fmasha-h         ###   ########.fr       */
+/*   Updated: 2019/12/01 14:38:56 by fmasha-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,7 @@ unsigned char	*read_bytecode(char *file)
 	size_t				i;
 
 	i = 0;
-	if ((fd = open(file, O_RDONLY)) == -1)
+	if ((fd = check_fd(file)) == -1)
 		return (NULL);
 	buf = (unsigned char*)malloc(sizeof(unsigned char) * FILE_SIZE);
 	byte = 0;
@@ -104,6 +104,7 @@ unsigned char	*read_bytecode(char *file)
 	}
 	if ((check_file_size(i, file, buf)) == -1)
 		return (NULL);
+	close(fd);
 	return (buf);
 }
 
