@@ -1,72 +1,72 @@
-COREWAR = corewar
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: vsanta <vsanta@student.42.fr>              +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2019/12/01 15:36:59 by vsanta            #+#    #+#              #
+#    Updated: 2019/12/01 15:52:38 by vsanta           ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
 
-LIB = make -C libft
+NAME 				= corewar
 
-FLAGS = -Wall -Wextra -Werror
+NAME_LIB 			= libft/libft.a
 
-COREWAR_DIR_O = corewar_obj
+HEADER_NAME_MAIN	= corewar.h
+HEADER_NAME_OP		= op.h
+HEADER_NAME_VM		= vm.h
 
-INCLUDES =  vm.h
+INC_DIR_MIAN 		= ../includes/
+INC_DIR_VM 			= ./includes/
+INC_DIR_LIB_FT 		= ./libft/
 
-LIBFT = libft/libft.a
+SRC_DIR 			= ./src/
+OBJ_DIR 			= ./obj/
 
-COREWAR_SRCS =	error_work.c \
-				vm.c \
-				bytecode_parser.c \
-				args_parser.c \
-				champs.c \
-				tools.c \
-				arena.c \
-				bogie.c \
-				define_cycles_to_exec.c \
-				fight.c \
-				get_data.c \
-				load_lload.c \
-				store.c \
-				addition.c \
-				subtraction.c \
-				bitwise_operations.c \
-				op_live.c \
-				move_caret.c \
-				aff.c \
-				fork_lfork.c \
-				ldi_sti.c \
-				visualisator.c \
-				init_windows.c \
-				visualisator_searching_funs.c \
-				introduce.c \
-				what_is_it.c \
-				lives_check.c \
-				print_4bytes.c \
-				add_bogies.c \
-				add_champs.c \
-				champs_tools.c \
-				print_ldi_sti.c \
-				init_flags.c \
-				check_file_name.c \
+SRC_NAME			= add_bogies.c champs.c init_windows.c store.c \
+					add_champs.c champs_tools.c introduce.c subtraction.c \
+					addition.c check_file_name.c ldi_sti.c tools.c \
+					aff.c define_cycles_to_exec.c lives_check.c visualisator.c \
+					arena.c error_work.c load_lload.c visualisator_searching_funs.c \
+					args_parser.c fight.c move_caret.c vm.c \
+					bitwise_operations.c fork_lfork.c op_live.c what_is_it.c \
+					bogie.c get_data.c print_4bytes.c \
+					bytecode_parser.c init_flags.c print_ldi_sti.c
 
-COREWAR_OBJF = $(addprefix $(COREWAR_DIR_O)/, $(patsubst %.c,%.o,$(COREWAR_SRCS)))
+HEADER_MAIN 		= $(addprefix $(INC_DIR_MIAN), $(HEADER_NAME_MAIN))
+HEADER_OP 			= $(addprefix $(INC_DIR_MIAN), $(HEADER_NAME_OP))
+HEADER_VM 			= $(addprefix $(INC_DIR_VM), $(HEADER_NAME_VM))
 
-all: $(LIB) $(COREWAR)
+SRC					= $(addprefix $(SRC_PATH), $(SRC_NAME))
+OBJ					= $(addprefix $(OBJ_DIR), $(SRC_NAME:.c=.o))
 
-$(COREWAR_DIR_O):
-	@mkdir -p corewar_obj
+CC					= gcc
+FLAGS				= -Wall -Wextra -Werror
+GCC_LIBFT 			= -L ./libft -l ft
+GCC_INCLUDES		= -I $(INC_DIR_MIAN) -I $(INC_DIR_VM) -I $(INC_DIR_LIB_FT)
 
-$(LIB):
-	@make -C libft
+all: $(NAME)
 
-$(COREWAR): $(COREWAR_DIR_O) $(COREWAR_OBJF) $(LIB)
-	gcc $(FLAGS) $(COREWAR_OBJF) $(LIBFT) -o $(COREWAR) -lncurses
+$(NAME): $(OBJ_DIR) $(OBJ) $(NAME_LIB)
+	$(CC) $(GCC_LIBFT) $(GCC_INCLUDES) $(OBJ) $(FLAGS) -o $(NAME) -lncurses
 
-$(COREWAR_DIR_O)/%.o: %.c $(INCLUDES)
-	@gcc $(FLAGS) -I $(INCLUDES) -o $@ -c $<
+$(OBJ_DIR):
+	@mkdir -p obj
+
+$(NAME_LIB):
+	@make -C libft/
+
+$(OBJ_DIR)%.o: $(SRC_DIR)%.c $(HEADER_MAIN) $(HEADER_OP) $(HEADER_VM)
+	$(CC) -c $(GCC_INCLUDES) $(FLAGS) $< -o $@
 
 clean:
-	@rm -rf $(COREWAR_DIR_O)
-	@make clean -C libft
+	@/bin/rm -rf $(OBJ_DIR)
+	@make clean -C libft/
 
 fclean: clean
-	@rm $(COREWAR)
-	@make fclean -C libft
+	@/bin/rm -f $(NAME)
+	@make fclean -C libft/
 
 re: fclean all

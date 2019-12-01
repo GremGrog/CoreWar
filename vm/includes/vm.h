@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   vm.h                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fmasha-h <fmasha-h@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vsanta <vsanta@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/26 16:01:46 by kbethany          #+#    #+#             */
-/*   Updated: 2019/12/01 14:39:12 by fmasha-h         ###   ########.fr       */
+/*   Updated: 2019/12/01 15:47:13 by vsanta           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 # define VM_H
 
 # include <ncurses.h>
-# include "libft/libft.h"
-# include "../includes/corewar.h"
-# include "../includes/op.h"
+# include "libft.h"
+# include "corewar.h"
+# include "op.h"
 
 # define MAGIC_NUM_B 4
 # define NULL_B 4
