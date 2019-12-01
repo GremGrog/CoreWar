@@ -2,7 +2,7 @@ COREWAR = corewar
 
 LIB = make -C libft
 
-FLAGS = -Wall -Wextra -Werror -g
+FLAGS = -Wall -Wextra -Werror
 
 COREWAR_DIR_O = corewar_obj
 
@@ -47,7 +47,7 @@ COREWAR_SRCS =	error_work.c \
 
 COREWAR_OBJF = $(addprefix $(COREWAR_DIR_O)/, $(patsubst %.c,%.o,$(COREWAR_SRCS)))
 
-all: $(LIB) $(COREWAR) $(VIS)
+all: $(LIB) $(COREWAR)
 
 $(COREWAR_DIR_O):
 	@mkdir -p corewar_obj
@@ -56,10 +56,9 @@ $(LIB):
 	@make -C libft
 
 $(COREWAR): $(COREWAR_DIR_O) $(COREWAR_OBJF) $(LIB)
-	@gcc $(FLAGS) $(COREWAR_OBJF) $(LIBFT) -o $(COREWAR) -lncurses
-	@echo "------------------COREWAR IS COMPILED------------------------"
+	gcc $(FLAGS) $(COREWAR_OBJF) $(LIBFT) -o $(COREWAR) -lncurses
 
-$(COREWAR_DIR_O)/%.o: %.c
+$(COREWAR_DIR_O)/%.o: %.c $(INCLUDES)
 	@gcc $(FLAGS) -I $(INCLUDES) -o $@ -c $<
 
 clean:
@@ -67,7 +66,7 @@ clean:
 	@make clean -C libft
 
 fclean: clean
-	@rm -rf $(COREWAR)
+	@rm $(COREWAR)
 	@make fclean -C libft
 
 re: fclean all
