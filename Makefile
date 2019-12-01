@@ -6,7 +6,7 @@
 #    By: fmasha-h <fmasha-h@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/12/01 12:47:43 by fmasha-h          #+#    #+#              #
-#    Updated: 2019/12/01 15:25:07 by kbethany         ###   ########.fr        #
+#    Updated: 2019/12/01 15:57:37 by fmasha-h         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,7 +19,7 @@ BINARIES = binaries
 all: $(BINARIES) $(ASM) $(COREWAR)
 
 $(BINARIES):
-	@mkdir binaries
+	@mkdir -p binaries
 
 $(ASM):
 	@make -C asm
